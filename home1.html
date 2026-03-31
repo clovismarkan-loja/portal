@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Pesquisador — IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== STANFORD-STYLE HOME OVERRIDES ===== */
+
+    /* Scroll-snap wrapper */
+    .home-wrapper {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    /* --- HERO: fullscreen with background photo --- */
+    .hero--home {
+      position: relative;
+      height: 100vh;
+      margin-top: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('imagem-hero-banner.jpg') center/cover no-repeat;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .hero--home::before { display: none; }
+    .hero--home .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 760px;
+      padding: 0 24px;
+    }
+    .hero--home .hero__title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -.8px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--blue-900);
+      text-shadow: none;
+    }
+    .hero--home .hero__desc {
+      font-size: clamp(15px, 2.2vw, 19px);
+      margin-bottom: 40px;
+      color: #1d1d1e;
+      text-shadow: none;
+    }
+
+    /* Search box — minimal, flat, icon inline */
+    .hero--home .search-box {
+      border-radius: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1.5px solid rgba(29,29,30,.15);
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .hero--home .search-box__icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(29,29,30,.35);
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+    .hero--home .search-box input {
+      padding: 16px 20px 16px 50px;
+      font-size: 15px;
+      color: #1d1d1e;
+    }
+    .hero--home .search-box input::placeholder {
+      color: rgba(29,29,30,.35);
+    }
+    .hero--home .search-box button {
+      background: transparent;
+      color: #1d1d1e;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0 20px;
+      border-left: 1px solid rgba(29,29,30,.12);
+    }
+    .hero--home .search-box button:hover {
+      color: var(--blue-900);
+      background: transparent;
+    }
+
+    /* Hero filter links — minimal, no border, no background */
+    .hero-filters {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-filter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(29,29,30,.5);
+      text-decoration: none;
+      padding: 4px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: color .25s ease, border-color .25s ease;
+      letter-spacing: .2px;
+    }
+    .hero-filter svg {
+      opacity: .5;
+      transition: opacity .25s ease;
+    }
+    .hero-filter:hover {
+      color: #1d1d1e;
+      border-bottom-color: #1d1d1e;
+    }
+    .hero-filter:hover svg { opacity: 1; }
+    .hero-filter.active {
+      color: #1d1d1e;
+      border-bottom-color: #1d1d1e;
+    }
+    .hero-filter.active svg { opacity: 1; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #1d1d1e;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 3;
+      animation: fadeInUp 1s ease 1s both;
+    }
+    .scroll-hint__arrow {
+      width: 28px;
+      height: 28px;
+      border: 2px solid rgba(29,29,30,.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bounceDown 2s ease infinite;
+    }
+    .scroll-hint__arrow::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid rgba(29,29,30,.7);
+      border-bottom: 2px solid rgba(29,29,30,.7);
+      transform: rotate(45deg) translateY(-2px);
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* --- CONTENT PANEL: slides up over hero --- */
+    .home-content {
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+      min-height: 100vh;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -8px 40px rgba(0,0,0,.15);
+    }
+    .home-content::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--blue-900), var(--gold));
+      border-radius: 24px 24px 0 0;
+    }
+
+    /* Animate cards when panel appears */
+    .home-content .cat-card,
+    .home-content .opp-card,
+    .home-content .article-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .home-content .cat-card.visible,
+    .home-content .opp-card.visible,
+    .home-content .article-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header: transparent on hero with dark text, solid on content */
+    .header.header--home {
+      background: transparent !important;
+      box-shadow: none !important;
+      transition: background .4s ease, box-shadow .4s ease;
+    }
+    .header--home .header__title { color: #1d1d1e; }
+    .header--home .header__nav a { color: rgba(29,29,30,.7); }
+    .header--home .header__nav a:hover,
+    .header--home .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.08); }
+    .header--home .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.3); background: rgba(29,29,30,.06);
+    }
+    .header--home .btn-secondary:hover {
+      color: var(--white); background: #1d1d1e; border-color: #1d1d1e;
+    }
+    .header--home .menu-toggle { color: #1d1d1e; }
+
+    /* Solid state (after scroll) */
+    .header.header--home.header--solid {
+      background: var(--white) !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08) !important;
+    }
+    .header--home.header--solid .header__title { color: #1d1d1e; }
+    .header--home.header--solid .header__nav a { color: rgba(29,29,30,.7); }
+    .header--home.header--solid .header__nav a:hover,
+    .header--home.header--solid .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.08); }
+    .header--home.header--solid .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.3); background: rgba(29,29,30,.06);
+    }
+    .header--home.header--solid .btn-secondary:hover {
+      color: var(--white); background: #1d1d1e; border-color: #1d1d1e;
+    }
+    .header--home.header--solid .menu-toggle { color: #1d1d1e; }
+
+    /* Logo image */
+    .header__logo-img { height: 40px; width: auto; }
+
+    /* Categories section needs padding-top to breathe */
+    .home-content > .section:first-child {
+      padding-top: 72px;
+    }
+
+    /* Fix footer inside snap wrapper */
+    .home-content .footer {
+      border-radius: 0;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .hero--home .hero__title { font-size: 26px; }
+      .home-content { border-radius: 16px 16px 0 0; }
+      .home-content > .section:first-child { padding-top: 48px; }
+      .scroll-hint { bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER (transparent on hero) ===== -->
+  <header class="header header--home" id="homeHeader">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== SCROLL-SNAP WRAPPER ===== -->
+  <div class="home-wrapper" id="homeWrapper">
+
+    <!-- ===== HERO: fullscreen background photo ===== -->
+    <section class="hero hero--home">
+      <div class="hero__content">
+        <h1 class="hero__title">Procure informacoes sobre servicos e plataformas do IDOR</h1>
+        <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
+        <div class="search-box">
+          <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Busque por servicos, artigos, oportunidades, editais...">
+          <button>Buscar</button>
+        </div>
+        <div class="hero-filters">
+          <a href="#" class="hero-filter active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Todos
+          </a>
+          <a href="#" class="hero-filter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Artigos
+          </a>
+          <a href="#" class="hero-filter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Oportunidades
+          </a>
+          <a href="#" class="hero-filter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Servicos
+          </a>
+          <a href="#" class="hero-filter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            Editais
+          </a>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Explorar</span>
+        <div class="scroll-hint__arrow"></div>
+      </div>
+    </section>
+
+    <!-- ===== CONTENT PANEL (slides up over hero) ===== -->
+    <div class="home-content" id="homeContent">
+
+      <!-- CATEGORIAS -->
+      <section class="section">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Areas e Servicos</h2>
+          </div>
+          <div class="cat-grid">
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F52C;</div>
+              <div class="cat-card__title">NAPE</div>
+              <div class="cat-card__desc">Nucleo de Apoio a Pesquisa e Ensino</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4BB;</div>
+              <div class="cat-card__title">TI</div>
+              <div class="cat-card__desc">Suporte tecnico e infraestrutura digital</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4CA;</div>
+              <div class="cat-card__title">Software de Apoio Academico</div>
+              <div class="cat-card__desc">Ferramentas e sistemas academicos</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F3E2;</div>
+              <div class="cat-card__title">Agendamento de Salas</div>
+              <div class="cat-card__desc">Reserve salas de reuniao e laboratorios</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4DA;</div>
+              <div class="cat-card__title">Acesso a Publicacoes Cientificas</div>
+              <div class="cat-card__desc">Bases de dados e periodicos</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4A1;</div>
+              <div class="cat-card__title">Inovacao e Propriedade Intelectual</div>
+              <div class="cat-card__desc">Patentes, transferencia de tecnologia</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F465;</div>
+              <div class="cat-card__title">Recursos Humanos (RH)</div>
+              <div class="cat-card__desc">Beneficios, folha e documentacao</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x2699;&#xFE0F;</div>
+              <div class="cat-card__title">Plataformas IDOR</div>
+              <div class="cat-card__desc">Sistemas e ferramentas internas</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4CB;</div>
+              <div class="cat-card__title">Editais IDOR</div>
+              <div class="cat-card__desc">Editais internos e chamadas do instituto</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F3AF;</div>
+              <div class="cat-card__title">Eventos IDOR</div>
+              <div class="cat-card__desc">Congressos, seminarios e workshops</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4B0;</div>
+              <div class="cat-card__title">Apoio a Captacao de Recursos</div>
+              <div class="cat-card__desc">Grants, financiamentos e parcerias</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F9EA;</div>
+              <div class="cat-card__title">Assessoria Cientifica</div>
+              <div class="cat-card__desc">Consultoria para projetos de pesquisa</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4C4;</div>
+              <div class="cat-card__title">Lattes Desk</div>
+              <div class="cat-card__desc">Apoio na gestao do curriculo Lattes</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F310;</div>
+              <div class="cat-card__title">Editais Externos</div>
+              <div class="cat-card__desc">FAPESP, CNPq, NIH e outras agencias</div>
+            </a>
+
+            <a href="categoria.html" class="cat-card">
+              <div class="cat-card__icon">&#x1F4C2;</div>
+              <div class="cat-card__title">Apoio a Gestao de Projetos</div>
+              <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- EDITAIS E OPORTUNIDADES RECENTES -->
+      <section class="section section--alt">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Editais e Oportunidades Recentes</h2>
+            <a href="oportunidades.html" class="btn btn-outline btn-sm">Ver todos &rarr;</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track">
+
+              <a href="oportunidade.html" class="opp-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">FAPESP</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa</div>
+                <div class="opp-card__meta">
+                  <span>&#x1F4B0; Ate R$200.000</span>
+                  <span>&#x23F3; Prazo: 15/04/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Biomedicina</span>
+                  <span class="tag">Saude</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">NIH</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Grant NIH R21 &mdash; Neuroscience Research</div>
+                <div class="opp-card__meta">
+                  <span>&#x1F4B0; Ate US$275,000</span>
+                  <span>&#x23F3; Prazo: 30/06/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Neurociencia</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">CNPq</span>
+                  <span class="badge badge-urgent">Urgente</span>
+                </div>
+                <div class="opp-card__title">Bolsa de Produtividade em Pesquisa &mdash; 2026</div>
+                <div class="opp-card__meta">
+                  <span>&#x1F4B0; R$1.500/mes</span>
+                  <span>&#x23F3; Prazo: 05/04/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Multidisciplinar</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Seed Grant IDOR &mdash; Pesquisa Translacional 2026</div>
+                <div class="opp-card__meta">
+                  <span>&#x1F4B0; Ate R$80.000</span>
+                  <span>&#x23F3; Prazo: 30/05/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Genetica</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-closed">Encerrado</span>
+                </div>
+                <div class="opp-card__title">Bolsa IDOR Pos-Doc 2026 &mdash; Oncologia</div>
+                <div class="opp-card__meta">
+                  <span>&#x1F4B0; R$8.000/mes</span>
+                  <span>Encerrado em 01/03/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                </div>
+              </a>
+
+            </div>
+            <button class="carousel__nav carousel__nav--prev" onclick="scrollCarousel(-1)">&#8249;</button>
+            <button class="carousel__nav carousel__nav--next" onclick="scrollCarousel(1)">&#8250;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARTIGOS RECENTES -->
+      <section class="section">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Artigos Recentes</h2>
+          </div>
+          <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+
+            <a href="artigo.html" class="article-card">
+              <div class="article-card__cat">NAPE</div>
+              <div class="article-card__title">Como submeter um Projeto de Pesquisa?</div>
+              <div class="article-card__excerpt">Cadastre-se como proponente na Plataforma NAPE e registre seu projeto para avaliacao e aprovacao previa.</div>
+              <div class="article-card__footer">
+                <span>15/03/2026</span>
+                <span class="badge badge-public">Publico</span>
+              </div>
+            </a>
+
+            <a href="artigo.html" class="article-card">
+              <div class="article-card__cat">TI</div>
+              <div class="article-card__title">Acesso a bases de dados cientificas</div>
+              <div class="article-card__excerpt">Guia completo para acessar PubMed, Scopus, Web of Science e outras plataformas disponiveis.</div>
+              <div class="article-card__footer">
+                <span>10/03/2026</span>
+                <span class="badge badge-public">Publico</span>
+              </div>
+            </a>
+
+            <a href="artigo.html" class="article-card">
+              <div class="article-card__cat">NAPE</div>
+              <div class="article-card__title">Estruturacao de documentos para publicacao</div>
+              <div class="article-card__excerpt">Como solicitar apoio na estruturacao de documentos para publicacao em periodicos cientificos.</div>
+              <div class="article-card__footer">
+                <span>05/03/2026</span>
+                <span class="badge badge-restricted">Restrito</span>
+              </div>
+            </a>
+
+            <a href="artigo.html" class="article-card">
+              <div class="article-card__cat">Administracao</div>
+              <div class="article-card__title">Agendamento de salas &mdash; Novo sistema</div>
+              <div class="article-card__excerpt">Conheca o novo sistema de reserva de salas de reuniao e laboratorios do IDOR.</div>
+              <div class="article-card__footer">
+                <span>01/03/2026</span>
+                <span class="badge badge-public">Publico</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section">
+        <div class="container">
+          <div class="cta-banner">
+            <h3>Nao encontrou o que procura?</h3>
+            <p>Nossa equipe esta pronta para ajudar voce a encontrar as informacoes que precisa.</p>
+            <a href="mailto:portalpesquisador@idor.org" class="btn btn-primary btn-lg">Fale Conosco</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer__inner">
+          <div class="footer__brand">
+            <h4>Portal do Pesquisador &mdash; IDOR</h4>
+            <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+          </div>
+          <div class="footer__links">
+            <div>
+              <h5>Portal</h5>
+              <a href="index.html">Home</a>
+              <a href="oportunidades.html">Oportunidades</a>
+              <a href="compliance.html">Compliance</a>
+              <a href="open-science.html">Open Science</a>
+            </div>
+            <div>
+              <h5>Institucional</h5>
+              <a href="#">IDOR</a>
+              <a href="#">Rede D'Or Sao Luiz</a>
+              <a href="#">Fale Conosco</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+        </div>
+      </footer>
+
+    </div><!-- /home-content -->
+
+  </div><!-- /home-wrapper -->
+
+  <script src="main.js"></script>
+  <script>
+    (function() {
+      var wrapper = document.getElementById('homeWrapper');
+      var header = document.getElementById('homeHeader');
+      var content = document.getElementById('homeContent');
+      var scrollHint = document.querySelector('.scroll-hint');
+      var hasSnapped = false;
+      var isAnimating = false;
+      var heroH = window.innerHeight;
+
+      window.addEventListener('resize', function() { heroH = window.innerHeight; });
+
+      /* --- Scroll listener for header + card animations --- */
+      wrapper.addEventListener('scroll', function() {
+        var scrollY = wrapper.scrollTop;
+
+        // Header: transparent -> solid
+        if (scrollY > heroH * 0.15) {
+          header.classList.add('header--solid');
+        } else {
+          header.classList.remove('header--solid');
+        }
+
+        // Hide scroll hint
+        if (scrollY > 50 && scrollHint) {
+          scrollHint.style.opacity = '0';
+          scrollHint.style.pointerEvents = 'none';
+        } else if (scrollHint) {
+          scrollHint.style.opacity = '';
+          scrollHint.style.pointerEvents = '';
+        }
+
+        // Animate cards on first snap to content
+        if (scrollY > heroH * 0.5 && !hasSnapped) {
+          hasSnapped = true;
+          animateCards();
+        }
+
+        // Reset cards if back on hero
+        if (scrollY < 10 && hasSnapped) {
+          hasSnapped = false;
+          var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
+          cards.forEach(function(card) { card.classList.remove('visible'); });
+        }
+      });
+
+      /* --- Staggered card entrance animation --- */
+      function animateCards() {
+        var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
+        cards.forEach(function(card, i) {
+          setTimeout(function() { card.classList.add('visible'); }, i * 40);
+        });
+      }
+
+      /* --- Click scroll hint to go to content --- */
+      if (scrollHint) {
+        scrollHint.style.cursor = 'pointer';
+        scrollHint.addEventListener('click', function() {
+          smoothScrollTo(heroH);
+        });
+      }
+
+      /* --- Wheel handler: snap between hero <-> content top --- */
+      wrapper.addEventListener('wheel', function(e) {
+        var scrollY = wrapper.scrollTop;
+        // Tolerance zone: how close to the content-top the user must be
+        // for a single scroll-up to snap back to hero
+        var tolerance = 80;
+        var atHero = scrollY < 10;
+        var atContentTop = Math.abs(scrollY - heroH) < tolerance;
+
+        // At hero, scrolling DOWN -> snap to content
+        if (atHero && e.deltaY > 0) {
+          e.preventDefault();
+          smoothScrollTo(heroH);
+          return;
+        }
+
+        // At content top (categories area), scrolling UP -> snap to hero
+        if (atContentTop && e.deltaY < 0) {
+          e.preventDefault();
+          smoothScrollTo(0);
+          return;
+        }
+
+        // Between hero and content (mid-transition), lock to nearest
+        if (scrollY > 10 && scrollY < heroH - tolerance) {
+          e.preventDefault();
+          if (e.deltaY > 0) {
+            smoothScrollTo(heroH);
+          } else {
+            smoothScrollTo(0);
+          }
+          return;
+        }
+
+        // Otherwise: free scroll within content (below categories, etc.)
+      }, { passive: false });
+
+      /* --- Touch support for mobile --- */
+      var touchStartY = 0;
+      wrapper.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', function(e) {
+        var scrollY = wrapper.scrollTop;
+        var deltaY = touchStartY - e.changedTouches[0].clientY;
+        var tolerance = 80;
+        var atHero = scrollY < 10;
+        var atContentTop = Math.abs(scrollY - heroH) < tolerance;
+
+        if (atHero && deltaY > 40) {
+          smoothScrollTo(heroH);
+        } else if (atContentTop && deltaY < -40) {
+          smoothScrollTo(0);
+        }
+      }, { passive: true });
+
+      /* --- Smooth scroll helper --- */
+      function smoothScrollTo(target) {
+        if (isAnimating) return;
+        isAnimating = true;
+        wrapper.scrollTo({ top: target, behavior: 'smooth' });
+        // Release lock after animation
+        setTimeout(function() { isAnimating = false; }, 600);
+      }
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Science / Gestao de Dados — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html" class="active">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <span class="breadcrumb__current">Open Science</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="section" style="padding-top: 1rem;">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-header__title">Open Science / Gestao de Dados</h1>
+        <p class="page-header__desc">Orientacoes para pesquisadores sobre gestao de dados de pesquisa, repositorios abertos e politicas de ciencia aberta do IDOR. Encontre aqui ferramentas, templates e boas praticas para tornar sua pesquisa mais transparente, reproduzivel e acessivel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE CARDS ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Recursos e Ferramentas</h2>
+      </div>
+      <div class="cards-grid">
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#x1F4DD;</div>
+          <h3 class="feature-card__title">Planos de Gestao de Dados (DMP)</h3>
+          <p class="feature-card__desc">O Data Management Plan (DMP) descreve como os dados serao coletados, organizados, armazenados e compartilhados durante e apos o projeto de pesquisa. Acesse templates, exemplos preenchidos e orientacoes para criar seu DMP de acordo com as exigencias de agencias de fomento nacionais e internacionais.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#x1F4E6;</div>
+          <h3 class="feature-card__title">Repositorios de Dados Abertos</h3>
+          <p class="feature-card__desc">Saiba onde e como depositar seus dados de pesquisa em repositorios abertos e confiadores. Conhea opcoes como Zenodo, Dryad, Figshare, Dataverse e o repositorio institucional do IDOR, incluindo orientacoes sobre licenciamento, metadados e identificadores persistentes (DOI).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#x1F310;</div>
+          <h3 class="feature-card__title">Boas Praticas de Open Science</h3>
+          <p class="feature-card__desc">Adote os principios FAIR (Findable, Accessible, Interoperable, Reusable) em sua pesquisa. Aprenda sobre pre-registro de estudos, pre-prints, compartilhamento de codigo, ciencia cidada e como integrar praticas de ciencia aberta ao seu fluxo de trabalho desde o inicio do projeto.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#x1F6E0;&#xFE0F;</div>
+          <h3 class="feature-card__title">Ferramentas e Tutoriais</h3>
+          <p class="feature-card__desc">Guias passo a passo para softwares e plataformas de gestao de dados, incluindo REDCap, Git/GitHub, OSF (Open Science Framework), R, Python para analise reproduzivel e ferramentas de anonimizacao de dados. Tutoriais em video e documentacao de apoio.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#x1F3DB;&#xFE0F;</div>
+          <h3 class="feature-card__title">Politicas Institucionais</h3>
+          <p class="feature-card__desc">Conhea as politicas do IDOR sobre gestao, compartilhamento e preservacao de dados de pesquisa. Inclui diretrizes sobre propriedade de dados, periodos de embargo, requisitos de agencias financiadoras e alinhamento com regulamentacoes como a LGPD para dados sensiveis.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TUTORIAIS RELACIONADOS ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Tutoriais e Guias</h2>
+      </div>
+      <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">Open Science</div>
+          <div class="article-card__title">Como criar seu primeiro Plano de Gestao de Dados</div>
+          <div class="article-card__excerpt">Tutorial passo a passo para elaborar um DMP usando o template do IDOR e a ferramenta DMP Tool, atendendo requisitos de FAPESP, CNPq e NIH.</div>
+          <div class="article-card__footer">
+            <span>22/03/2026</span>
+            <span class="badge badge-public">Publico</span>
+          </div>
+        </a>
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">Open Science</div>
+          <div class="article-card__title">Depositando dados no Zenodo &mdash; Guia completo</div>
+          <div class="article-card__excerpt">Aprenda a depositar datasets no Zenodo vinculado a comunidade IDOR, obter DOI, definir licencas e configurar metadados corretamente.</div>
+          <div class="article-card__footer">
+            <span>18/03/2026</span>
+            <span class="badge badge-public">Publico</span>
+          </div>
+        </a>
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">Open Science</div>
+          <div class="article-card__title">Pre-registro de estudos no OSF</div>
+          <div class="article-card__excerpt">Como pre-registrar sua hipotese e protocolo no Open Science Framework para aumentar a transparencia e credibilidade da sua pesquisa.</div>
+          <div class="article-card__footer">
+            <span>12/03/2026</span>
+            <span class="badge badge-public">Publico</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

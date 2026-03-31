@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Conta — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="minha-conta.html" class="btn btn-secondary btn-sm">Minha Conta</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="minha-conta.html">Minha Conta</a>
+      <a href="login.html">Sair</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <nav style="font-size:14px; color:var(--gray-500);">
+        <a href="index.html" style="color:var(--blue-900); font-weight:600;">Home</a>
+        <span style="margin:0 8px;">/</span>
+        <span>Minha Conta</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <h1 style="font-size:28px; font-weight:800; color:var(--gray-900);">Minha Conta</h1>
+    </div>
+  </section>
+
+  <!-- ===== ACCOUNT CONTENT ===== -->
+  <section class="section">
+    <div class="container" style="max-width:680px;">
+      <div style="background:#fff; border-radius:16px; padding:40px; box-shadow:0 1px 3px rgba(0,0,0,.08);">
+
+        <!-- Dados Pessoais -->
+        <h3 style="font-size:18px; font-weight:700; color:var(--gray-900); margin-bottom:24px;">Dados Pessoais</h3>
+
+        <form onsubmit="event.preventDefault();">
+
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" class="form-input" value="Maria Silva" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" class="form-input" value="maria.silva@idor.org.br" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="unidade">Unidade</label>
+            <select id="unidade" class="form-select">
+              <option value="rj-botafogo" selected>IDOR RJ - Botafogo</option>
+              <option value="sp-jabaquara">IDOR SP - Jabaquara</option>
+              <option value="ba-cbtc">IDOR BA - CBTC</option>
+              <option value="outra">Outra</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Tipo de perfil</label>
+            <div>
+              <span class="badge badge-open">Pesquisador</span>
+            </div>
+          </div>
+
+          <!-- Alterar Senha -->
+          <h3 style="font-size:18px; font-weight:700; color:var(--gray-900); margin-top:40px; margin-bottom:24px;">Alterar Senha</h3>
+
+          <div class="form-group">
+            <label for="senha-atual">Senha atual</label>
+            <input type="password" id="senha-atual" class="form-input" placeholder="Digite sua senha atual">
+          </div>
+
+          <div class="form-group">
+            <label for="nova-senha">Nova senha</label>
+            <input type="password" id="nova-senha" class="form-input" placeholder="Digite a nova senha">
+          </div>
+
+          <div class="form-group">
+            <label for="confirmar-nova-senha">Confirmar nova senha</label>
+            <input type="password" id="confirmar-nova-senha" class="form-input" placeholder="Repita a nova senha">
+          </div>
+
+          <div class="form-actions" style="display:flex; gap:12px; flex-direction:column;">
+            <button type="submit" class="btn btn-primary">Salvar alteracoes</button>
+            <a href="login.html" class="btn btn-ghost" style="width:100%; justify-content:center; padding:14px; font-size:16px;">Sair da conta</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

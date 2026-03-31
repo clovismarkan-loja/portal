@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como submeter um Projeto de Pesquisa? — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <section class="section" style="padding-top: calc(var(--header-h) + 24px); padding-bottom: 0;">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <a href="categoria.html">NAPE</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <span class="breadcrumb__current">Como submeter um Projeto?</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE ===== -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Article Meta -->
+      <div class="article-meta">
+        <span class="article-meta__area">NAPE</span>
+        <span class="article-meta__date">Publicado em 15/03/2026</span>
+        <span class="article-meta__date">Atualizado em 28/03/2026</span>
+        <span class="badge badge-public">Publico</span>
+      </div>
+
+      <h1 style="font-size: 2rem; color: var(--gray-900); margin-bottom: 24px; line-height: 1.3;">Como submeter um Projeto de Pesquisa?</h1>
+
+      <!-- Article Body -->
+      <div class="article-body">
+
+        <p>Todo projeto de pesquisa conduzido no Instituto D'Or de Pesquisa e Ensino (IDOR) deve ser submetido previamente ao <strong>Nucleo de Apoio a Pesquisa e Ensino (NAPE)</strong> para avaliacao etica, cientifica e regulatoria. Este artigo descreve o fluxo completo de submissao, desde o cadastro na plataforma ate a aprovacao final pelo Comite de Etica em Pesquisa (CEP).</p>
+
+        <p>O processo de submissao foi redesenhado em 2025 para tornar a experiencia mais agil e transparente. Agora, todas as etapas sao acompanhadas em tempo real pela <strong>Plataforma NAPE</strong>, garantindo rastreabilidade e comunicacao direta entre pesquisadores e avaliadores.</p>
+
+        <h2>Pre-requisitos para submissao</h2>
+
+        <p>Antes de iniciar a submissao do seu projeto, certifique-se de que voce atende aos seguintes requisitos:</p>
+
+        <ul>
+          <li>Ser pesquisador vinculado ao IDOR (titular, associado ou colaborador externo com carta-convite).</li>
+          <li>Possuir curriculo Lattes atualizado nos ultimos 6 meses.</li>
+          <li>Ter concluido o treinamento obrigatorio em Boas Praticas Clinicas (GCP) &mdash; certificado com validade de 3 anos.</li>
+          <li>Dispor de um orientador ou pesquisador responsavel, caso seja aluno de pos-graduacao.</li>
+          <li>Possuir orcamento preliminar do projeto, quando aplicavel.</li>
+        </ul>
+
+        <h2>Passo a passo da submissao</h2>
+
+        <p>O processo de submissao e composto por etapas sequenciais. Cada etapa deve ser concluida antes de avancar para a proxima.</p>
+
+        <h3>1. Cadastro na Plataforma NAPE</h3>
+
+        <p>Acesse a <a href="#">Plataforma NAPE</a> e realize seu cadastro como proponente. Caso ja possua conta, faca login com suas credenciais institucionais. Durante o cadastro, voce devera informar seus dados pessoais, vinculo institucional e area de atuacao.</p>
+
+        <h3>2. Registro do projeto</h3>
+
+        <p>Apos o cadastro, clique em <strong>"Novo Projeto"</strong> e preencha o formulario de registro. Os campos obrigatorios incluem:</p>
+
+        <ul>
+          <li>Titulo do projeto (em portugues e ingles)</li>
+          <li>Resumo cientifico (ate 500 palavras)</li>
+          <li>Justificativa e relevancia</li>
+          <li>Objetivos (geral e especificos)</li>
+          <li>Metodologia proposta</li>
+          <li>Cronograma de execucao</li>
+          <li>Equipe de pesquisa (com funcoes e qualificacoes)</li>
+          <li>Orcamento detalhado e fonte de financiamento</li>
+          <li>Termos de Consentimento Livre e Esclarecido (TCLE), quando aplicavel</li>
+        </ul>
+
+        <h3>3. Upload de documentos obrigatorios</h3>
+
+        <p>Anexe os seguintes documentos ao registro do projeto:</p>
+
+        <ul>
+          <li>Protocolo de pesquisa completo (formato PDF)</li>
+          <li>Folha de rosto assinada pelo pesquisador responsavel e pela direcao do IDOR</li>
+          <li>Curriculo Lattes do pesquisador principal</li>
+          <li>TCLE e/ou TALE (Termo de Assentimento), quando houver participacao de seres humanos</li>
+          <li>Declaracao de infraestrutura e equipamentos</li>
+          <li>Carta de anuencia de instituicoes coparticipantes, se aplicavel</li>
+        </ul>
+
+        <h3>4. Analise interna pelo NAPE</h3>
+
+        <p>Apos a submissao, o NAPE realizara uma analise preliminar da documentacao em ate <strong>5 dias uteis</strong>. Nesta etapa, serao verificados a completude dos documentos, a aderencia as normas institucionais e a viabilidade tecnica do projeto. Caso haja pendencias, voce recebera uma notificacao na plataforma com orientacoes para correcao.</p>
+
+        <h3>5. Submissao ao CEP/CONEP via Plataforma Brasil</h3>
+
+        <p>Projetos que envolvam pesquisa com seres humanos devem ser submetidos ao <strong>Comite de Etica em Pesquisa (CEP)</strong> do IDOR por meio da <a href="https://plataformabrasil.saude.gov.br" target="_blank" rel="noopener">Plataforma Brasil</a>. O NAPE auxilia neste processo, revisando a documentacao antes do envio. Projetos de maior complexidade podem ser encaminhados a Comissao Nacional de Etica em Pesquisa (CONEP).</p>
+
+        <h3>6. Parecer e aprovacao</h3>
+
+        <p>O CEP emitira um parecer &mdash; aprovado, com pendencias ou reprovado. Em caso de pendencias, o pesquisador tera <strong>30 dias</strong> para realizar as adequacoes e reenviar a documentacao. Apos a aprovacao, o projeto recebe um numero de registro e esta autorizado a iniciar.</p>
+
+        <h2>Prazos estimados</h2>
+
+        <p>O tempo medio para aprovacao completa de um projeto varia conforme a complexidade:</p>
+
+        <ul>
+          <li><strong>Projetos simples</strong> (sem envolvimento de seres humanos): 15 a 20 dias uteis</li>
+          <li><strong>Projetos com CEP:</strong> 30 a 60 dias uteis</li>
+          <li><strong>Projetos encaminhados a CONEP:</strong> 60 a 120 dias uteis</li>
+        </ul>
+
+        <h2>Dicas importantes</h2>
+
+        <p>Para agilizar a aprovacao do seu projeto, recomendamos:</p>
+
+        <ul>
+          <li>Preencha todos os campos do formulario de forma clara e objetiva.</li>
+          <li>Revise a ortografia e a formatacao dos documentos antes de anexa-los.</li>
+          <li>Consulte os modelos de TCLE e protocolo disponibilizados pelo NAPE (veja a secao de downloads abaixo).</li>
+          <li>Em caso de duvidas, agende uma reuniao de orientacao com a equipe do NAPE pelo e-mail <a href="mailto:nape@idor.org">nape@idor.org</a>.</li>
+          <li>Acompanhe o status da submissao regularmente na Plataforma NAPE.</li>
+        </ul>
+
+        <p>Para mais informacoes sobre normas eticas e regulatorias, consulte a <a href="compliance.html">secao de Compliance e Etica</a> do portal.</p>
+
+      </div>
+
+      <!-- ===== DOWNLOADS ===== -->
+      <div class="downloads-section">
+        <h2 style="font-size: 1.25rem; color: var(--gray-900); margin-bottom: 16px;">Downloads</h2>
+
+        <div class="download-item">
+          <div class="download-item__icon">PDF</div>
+          <div class="download-item__info">
+            <div class="download-item__name">Formulario de Submissao de Projeto</div>
+            <div class="download-item__size">PDF &mdash; 245 KB</div>
+          </div>
+          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
+        </div>
+
+        <div class="download-item">
+          <div class="download-item__icon">PDF</div>
+          <div class="download-item__info">
+            <div class="download-item__name">Manual de Orientacao CONEP &mdash; Pesquisa com Seres Humanos</div>
+            <div class="download-item__size">PDF &mdash; 1.2 MB</div>
+          </div>
+          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
+        </div>
+
+        <div class="download-item download-item--doc">
+          <div class="download-item__icon download-item__icon--doc">DOC</div>
+          <div class="download-item__info">
+            <div class="download-item__name">Template de Protocolo de Pesquisa</div>
+            <div class="download-item__size">DOCX &mdash; 89 KB</div>
+          </div>
+          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
+        </div>
+      </div>
+
+      <!-- ===== TAGS ===== -->
+      <div class="tags-section">
+        <span class="tag">submissao</span>
+        <span class="tag">etica</span>
+        <span class="tag">CONEP</span>
+        <span class="tag">projeto</span>
+        <span class="tag">NAPE</span>
+      </div>
+
+      <!-- ===== FEEDBACK ===== -->
+      <div class="feedback-box">
+        <p class="feedback-box__question">Este artigo foi util?</p>
+        <div class="feedback-box__btns">
+          <button class="btn btn-sm btn-outline feedback-btn" onclick="this.classList.add('feedback-btn--active'); this.nextElementSibling.classList.remove('feedback-btn--active');">&#x1F44D; Sim</button>
+          <button class="btn btn-sm btn-outline feedback-btn" onclick="this.classList.add('feedback-btn--active'); this.previousElementSibling.classList.remove('feedback-btn--active');">&#x1F44E; Nao</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ARTIGOS RELACIONADOS ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Artigos Relacionados</h2>
+      </div>
+      <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">NAPE</div>
+          <div class="article-card__title">Estruturacao de documentos para publicacao</div>
+          <div class="article-card__excerpt">Como solicitar apoio na estruturacao de documentos para publicacao em periodicos cientificos.</div>
+          <div class="article-card__footer">
+            <span>05/03/2026</span>
+            <span class="badge badge-restricted">Restrito</span>
+          </div>
+        </a>
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">Compliance</div>
+          <div class="article-card__title">Guia rapido: Plataforma Brasil</div>
+          <div class="article-card__excerpt">Passo a passo para cadastrar e acompanhar projetos na Plataforma Brasil do Ministerio da Saude.</div>
+          <div class="article-card__footer">
+            <span>20/02/2026</span>
+            <span class="badge badge-public">Publico</span>
+          </div>
+        </a>
+
+        <a href="artigo.html" class="article-card">
+          <div class="article-card__cat">NAPE</div>
+          <div class="article-card__title">Elaboracao do TCLE: boas praticas</div>
+          <div class="article-card__excerpt">Orientacoes para redigir Termos de Consentimento Livre e Esclarecido claros e em conformidade com a CONEP.</div>
+          <div class="article-card__footer">
+            <span>12/02/2026</span>
+            <span class="badge badge-public">Publico</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

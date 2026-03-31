@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Oportunidades — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html" class="active">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb__sep">&rsaquo;</span>
+      <span>Oportunidades</span>
+    </div>
+  </div>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header__icon">&#x1F3AF;</div>
+      <h1 class="page-header__title">Banco de Oportunidades</h1>
+      <p class="page-header__desc">Encontre editais, grants, bolsas e financiamentos para impulsionar sua pesquisa. Filtre por area, valor, prazo e elegibilidade para descobrir as melhores oportunidades disponiveis.</p>
+    </div>
+  </section>
+
+  <!-- ===== SEARCH ===== -->
+  <section class="section" style="padding-top: 0; padding-bottom: 24px;">
+    <div class="container">
+      <div class="search-box">
+        <input type="text" placeholder="Busque por editais, grants, bolsas, agencias financiadoras...">
+        <button>&#x1F50D; Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT: FILTERS + RESULTS ===== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="opp-layout">
+
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Tipo</h4>
+            <label class="filter-check"><input type="checkbox"> Edital</label>
+            <label class="filter-check"><input type="checkbox"> Grant</label>
+            <label class="filter-check"><input type="checkbox"> Bolsa</label>
+            <label class="filter-check"><input type="checkbox"> Financiamento</label>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Area</h4>
+            <label class="filter-check"><input type="checkbox"> Saude</label>
+            <label class="filter-check"><input type="checkbox"> Biomedicina</label>
+            <label class="filter-check"><input type="checkbox"> Neurociencia</label>
+            <label class="filter-check"><input type="checkbox"> Oncologia</label>
+            <label class="filter-check"><input type="checkbox"> Genetica</label>
+            <label class="filter-check"><input type="checkbox"> Multidisciplinar</label>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Prazo</h4>
+            <label class="filter-check"><input type="checkbox"> Em aberto</label>
+            <label class="filter-check"><input type="checkbox"> Proximos 30 dias</label>
+            <label class="filter-check"><input type="checkbox"> Proximos 90 dias</label>
+            <label class="filter-check"><input type="checkbox"> Encerrados</label>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Valor</h4>
+            <label class="filter-check"><input type="checkbox"> Ate R$50.000</label>
+            <label class="filter-check"><input type="checkbox"> R$50.000 &ndash; R$200.000</label>
+            <label class="filter-check"><input type="checkbox"> R$200.000 &ndash; R$1.000.000</label>
+            <label class="filter-check"><input type="checkbox"> Acima de R$1.000.000</label>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Elegibilidade</h4>
+            <label class="filter-check"><input type="checkbox"> Pesquisador</label>
+            <label class="filter-check"><input type="checkbox"> Pos-doc</label>
+            <label class="filter-check"><input type="checkbox"> Doutorando</label>
+            <label class="filter-check"><input type="checkbox"> Equipe</label>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title">Origem</h4>
+            <label class="filter-check"><input type="checkbox"> IDOR Interno</label>
+            <label class="filter-check"><input type="checkbox"> Nacional</label>
+            <label class="filter-check"><input type="checkbox"> Internacional</label>
+          </div>
+
+          <button class="filter-clear" onclick="clearFilters()">Limpar filtros</button>
+
+        </aside>
+
+        <!-- Results -->
+        <div class="opp-results">
+
+          <div class="sort-bar">
+            <span class="sort-bar__count">Exibindo <strong>6</strong> oportunidades</span>
+            <div class="sort-bar__sort">
+              <label for="sortSelect">Ordenar por:</label>
+              <select id="sortSelect">
+                <option value="relevancia">Relevancia</option>
+                <option value="prazo-asc">Prazo (mais proximo)</option>
+                <option value="prazo-desc">Prazo (mais distante)</option>
+                <option value="valor-desc">Valor (maior)</option>
+                <option value="valor-asc">Valor (menor)</option>
+                <option value="recentes">Mais recentes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Card 1 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa Regular</h3>
+              <span class="badge badge-open">Aberto</span>
+            </div>
+            <div class="opp-list-card__org">FAPESP &mdash; Fundacao de Amparo a Pesquisa do Estado de Sao Paulo</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; Ate R$200.000</span>
+              <span>&#x23F3; Prazo: 15/04/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Biomedicina</span>
+                <span class="tag">Saude</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">Grant NIH R21 &mdash; Exploratory/Developmental Research</h3>
+              <span class="badge badge-open">Aberto</span>
+            </div>
+            <div class="opp-list-card__org">NIH &mdash; National Institutes of Health (EUA)</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; Ate US$275,000</span>
+              <span>&#x23F3; Prazo: 30/06/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Neurociencia</span>
+                <span class="tag">Multidisciplinar</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">Bolsa de Produtividade em Pesquisa &mdash; CNPq 2026</h3>
+              <span class="badge badge-urgent">Urgente</span>
+            </div>
+            <div class="opp-list-card__org">CNPq &mdash; Conselho Nacional de Desenvolvimento Cientifico e Tecnologico</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; R$1.500/mes (36 meses)</span>
+              <span>&#x23F3; Prazo: 05/04/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Multidisciplinar</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">Seed Grant IDOR &mdash; Pesquisa Translacional 2026</h3>
+              <span class="badge badge-open">Aberto</span>
+            </div>
+            <div class="opp-list-card__org">IDOR &mdash; Instituto D'Or de Pesquisa e Ensino (Edital Interno)</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; Ate R$80.000</span>
+              <span>&#x23F3; Prazo: 30/05/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Oncologia</span>
+                <span class="tag">Genetica</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 5 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">FINEP &mdash; Chamada Publica Subvencao Economica a Inovacao</h3>
+              <span class="badge badge-urgent">Urgente</span>
+            </div>
+            <div class="opp-list-card__org">FINEP &mdash; Financiadora de Estudos e Projetos</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; R$500.000 &ndash; R$2.000.000</span>
+              <span>&#x23F3; Prazo: 10/04/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Saude</span>
+                <span class="tag">Biomedicina</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 6 -->
+          <a href="oportunidade.html" class="opp-list-card">
+            <div class="opp-list-card__header">
+              <h3 class="opp-list-card__title">Bolsa IDOR Pos-Doc 2026 &mdash; Oncologia</h3>
+              <span class="badge badge-closed">Encerrado</span>
+            </div>
+            <div class="opp-list-card__org">IDOR &mdash; Instituto D'Or de Pesquisa e Ensino (Edital Interno)</div>
+            <div class="opp-list-card__details">
+              <span>&#x1F4B0; R$8.000/mes (24 meses)</span>
+              <span>Encerrado em 01/03/2026</span>
+              <div class="opp-list-card__tags">
+                <span class="tag">Oncologia</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <span class="pagination__item pagination__item--active">1</span>
+            <a href="#" class="pagination__item">2</a>
+            <a href="#" class="pagination__item">3</a>
+            <span class="pagination__item pagination__ellipsis">&hellip;</span>
+            <a href="#" class="pagination__item">12</a>
+            <a href="#" class="pagination__item pagination__next">Proxima &rarr;</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

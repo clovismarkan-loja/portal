@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance, Etica e Integridade — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html" class="active">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <section class="section" style="padding-top: calc(var(--header-h) + 24px); padding-bottom: 0;">
+    <div class="container">
+      <nav class="breadcrumb" style="font-size: .9rem; color: var(--gray-500);">
+        <a href="index.html" style="color: var(--blue-800); text-decoration: none;">Home</a>
+        <span style="margin: 0 8px;">&gt;</span>
+        <span>Compliance e Etica</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="section" style="padding-top: 24px;">
+    <div class="container">
+      <div style="max-width: 800px;">
+        <h1 style="font-size: 2rem; font-weight: 800; color: var(--gray-900); margin-bottom: 16px;">Compliance, Etica e Integridade na Pesquisa</h1>
+        <p style="font-size: 1.1rem; color: var(--gray-600); line-height: 1.7;">
+          Esta pagina centraliza as boas praticas, diretrizes eticas e regulamentacoes aplicaveis a pesquisa no IDOR. Aqui voce encontra orientacoes sobre comites de etica, formularios obrigatorios, normativas vigentes e recursos para garantir a integridade e transparencia em todas as etapas do processo cientifico.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACCORDION ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="accordion" style="max-width: 900px;">
+
+        <!-- 1. Boas Praticas de Pesquisa (open) -->
+        <div class="accordion__item open" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Boas Praticas de Pesquisa
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 16px;">
+              O IDOR esta comprometido com os mais altos padroes de integridade cientifica. Todos os pesquisadores, colaboradores e alunos devem aderir as diretrizes de boas praticas em pesquisa, incluindo: planejamento rigoroso de estudos, registro adequado de dados, transparencia na divulgacao de resultados e respeito aos principios eticos em todas as fases do projeto.
+            </p>
+            <p style="margin-bottom: 16px;">
+              Recomendamos a leitura dos documentos abaixo antes de iniciar qualquer novo projeto de pesquisa:
+            </p>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm); margin-bottom: 8px;">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Guia de Boas Praticas em Pesquisa Biomedica — IDOR</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">PDF &middot; 1.2 MB &middot; Atualizado em Jan/2026</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm);">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Manual de Integridade Cientifica e Prevencao a Fraude</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">PDF &middot; 860 KB &middot; Atualizado em Mar/2025</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Comites de Etica -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Comites de Etica (CEP, CONEP)
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 12px;">
+              O Comite de Etica em Pesquisa (CEP) do IDOR e responsavel por avaliar todos os projetos de pesquisa envolvendo seres humanos, em conformidade com a Resolucao CNS 466/2012 e a Resolucao CNS 510/2016. Nenhum projeto pode ser iniciado sem a aprovacao previa do CEP.
+            </p>
+            <p style="margin-bottom: 12px;">
+              <strong>Como submeter um projeto ao CEP:</strong>
+            </p>
+            <ol style="margin-left: 20px; margin-bottom: 12px;">
+              <li style="margin-bottom: 6px;">Cadastre-se na <strong>Plataforma Brasil</strong> (plataformabrasil.saude.gov.br).</li>
+              <li style="margin-bottom: 6px;">Preencha o formulario de submissao com todos os documentos obrigatorios (protocolo, TCLE, orcamento, cronograma).</li>
+              <li style="margin-bottom: 6px;">Selecione o CEP do IDOR como instituicao proponente.</li>
+              <li style="margin-bottom: 6px;">Aguarde a analise — o prazo medio e de <strong>30 dias uteis</strong> para primeira avaliacao.</li>
+              <li style="margin-bottom: 6px;">Projetos multicêntricos ou com tematicas especiais podem ser encaminhados a CONEP.</li>
+            </ol>
+            <p style="margin-bottom: 12px;">
+              <strong>Reunioes do CEP:</strong> ocorrem mensalmente, na segunda quinta-feira de cada mes. Submissoes devem ser realizadas com pelo menos 15 dias de antecedencia para inclusao na pauta.
+            </p>
+            <p>
+              <strong>Contato do CEP:</strong> <a href="mailto:cep@idor.org" style="color: var(--blue-800);">cep@idor.org</a> | Ramal 4520
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Regulamentacoes e Normativas -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Regulamentacoes e Normativas
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 12px;">
+              A pesquisa no IDOR deve estar em conformidade com as seguintes regulamentacoes e normativas nacionais e internacionais:
+            </p>
+            <ul style="margin-left: 20px; margin-bottom: 16px;">
+              <li style="margin-bottom: 8px;"><strong>Resolucao CNS 466/2012</strong> — Diretrizes e normas regulamentadoras de pesquisa envolvendo seres humanos.</li>
+              <li style="margin-bottom: 8px;"><strong>Resolucao CNS 510/2016</strong> — Normas aplicaveis a pesquisas em Ciencias Humanas e Sociais.</li>
+              <li style="margin-bottom: 8px;"><strong>Resolucao CNS 580/2018</strong> — Regulamentacao de pesquisas com cooperacao estrangeira.</li>
+              <li style="margin-bottom: 8px;"><strong>Lei Geral de Protecao de Dados (LGPD — Lei 13.709/2018)</strong> — Protecao de dados pessoais e sensiveis de participantes de pesquisa.</li>
+              <li style="margin-bottom: 8px;"><strong>Lei de Biosseguranca (Lei 11.105/2005)</strong> — Normas para pesquisa com organismos geneticamente modificados.</li>
+              <li style="margin-bottom: 8px;"><strong>Declaracao de Helsinki</strong> — Principios eticos para pesquisa medica em seres humanos (WMA).</li>
+              <li style="margin-bottom: 8px;"><strong>Boas Praticas Clinicas (ICH-GCP E6)</strong> — Padrao internacional para ensaios clinicos.</li>
+              <li style="margin-bottom: 8px;"><strong>Lei de Acesso a Informacao (Lei 12.527/2011)</strong> — Transparencia e acesso publico a informacoes de pesquisa financiada com recursos publicos.</li>
+            </ul>
+            <p>
+              Em caso de duvidas sobre a aplicabilidade de alguma regulamentacao ao seu projeto, entre em contato com o Escritorio de Compliance do IDOR pelo e-mail <a href="mailto:compliance@idor.org" style="color: var(--blue-800);">compliance@idor.org</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Formularios para Download -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Formularios para Download
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 16px;">
+              Abaixo estao disponiveis os formularios padronizados exigidos para submissao e acompanhamento de projetos de pesquisa no IDOR:
+            </p>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm); margin-bottom: 8px;">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Modelo de Termo de Consentimento Livre e Esclarecido (TCLE)</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">DOCX &middot; 95 KB &middot; Versao 4.0 — Jan/2026</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm); margin-bottom: 8px;">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Formulario de Declaracao de Conflito de Interesses</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">PDF &middot; 210 KB &middot; Versao 2.1 — Set/2025</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm); margin-bottom: 8px;">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Checklist de Submissao ao CEP</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">PDF &middot; 145 KB &middot; Versao 3.0 — Mar/2026</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+            <div class="download-item" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-sm);">
+              <span style="font-size: 1.3rem;">&#x1F4C4;</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--gray-900); font-size: .95rem;">Termo de Compromisso do Pesquisador Responsavel</div>
+                <div style="font-size: .85rem; color: var(--gray-500);">PDF &middot; 180 KB &middot; Versao 1.3 — Nov/2025</div>
+              </div>
+              <a href="#" style="color: var(--blue-800); font-weight: 600; font-size: .9rem; text-decoration: none;">Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Afiliacao para Producoes Cientificas -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Afiliacao para Producoes Cientificas
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 12px;">
+              Todos os pesquisadores vinculados ao IDOR devem incluir a afiliacao institucional correta em suas publicacoes cientificas. A padronizacao da afiliacao e fundamental para o ranqueamento institucional em bases bibliometricas (Scopus, Web of Science) e para a visibilidade da producao cientifica do instituto.
+            </p>
+            <p style="margin-bottom: 12px;">
+              <strong>Afiliacao padrao em portugues:</strong>
+            </p>
+            <div style="background: var(--gold-50); border-left: 4px solid var(--gold); padding: 16px 20px; border-radius: var(--radius-sm); margin-bottom: 12px; font-style: italic;">
+              Instituto D'Or de Pesquisa e Ensino (IDOR), Rio de Janeiro, RJ, Brasil
+            </div>
+            <p style="margin-bottom: 12px;">
+              <strong>Afiliacao padrao em ingles:</strong>
+            </p>
+            <div style="background: var(--gold-50); border-left: 4px solid var(--gold); padding: 16px 20px; border-radius: var(--radius-sm); margin-bottom: 12px; font-style: italic;">
+              D'Or Institute for Research and Education (IDOR), Rio de Janeiro, RJ, Brazil
+            </div>
+            <p style="margin-bottom: 12px;">
+              Caso o pesquisador possua dupla afiliacao, o IDOR deve aparecer como <strong>primeira afiliacao</strong> sempre que o projeto de pesquisa tenha sido conduzido majoritariamente nas instalacoes do instituto ou com financiamento do IDOR.
+            </p>
+            <p>
+              Duvidas sobre afiliacao podem ser encaminhadas ao NAPE: <a href="mailto:nape@idor.org" style="color: var(--blue-800);">nape@idor.org</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6. Links Uteis -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            Links Uteis
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+            <p style="margin-bottom: 16px;">
+              Recursos externos relevantes para etica, compliance e regulamentacao em pesquisa:
+            </p>
+            <ul style="list-style: none; margin: 0; padding: 0;">
+              <li style="margin-bottom: 10px;">
+                <a href="https://plataformabrasil.saude.gov.br" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">Plataforma Brasil</a>
+                <span style="color: var(--gray-500);"> — Sistema nacional de submissao de projetos ao CEP/CONEP</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://conselho.saude.gov.br/comissoes-cns/conep" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">CONEP</a>
+                <span style="color: var(--gray-500);"> — Comissao Nacional de Etica em Pesquisa</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://www.gov.br/cnpq" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">CNPq</a>
+                <span style="color: var(--gray-500);"> — Conselho Nacional de Desenvolvimento Cientifico e Tecnologico</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://www.gov.br/anvisa" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">ANVISA</a>
+                <span style="color: var(--gray-500);"> — Agencia Nacional de Vigilancia Sanitaria (ensaios clinicos)</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://publicationethics.org" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">COPE</a>
+                <span style="color: var(--gray-500);"> — Committee on Publication Ethics</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://www.wma.net/policies-post/wma-declaration-of-helsinki/" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">Declaracao de Helsinki</a>
+                <span style="color: var(--gray-500);"> — Principios eticos da WMA para pesquisa medica</span>
+              </li>
+              <li style="margin-bottom: 10px;">
+                <a href="https://www.gov.br/governodigital/pt-br/lgpd" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">LGPD</a>
+                <span style="color: var(--gray-500);"> — Lei Geral de Protecao de Dados Pessoais</span>
+              </li>
+              <li>
+                <a href="https://www.fapesp.br/boaspraticas" target="_blank" rel="noopener" style="color: var(--blue-800); font-weight: 600; text-decoration: none;">Codigo de Boas Praticas FAPESP</a>
+                <span style="color: var(--gray-500);"> — Referencia nacional em integridade cientifica</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7. FAQ de Compliance -->
+        <div class="accordion__item" style="border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden;">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--white); border: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--gray-900); text-align: left; font-family: inherit;">
+            FAQ de Compliance
+            <span class="icon" style="font-size: .75rem; transition: transform .25s ease;">&#9660;</span>
+          </button>
+          <div class="accordion__body" style="display: none; padding: 0 24px 24px; color: var(--gray-600); line-height: 1.7;">
+
+            <div style="margin-bottom: 20px;">
+              <p style="font-weight: 600; color: var(--gray-900); margin-bottom: 6px;">Preciso de aprovacao do CEP para estudos com dados retrospectivos?</p>
+              <p>Sim. Mesmo estudos que utilizam apenas dados secundarios ou retrospectivos devem ser submetidos ao CEP para avaliacao. Em alguns casos, e possivel solicitar dispensa do TCLE, mas a aprovacao etica e obrigatoria.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <p style="font-weight: 600; color: var(--gray-900); margin-bottom: 6px;">Quanto tempo leva a aprovacao de um projeto no CEP?</p>
+              <p>O prazo medio para a primeira avaliacao e de 30 dias uteis apos a submissao completa na Plataforma Brasil. Projetos que necessitam de pendencias podem levar mais tempo, dependendo da complexidade das adequacoes solicitadas.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <p style="font-weight: 600; color: var(--gray-900); margin-bottom: 6px;">Como devo proceder em caso de evento adverso durante a pesquisa?</p>
+              <p>Eventos adversos graves devem ser comunicados ao CEP em ate 48 horas. Utilize o formulario de notificacao de evento adverso disponivel na secao de Formularios para Download e encaminhe copia para o Escritorio de Compliance (<a href="mailto:compliance@idor.org" style="color: var(--blue-800);">compliance@idor.org</a>).</p>
+            </div>
+
+            <div>
+              <p style="font-weight: 600; color: var(--gray-900); margin-bottom: 6px;">Meu projeto envolve cooperacao internacional. Ha requisitos adicionais?</p>
+              <p>Sim. Projetos com cooperacao estrangeira devem observar a Resolucao CNS 580/2018. E necessario apresentar documentacao complementar, incluindo carta de anuencia da instituicao estrangeira, e a aprovacao pode ser encaminhada a CONEP. Consulte o NAPE para orientacao detalhada.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /.accordion -->
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

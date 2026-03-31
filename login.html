@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="auth-page">
+    <div class="auth-card">
+
+      <div class="auth-card__logo">
+        <div class="logo-circle">ID</div>
+        <h2>Portal do Pesquisador</h2>
+        <p>IDOR</p>
+      </div>
+
+      <form onsubmit="event.preventDefault();">
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-input" placeholder="seu.email@idor.org.br" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" class="form-input" placeholder="Digite sua senha" required>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+
+      </form>
+
+      <div class="form-links">
+        <a href="recuperar-senha.html">Esqueci minha senha</a>
+        <p style="margin-top:12px;">Ainda nao tem conta? <a href="cadastro.html">Criar conta</a></p>
+      </div>
+
+      <div style="text-align:center; margin-top:24px;">
+        <a href="index.html" style="font-size:13px; color:var(--gray-500);">&#8592; Voltar ao portal</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

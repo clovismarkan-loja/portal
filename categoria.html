@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAPE — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="container" style="margin-top: var(--header-h);">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      NAPE
+    </nav>
+  </div>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header__content">
+        <div class="page-header__icon">&#x1F52C;</div>
+        <h1>NAPE</h1>
+        <p>Nucleo de Apoio a Pesquisa e Ensino &mdash; suporte a submissao de projetos e documentacao institucional.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENT + SIDEBAR ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="layout-with-sidebar">
+
+        <!-- Main: Article List -->
+        <div class="article-list">
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Como submeter um projeto de pesquisa na Plataforma NAPE</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Passo a passo completo para cadastrar seu projeto na Plataforma NAPE, incluindo documentacao necessaria, prazos de avaliacao e fluxo de aprovacao pelo comite interno.
+            </div>
+            <div class="article-list-item__footer">
+              <span>15/03/2026</span>
+              <span class="badge badge-public">Publico</span>
+            </div>
+          </div>
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Submissao ao CEP/CONEP &mdash; Orientacoes e checklist</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Guia detalhado sobre como preparar a documentacao etica para submissao ao Comite de Etica em Pesquisa (CEP) e a Comissao Nacional de Etica em Pesquisa (CONEP), com checklist de documentos obrigatorios.
+            </div>
+            <div class="article-list-item__footer">
+              <span>08/03/2026</span>
+              <span class="badge badge-public">Publico</span>
+            </div>
+          </div>
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Modelos de TCLE e documentos regulatorios</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Acesse os templates atualizados de Termo de Consentimento Livre e Esclarecido (TCLE), Termo de Assentimento e demais documentos regulatorios exigidos pelos comites de etica.
+            </div>
+            <div class="article-list-item__footer">
+              <span>01/03/2026</span>
+              <span class="badge badge-restricted">Restrito</span>
+            </div>
+          </div>
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Fluxo de orcamento e financeiro para projetos de pesquisa</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Entenda como funciona a elaboracao de orcamento, prestacao de contas e gestao financeira de projetos aprovados. Inclui orientacoes sobre rubricas aceitas e prazos de execucao.
+            </div>
+            <div class="article-list-item__footer">
+              <span>22/02/2026</span>
+              <span class="badge badge-restricted">Restrito</span>
+            </div>
+          </div>
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Registro de ensaios clinicos &mdash; ReBEC e ClinicalTrials</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Saiba quando e como registrar seu ensaio clinico nas plataformas ReBEC (Registro Brasileiro de Ensaios Clinicos) e ClinicalTrials.gov, conforme exigencias regulatorias nacionais e internacionais.
+            </div>
+            <div class="article-list-item__footer">
+              <span>14/02/2026</span>
+              <span class="badge badge-public">Publico</span>
+            </div>
+          </div>
+
+          <div class="article-list-item">
+            <div class="article-list-item__title">
+              <a href="artigo.html">Acordos de cooperacao e contratos de pesquisa</a>
+            </div>
+            <div class="article-list-item__excerpt">
+              Procedimentos para formalizacao de acordos de cooperacao tecnica, contratos de pesquisa colaborativa e termos de confidencialidade (NDA) com instituicoes parceiras nacionais e internacionais.
+            </div>
+            <div class="article-list-item__footer">
+              <span>05/02/2026</span>
+              <span class="badge badge-restricted">Restrito</span>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">&raquo;</a>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+
+          <div class="sidebar__block">
+            <h4>Buscar em NAPE</h4>
+            <div class="sidebar__search">
+              <input type="text" placeholder="Buscar artigos...">
+              <button>&#x1F50D;</button>
+            </div>
+          </div>
+
+          <div class="sidebar__block">
+            <h4>Mais lidos</h4>
+            <a href="artigo.html" class="sidebar__link">Como submeter um projeto de pesquisa</a>
+            <a href="artigo.html" class="sidebar__link">Submissao ao CEP/CONEP</a>
+            <a href="artigo.html" class="sidebar__link">Modelos de TCLE e documentos regulatorios</a>
+            <a href="artigo.html" class="sidebar__link">Registro de ensaios clinicos</a>
+            <a href="artigo.html" class="sidebar__link">Fluxo de orcamento para projetos</a>
+          </div>
+
+          <div class="sidebar__block">
+            <h4>Categorias</h4>
+            <a href="categoria.html" class="sidebar__link">TI</a>
+            <a href="categoria.html" class="sidebar__link">Software de Apoio Academico</a>
+            <a href="categoria.html" class="sidebar__link">Inovacao e Propriedade Intelectual</a>
+            <a href="categoria.html" class="sidebar__link">Recursos Humanos (RH)</a>
+            <a href="categoria.html" class="sidebar__link">Assessoria Cientifica</a>
+            <a href="categoria.html" class="sidebar__link">Editais IDOR</a>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

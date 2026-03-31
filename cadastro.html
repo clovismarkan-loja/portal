@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="auth-page">
+    <div class="auth-card auth-card--wide">
+
+      <div class="auth-card__logo">
+        <div class="logo-circle">ID</div>
+        <h2>Portal do Pesquisador</h2>
+        <p>IDOR</p>
+      </div>
+
+      <form onsubmit="event.preventDefault();">
+
+        <div class="form-group">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" class="form-input" placeholder="Seu nome completo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail institucional</label>
+          <input type="email" id="email" class="form-input" placeholder="seu.email@idor.org.br" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" class="form-input" placeholder="Crie uma senha" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmar-senha">Confirmar senha</label>
+          <input type="password" id="confirmar-senha" class="form-input" placeholder="Repita a senha" required>
+        </div>
+
+        <div class="form-group">
+          <label for="vinculo">Tipo de vinculo</label>
+          <select id="vinculo" class="form-select" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="pesquisador">Pesquisador</option>
+            <option value="colaborador">Colaborador</option>
+            <option value="aluno">Aluno</option>
+            <option value="externo">Externo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="area">Area / Departamento</label>
+          <select id="area" class="form-select" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="neurociencia">Neurociencia</option>
+            <option value="oncologia">Oncologia</option>
+            <option value="cardiologia">Cardiologia</option>
+            <option value="genetica">Genetica e Genomica</option>
+            <option value="imunologia">Imunologia</option>
+            <option value="bioinformatica">Bioinformatica</option>
+            <option value="epidemiologia">Epidemiologia</option>
+            <option value="ensino">Ensino e Educacao</option>
+            <option value="administracao">Administracao</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="unidade">Unidade</label>
+          <select id="unidade" class="form-select" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="rj-botafogo">IDOR RJ - Botafogo</option>
+            <option value="sp-jabaquara">IDOR SP - Jabaquara</option>
+            <option value="ba-cbtc">IDOR BA - CBTC</option>
+            <option value="outra">Outra</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Criar conta</button>
+        </div>
+
+      </form>
+
+      <div class="form-links">
+        <p>Ja tem conta? <a href="login.html">Entrar</a></p>
+      </div>
+
+      <div style="text-align:center; margin-top:16px;">
+        <p style="font-size:12px; color:var(--gray-500); line-height:1.5;">
+          E-mails com dominio <strong>@idor.org.br</strong> ou <strong>@rededorsaoluiz.com.br</strong> recebem acesso completo automaticamente.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

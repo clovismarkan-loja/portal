@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edital FAPESP 2026/02 — Portal do Pesquisador — IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <div class="header__logo">ID</div>
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+          <div class="header__subtitle">IDOR</div>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="open-science.html">Open Science</a>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
+      <a href="index.html">Home</a>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Etica</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <section class="section" style="padding-top: 2rem; padding-bottom: 0;">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <a href="oportunidades.html">Oportunidades</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <span class="breadcrumb__current">Edital FAPESP 2026/02</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== TITULO DA OPORTUNIDADE ===== -->
+  <section class="section" style="padding-top: 1.5rem;">
+    <div class="container">
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; font-weight: 800; color: var(--text); margin: 0;">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa</h1>
+        <span class="badge badge-open">Aberto</span>
+      </div>
+
+      <!-- ===== INFO BOX ===== -->
+      <div class="info-box">
+        <div class="info-box__item">
+          <div class="info-box__label">Financiador</div>
+          <div class="info-box__value">FAPESP</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Tipo</div>
+          <div class="info-box__value">Edital</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Area</div>
+          <div class="info-box__value">
+            <span class="tag">Biomedicina</span>
+            <span class="tag">Saude</span>
+          </div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Valor</div>
+          <div class="info-box__value">Ate R$200.000</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Origem</div>
+          <div class="info-box__value">Nacional</div>
+        </div>
+      </div>
+
+      <!-- ===== DATES BOX ===== -->
+      <div class="dates-box">
+        <div class="dates-box__item">
+          <div class="dates-box__label">Abertura</div>
+          <div class="dates-box__value">01/03/2026</div>
+        </div>
+        <div class="dates-box__item">
+          <div class="dates-box__label">Encerramento</div>
+          <div class="dates-box__value">15/04/2026 <span class="dates-box__note">(em 16 dias)</span></div>
+        </div>
+        <div class="dates-box__item">
+          <div class="dates-box__label">Resultado</div>
+          <div class="dates-box__value">Julho 2026 <span class="dates-box__note">(previsao)</span></div>
+        </div>
+      </div>
+
+      <!-- ===== DESCRICAO ===== -->
+      <div class="article-body">
+        <h2>Descricao</h2>
+        <p>A Fundacao de Amparo a Pesquisa do Estado de Sao Paulo (FAPESP) torna publico o Edital 2026/02, destinado ao financiamento de projetos de pesquisa na modalidade Auxilio a Pesquisa &mdash; Regular, com foco em investigacoes nas areas de Biomedicina e Saude. O objetivo desta chamada e fomentar estudos originais que contribuam para o avanco do conhecimento cientifico e para a melhoria de praticas clinicas e de saude publica no Brasil.</p>
+        <p>Serao apoiados projetos com duracao de 12 a 24 meses que proponham abordagens inovadoras em temas como mecanismos moleculares de doencas, desenvolvimento de biomarcadores, epidemiologia translacional, ensaios pre-clinicos e estrategias terapeuticas emergentes. A FAPESP incentiva particularmente propostas que envolvam colaboracoes interinstitucionais e que demonstrem potencial de impacto social e cientifico.</p>
+        <p>O valor maximo de financiamento por projeto e de R$200.000,00, incluindo despesas com material de consumo, servicos de terceiros, equipamentos de pequeno porte, diarias e passagens vinculadas ao projeto, e bolsas de treinamento tecnico. Nao e permitido o uso dos recursos para pagamento de salarios de pesquisadores permanentes.</p>
+      </div>
+
+      <!-- ===== ELEGIBILIDADE ===== -->
+      <div class="article-body">
+        <h2>Elegibilidade</h2>
+        <ul>
+          <li>Pesquisador responsavel deve possuir titulo de Doutor ha pelo menos 3 anos</li>
+          <li>O proponente deve manter vinculo formal com instituicao de ensino superior ou instituto de pesquisa sediado no Estado de Sao Paulo</li>
+          <li>Pesquisadores vinculados a instituicoes de outros estados podem participar como co-investigadores, desde que a coordenacao do projeto seja realizada por pesquisador elegivel em SP</li>
+          <li>O proponente nao pode possuir pendencias com a FAPESP, incluindo relatorios atrasados ou prestacoes de contas em aberto</li>
+          <li>Projetos que envolvam pesquisa com seres humanos devem apresentar aprovacao do Comite de Etica em Pesquisa (CEP) ate a data de submissao</li>
+          <li>Projetos com experimentacao animal devem apresentar aprovacao da Comissao de Etica no Uso de Animais (CEUA)</li>
+          <li>Nao ha restricao de idade para o pesquisador responsavel</li>
+        </ul>
+      </div>
+
+      <!-- ===== DOCUMENTACAO NECESSARIA ===== -->
+      <div class="article-body">
+        <h2>Documentacao Necessaria</h2>
+        <ul>
+          <li>Formulario de submissao preenchido na Plataforma SAGe/FAPESP</li>
+          <li>Projeto de pesquisa completo (maximo 20 paginas), incluindo introducao, objetivos, metodologia, cronograma e orcamento detalhado</li>
+          <li>Curriculo Lattes atualizado do pesquisador responsavel e dos co-investigadores</li>
+          <li>Carta de anuencia da instituicao sede, assinada pelo dirigente institucional</li>
+          <li>Parecer aprovado do Comite de Etica em Pesquisa (CEP), quando aplicavel</li>
+          <li>Parecer aprovado da Comissao de Etica no Uso de Animais (CEUA), quando aplicavel</li>
+          <li>Declaracao de infraestrutura disponivel para a execucao do projeto</li>
+          <li>Orcamento detalhado discriminando itens de custeio e capital</li>
+          <li>Carta de concordancia dos co-investigadores, quando houver</li>
+        </ul>
+      </div>
+
+      <!-- ===== CTA ===== -->
+      <div style="text-align: center; margin: 3rem 0 2rem;">
+        <a href="#" class="btn btn-primary btn-lg">Acessar inscricao na FAPESP</a>
+      </div>
+
+      <!-- ===== CONTATO ===== -->
+      <div class="contact-box">
+        <h3>Duvidas?</h3>
+        <p>Entre em contato com o <strong>NAPE &mdash; Nucleo de Apoio a Pesquisa e Ensino</strong> para orientacoes sobre submissao e documentacao.</p>
+        <p><a href="mailto:nape@idor.org.br">nape@idor.org.br</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
