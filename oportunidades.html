@@ -7,26 +7,337 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #f4f4f1 !important; }
+
+    /* --- Inner page header — always white --- */
+    .header--inner {
+      background: var(--white) !important;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+    }
+    .header--inner .header__title { color: #1d1d1e; }
+    .header--inner .header__nav a { color: rgba(29,29,30,.6); }
+    .header--inner .header__nav a:hover,
+    .header--inner .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--inner .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent;
+      border-radius: 50px;
+    }
+    .header--inner .btn-secondary:hover {
+      color: var(--white); background: var(--gold); border-color: var(--gold);
+    }
+    .header--inner .menu-toggle { color: #1d1d1e; }
+    .header--inner .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--inner .mega-trigger__link:hover { color: #1d1d1e !important; }
+
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+
+    /* --- Mega Menu (same as home) --- */
+    .mega-trigger { position: static; }
+    .mega-trigger__link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .mega-menu {
+      position: fixed; top: var(--header-h); left: 0; right: 0;
+      background: var(--white); border-top: 1px solid var(--gray-200);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+    }
+    .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mega-menu__inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 40px; padding: 32px 24px; }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: var(--gray-700) !important; transition: background .2s ease, color .2s ease; text-decoration: none;
+    }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover { background: var(--gray-50); color: var(--blue-900) !important; }
+    .mega-menu__item:hover svg { color: var(--gold); }
+
+    /* --- Page Banner --- */
+    .page-banner {
+      height: 250px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      background: linear-gradient(180deg, rgba(0,20,50,.5), rgba(0,30,70,.75)), url('imagem-banner-interno-2.jpg') center/cover no-repeat;
+      margin-top: var(--header-h);
+      overflow: hidden;
+    }
+    .page-banner::before { display: none; }
+    .page-banner__content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      width: 100%;
+      text-shadow: none;
+    }
+    .page-banner__breadcrumb {
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .page-banner__breadcrumb,
+    .page-banner__breadcrumb a {
+      color: rgba(255,255,255,.6);
+    }
+    .page-banner__breadcrumb a:hover { color: var(--white); }
+    .page-banner__breadcrumb span { margin: 0 8px; }
+    .page-banner h1 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: -.3px;
+    }
+    .page-banner p {
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+    }
+    .page-banner__bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .page-banner__text { max-width: 560px; }
+    .page-banner__search {
+      display: flex;
+      border: none;
+      border-radius: 50px;
+      overflow: hidden;
+      min-width: 280px;
+      background: #fff;
+    }
+    .page-banner__search input {
+      flex: 1;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: transparent;
+      color: var(--gray-900);
+      outline: none;
+    }
+    .page-banner__search input::placeholder { color: var(--gray-400); }
+    .page-banner__search button {
+      background: transparent;
+      border: none;
+      padding: 0 16px;
+      color: var(--gray-400);
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .page-banner__search button:hover { color: var(--blue-900); }
+    @media (max-width: 768px) {
+      .page-banner__bottom { flex-direction: column; align-items: flex-start; }
+      .page-banner__search { min-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .page-banner { height: 280px; }
+      .page-banner h1 { font-size: 26px; }
+      .page-banner__content { padding-bottom: 28px; }
+    }
+
+    /* --- Titles --- */
+    .opp-list-card__title { font-weight: 600; }
+    .filter-group h4 {
+      font-weight: 600;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Space after banner + remove borders */
+    .page-banner + .section,
+    .page-banner + .section + .section { margin-top: 32px; }
+    .opp-list-card { border: none; border-radius: 16px; }
+    /* Badges — no bg, with icons */
+    .opp-list-card .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+    /* Tags — outline */
+    .opp-list-card .tag { background: transparent; border: 1px solid currentColor; padding-top: 0; padding-bottom: 0; transition: all .25s ease; }
+    .opp-list-card .tag:hover { background: var(--blue-900); color: var(--white); }
+    .opp-list-card__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .filters-sidebar { border: none; background: transparent; padding: 0; }
+    .filters-sidebar .filter-clear {
+      background: none; border: none; padding: 4px; cursor: pointer;
+      color: var(--gray-400); transition: color .2s ease; width: auto;
+    }
+    .filters-sidebar .filter-clear:hover { color: var(--red); }
+    .filter-group { border: none; }
+    .sidebar__block { border: none; }
+
+    /* Active filters list */
+    .active-filters__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .active-filters__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--blue-900);
+    }
+    .active-filters__list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+      min-height: 0;
+    }
+    .active-filters__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background: var(--white);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--gray-700);
+      animation: fadeIn .2s ease;
+    }
+    .active-filters__remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 16px;
+      padding: 0 0 0 8px;
+      line-height: 1;
+      transition: color .2s ease;
+    }
+    .active-filters__remove:hover { color: var(--red); }
+    .active-filters__empty {
+      font-size: 12px;
+      color: var(--gray-400);
+      font-style: italic;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Custom sort dropdown */
+    .custom-sort {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .custom-sort__label {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .custom-sort__trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue-900);
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color .2s ease;
+    }
+    .custom-sort__trigger:hover { border-bottom-color: var(--blue-900); }
+    .custom-sort__trigger svg { transition: transform .2s ease; }
+    .custom-sort.open .custom-sort__trigger svg { transform: rotate(180deg); }
+    .custom-sort__dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      padding: 8px 0;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+      z-index: 50;
+    }
+    .custom-sort.open .custom-sort__dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .custom-sort__option {
+      padding: 10px 20px;
+      font-size: 14px;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+    .custom-sort__option:hover {
+      background: var(--gray-50);
+      color: var(--blue-900);
+    }
+    .custom-sort__option.active {
+      color: var(--blue-900);
+      font-weight: 600;
+    }
+
+    /* --- Footer white (same as home) --- */
+    .footer {
+      background: #fff !important;
+      color: var(--gray-500) !important;
+    }
+    .footer h4, .footer h5 { color: var(--gray-900) !important; }
+    .footer__links h5 { color: var(--blue-900) !important; }
+    .footer__links a { color: var(--gray-500) !important; }
+    .footer__links a:hover { color: var(--blue-900) !important; }
+    .footer__bottom { border-top-color: var(--gray-200) !important; color: var(--gray-400) !important; }
+  </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header">
+  <!-- HEADER -->
+  <header class="header header--inner" id="pageHeader">
     <div class="header__inner">
       <a href="index.html" class="header__brand">
-        <div class="header__logo">ID</div>
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
         <div>
           <div class="header__title">Portal do Pesquisador</div>
-          <div class="header__subtitle">IDOR</div>
         </div>
       </a>
-      <nav class="header__nav">
-        <a href="index.html">Home</a>
-        <a href="oportunidades.html" class="active">Oportunidades</a>
-        <a href="compliance.html">Compliance</a>
-        <a href="open-science.html">Open Science</a>
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="header__nav">
+          <div class="mega-trigger">
+            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu">
+              <div class="mega-menu__inner container">
+                <div class="mega-menu__col">
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Academico</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                  <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="oportunidades.html" class="active">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </nav>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
         <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
       </div>
@@ -39,39 +350,30 @@
       <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
       <a href="index.html">Home</a>
       <a href="oportunidades.html">Oportunidades</a>
-      <a href="compliance.html">Compliance e Etica</a>
+      <a href="compliance.html">Compliance e Ética</a>
       <a href="open-science.html">Open Science</a>
       <a href="login.html">Entrar</a>
     </div>
   </div>
 
-  <!-- ===== BREADCRUMB ===== -->
-  <div class="breadcrumb">
-    <div class="container">
-      <a href="index.html">Home</a>
-      <span class="breadcrumb__sep">&rsaquo;</span>
-      <span>Oportunidades</span>
-    </div>
-  </div>
-
-  <!-- ===== PAGE HEADER ===== -->
-  <section class="page-header">
-    <div class="container">
-      <div class="page-header__icon">&#x1F3AF;</div>
-      <h1 class="page-header__title">Banco de Oportunidades</h1>
-      <p class="page-header__desc">Encontre editais, grants, bolsas e financiamentos para impulsionar sua pesquisa. Filtre por area, valor, prazo e elegibilidade para descobrir as melhores oportunidades disponiveis.</p>
-    </div>
-  </section>
-
-  <!-- ===== SEARCH ===== -->
-  <section class="section" style="padding-top: 0; padding-bottom: 24px;">
-    <div class="container">
-      <div class="search-box">
-        <input type="text" placeholder="Busque por editais, grants, bolsas, agencias financiadoras...">
-        <button>&#x1F50D; Buscar</button>
+  <!-- PAGE BANNER -->
+  <div class="page-banner">
+    <div class="page-banner__content">
+      <nav class="page-banner__breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&rsaquo;</span>
+        Oportunidades
+      </nav>
+      <h1>Banco de Oportunidades</h1>
+      <div class="page-banner__bottom">
+        <p class="page-banner__text">Encontre editais, grants, bolsas e financiamentos para impulsionar sua pesquisa. Filtre por área, valor, prazo e elegibilidade para descobrir as melhores oportunidades disponíveis.</p>
+        <div class="page-banner__search">
+          <input type="text" placeholder="Busque por editais, grants, bolsas...">
+          <button><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ===== MAIN CONTENT: FILTERS + RESULTS ===== -->
   <section class="section" style="padding-top: 0;">
@@ -81,8 +383,16 @@
         <!-- Sidebar Filters -->
         <aside class="filters-sidebar">
 
+          <div class="active-filters__header">
+            <span class="active-filters__title">Filtros</span>
+            <button class="filter-clear" id="clearFiltersBtn" title="Limpar filtros"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div>
+          <div class="active-filters__list" id="activeFiltersList">
+            <span class="active-filters__empty">Nenhum filtro selecionado</span>
+          </div>
+
           <div class="filter-group">
-            <h4 class="filter-group__title">Tipo</h4>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Tipo</h4>
             <label class="filter-check"><input type="checkbox"> Edital</label>
             <label class="filter-check"><input type="checkbox"> Grant</label>
             <label class="filter-check"><input type="checkbox"> Bolsa</label>
@@ -90,47 +400,45 @@
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title">Area</h4>
-            <label class="filter-check"><input type="checkbox"> Saude</label>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Area</h4>
+            <label class="filter-check"><input type="checkbox"> Saúde</label>
             <label class="filter-check"><input type="checkbox"> Biomedicina</label>
-            <label class="filter-check"><input type="checkbox"> Neurociencia</label>
+            <label class="filter-check"><input type="checkbox"> Neurociência</label>
             <label class="filter-check"><input type="checkbox"> Oncologia</label>
-            <label class="filter-check"><input type="checkbox"> Genetica</label>
+            <label class="filter-check"><input type="checkbox"> Genética</label>
             <label class="filter-check"><input type="checkbox"> Multidisciplinar</label>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title">Prazo</h4>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo</h4>
             <label class="filter-check"><input type="checkbox"> Em aberto</label>
-            <label class="filter-check"><input type="checkbox"> Proximos 30 dias</label>
-            <label class="filter-check"><input type="checkbox"> Proximos 90 dias</label>
+            <label class="filter-check"><input type="checkbox"> Próximos 30 dias</label>
+            <label class="filter-check"><input type="checkbox"> Próximos 90 dias</label>
             <label class="filter-check"><input type="checkbox"> Encerrados</label>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title">Valor</h4>
-            <label class="filter-check"><input type="checkbox"> Ate R$50.000</label>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Valor</h4>
+            <label class="filter-check"><input type="checkbox"> Até R$50.000</label>
             <label class="filter-check"><input type="checkbox"> R$50.000 &ndash; R$200.000</label>
             <label class="filter-check"><input type="checkbox"> R$200.000 &ndash; R$1.000.000</label>
             <label class="filter-check"><input type="checkbox"> Acima de R$1.000.000</label>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title">Elegibilidade</h4>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Elegibilidade</h4>
             <label class="filter-check"><input type="checkbox"> Pesquisador</label>
-            <label class="filter-check"><input type="checkbox"> Pos-doc</label>
+            <label class="filter-check"><input type="checkbox"> Pós-doc</label>
             <label class="filter-check"><input type="checkbox"> Doutorando</label>
             <label class="filter-check"><input type="checkbox"> Equipe</label>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title">Origem</h4>
+            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Origem</h4>
             <label class="filter-check"><input type="checkbox"> IDOR Interno</label>
             <label class="filter-check"><input type="checkbox"> Nacional</label>
             <label class="filter-check"><input type="checkbox"> Internacional</label>
           </div>
-
-          <button class="filter-clear" onclick="clearFilters()">Limpar filtros</button>
 
         </aside>
 
@@ -139,33 +447,37 @@
 
           <div class="sort-bar">
             <span class="sort-bar__count">Exibindo <strong>6</strong> oportunidades</span>
-            <div class="sort-bar__sort">
-              <label for="sortSelect">Ordenar por:</label>
-              <select id="sortSelect">
-                <option value="relevancia">Relevancia</option>
-                <option value="prazo-asc">Prazo (mais proximo)</option>
-                <option value="prazo-desc">Prazo (mais distante)</option>
-                <option value="valor-desc">Valor (maior)</option>
-                <option value="valor-asc">Valor (menor)</option>
-                <option value="recentes">Mais recentes</option>
-              </select>
+            <div class="custom-sort">
+              <span class="custom-sort__label">Ordenar por</span>
+              <div class="custom-sort__trigger" id="sortTrigger">
+                <span id="sortValue">Mais relevantes</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="custom-sort__dropdown" id="sortDropdown">
+                <div class="custom-sort__option active" data-value="Mais relevantes">Mais relevantes</div>
+                <div class="custom-sort__option" data-value="Prazo mais próximo">Prazo mais próximo</div>
+                <div class="custom-sort__option" data-value="Prazo mais distante">Prazo mais distante</div>
+                <div class="custom-sort__option" data-value="Maior valor">Maior valor</div>
+                <div class="custom-sort__option" data-value="Menor valor">Menor valor</div>
+                <div class="custom-sort__option" data-value="Mais recentes">Mais recentes</div>
+              </div>
             </div>
           </div>
 
           <!-- Card 1 -->
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
-              <h3 class="opp-list-card__title">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa Regular</h3>
-              <span class="badge badge-open">Aberto</span>
+              <h3 class="opp-list-card__title">Edital FAPESP 2026/02 &mdash; Auxílio à Pesquisa Regular</h3>
+              <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
             </div>
-            <div class="opp-list-card__org">FAPESP &mdash; Fundacao de Amparo a Pesquisa do Estado de Sao Paulo</div>
+            <div class="opp-list-card__org">FAPESP &mdash; Fundação de Amparo à Pesquisa do Estado de São Paulo</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; Ate R$200.000</span>
-              <span>&#x23F3; Prazo: 15/04/2026</span>
-              <div class="opp-list-card__tags">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Até R$200.000</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 15/04/2026</span>
+            </div>
+            <div class="opp-list-card__tags">
                 <span class="tag">Biomedicina</span>
-                <span class="tag">Saude</span>
-              </div>
+                <span class="tag">Saúde</span>
             </div>
           </a>
 
@@ -173,16 +485,16 @@
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
               <h3 class="opp-list-card__title">Grant NIH R21 &mdash; Exploratory/Developmental Research</h3>
-              <span class="badge badge-open">Aberto</span>
+              <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
             </div>
             <div class="opp-list-card__org">NIH &mdash; National Institutes of Health (EUA)</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; Ate US$275,000</span>
-              <span>&#x23F3; Prazo: 30/06/2026</span>
-              <div class="opp-list-card__tags">
-                <span class="tag">Neurociencia</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Até US$275,000</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/06/2026</span>
+            </div>
+            <div class="opp-list-card__tags">
+                <span class="tag">Neurociência</span>
                 <span class="tag">Multidisciplinar</span>
-              </div>
             </div>
           </a>
 
@@ -190,15 +502,15 @@
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
               <h3 class="opp-list-card__title">Bolsa de Produtividade em Pesquisa &mdash; CNPq 2026</h3>
-              <span class="badge badge-urgent">Urgente</span>
+              <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
             </div>
-            <div class="opp-list-card__org">CNPq &mdash; Conselho Nacional de Desenvolvimento Cientifico e Tecnologico</div>
+            <div class="opp-list-card__org">CNPq &mdash; Conselho Nacional de Desenvolvimento Científico e Tecnológico</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; R$1.500/mes (36 meses)</span>
-              <span>&#x23F3; Prazo: 05/04/2026</span>
-              <div class="opp-list-card__tags">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$1.500/mes (36 meses)</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 05/04/2026</span>
+            </div>
+            <div class="opp-list-card__tags">
                 <span class="tag">Multidisciplinar</span>
-              </div>
             </div>
           </a>
 
@@ -206,49 +518,49 @@
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
               <h3 class="opp-list-card__title">Seed Grant IDOR &mdash; Pesquisa Translacional 2026</h3>
-              <span class="badge badge-open">Aberto</span>
+              <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
             </div>
             <div class="opp-list-card__org">IDOR &mdash; Instituto D'Or de Pesquisa e Ensino (Edital Interno)</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; Ate R$80.000</span>
-              <span>&#x23F3; Prazo: 30/05/2026</span>
-              <div class="opp-list-card__tags">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Até R$80.000</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/05/2026</span>
+            </div>
+            <div class="opp-list-card__tags">
                 <span class="tag">Oncologia</span>
                 <span class="tag">Genetica</span>
-              </div>
             </div>
           </a>
 
           <!-- Card 5 -->
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
-              <h3 class="opp-list-card__title">FINEP &mdash; Chamada Publica Subvencao Economica a Inovacao</h3>
-              <span class="badge badge-urgent">Urgente</span>
+              <h3 class="opp-list-card__title">FINEP &mdash; Chamada Pública Subvenção Econômica à Inovação</h3>
+              <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
             </div>
             <div class="opp-list-card__org">FINEP &mdash; Financiadora de Estudos e Projetos</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; R$500.000 &ndash; R$2.000.000</span>
-              <span>&#x23F3; Prazo: 10/04/2026</span>
-              <div class="opp-list-card__tags">
-                <span class="tag">Saude</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$500.000 &ndash; R$2.000.000</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 10/04/2026</span>
+            </div>
+            <div class="opp-list-card__tags">
+                <span class="tag">Saúde</span>
                 <span class="tag">Biomedicina</span>
-              </div>
             </div>
           </a>
 
           <!-- Card 6 -->
           <a href="oportunidade.html" class="opp-list-card">
             <div class="opp-list-card__header">
-              <h3 class="opp-list-card__title">Bolsa IDOR Pos-Doc 2026 &mdash; Oncologia</h3>
-              <span class="badge badge-closed">Encerrado</span>
+              <h3 class="opp-list-card__title">Bolsa IDOR Pós-Doc 2026 &mdash; Oncologia</h3>
+              <span class="badge badge-closed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Encerrado</span>
             </div>
             <div class="opp-list-card__org">IDOR &mdash; Instituto D'Or de Pesquisa e Ensino (Edital Interno)</div>
             <div class="opp-list-card__details">
-              <span>&#x1F4B0; R$8.000/mes (24 meses)</span>
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$8.000/mes (24 meses)</span>
               <span>Encerrado em 01/03/2026</span>
-              <div class="opp-list-card__tags">
+            </div>
+            <div class="opp-list-card__tags">
                 <span class="tag">Oncologia</span>
-              </div>
             </div>
           </a>
 
@@ -259,7 +571,7 @@
             <a href="#" class="pagination__item">3</a>
             <span class="pagination__item pagination__ellipsis">&hellip;</span>
             <a href="#" class="pagination__item">12</a>
-            <a href="#" class="pagination__item pagination__next">Proxima &rarr;</a>
+            <a href="#" class="pagination__item pagination__next">Próxima &rarr;</a>
           </div>
 
         </div>
@@ -268,11 +580,12 @@
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+        <h4>Portal do Pesquisador</h4>
         <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
       </div>
       <div class="footer__links">
@@ -286,7 +599,7 @@
         <div>
           <h5>Institucional</h5>
           <a href="#">IDOR</a>
-          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Rede D'Or São Luiz</a>
           <a href="#">Fale Conosco</a>
         </div>
       </div>
@@ -297,5 +610,71 @@
   </footer>
 
   <script src="main.js"></script>
+  <script>
+    (function() {
+      var list = document.getElementById('activeFiltersList');
+      var checks = document.querySelectorAll('.filter-check input[type="checkbox"]');
+
+      function updateActiveFilters() {
+        list.innerHTML = '';
+        var hasActive = false;
+        checks.forEach(function(cb) {
+          if (cb.checked) {
+            hasActive = true;
+            var label = cb.parentElement.textContent.trim();
+            var item = document.createElement('div');
+            item.className = 'active-filters__item';
+            item.innerHTML = '<span>' + label + '</span><button class="active-filters__remove" title="Remover">&times;</button>';
+            item.querySelector('.active-filters__remove').addEventListener('click', function() {
+              cb.checked = false;
+              updateActiveFilters();
+            });
+            list.appendChild(item);
+          }
+        });
+        if (!hasActive) {
+          list.innerHTML = '<span class="active-filters__empty">Nenhum filtro selecionado</span>';
+        }
+      }
+
+      checks.forEach(function(cb) {
+        cb.addEventListener('change', updateActiveFilters);
+      });
+
+      // Custom sort dropdown
+      var sortWrap = document.querySelector('.custom-sort');
+      var sortTrigger = document.getElementById('sortTrigger');
+      var sortValue = document.getElementById('sortValue');
+      var sortOptions = document.querySelectorAll('.custom-sort__option');
+      if (sortTrigger) {
+        sortTrigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          sortWrap.classList.toggle('open');
+        });
+        sortOptions.forEach(function(opt) {
+          opt.addEventListener('click', function() {
+            sortValue.textContent = this.dataset.value;
+            sortOptions.forEach(function(o) { o.classList.remove('active'); });
+            this.classList.add('active');
+            sortWrap.classList.remove('open');
+          });
+        });
+        document.addEventListener('click', function() {
+          sortWrap.classList.remove('open');
+        });
+      }
+
+      // Clear all — use id to avoid main.js conflict
+      var clearBtn = document.getElementById('clearFiltersBtn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          checks.forEach(function(cb) { cb.checked = false; });
+          updateActiveFilters();
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

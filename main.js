@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.filter-check input').forEach(function(cb) {
     cb.addEventListener('change', function() {
       var count = document.querySelectorAll('.filter-check input:checked').length;
-      var clearBtn = document.querySelector('.filter-clear');
+      var clearBtn = document.querySelector('.filter-clear:not(#clearFiltersBtn)');
       if (clearBtn) {
         clearBtn.textContent = count > 0 ? 'Limpar filtros (' + count + ')' : 'Limpar filtros';
       }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   /* --- Clear filters --- */
-  var clearBtn = document.querySelector('.filter-clear');
+  var clearBtn = document.querySelector('.filter-clear:not(#clearFiltersBtn)');
   if (clearBtn) {
     clearBtn.addEventListener('click', function() {
       document.querySelectorAll('.filter-check input').forEach(function(cb) {

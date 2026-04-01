@@ -7,26 +7,155 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #fff !important; }
+
+    /* Header always white */
+    .header--inner {
+      background: var(--white) !important;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+    }
+    .header--inner .header__title { color: #1d1d1e; }
+    .header--inner .header__nav a { color: rgba(29,29,30,.6); }
+    .header--inner .header__nav a:hover,
+    .header--inner .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--inner .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent; border-radius: 50px;
+    }
+    .header--inner .btn-secondary:hover {
+      color: var(--white); background: var(--gold); border-color: var(--gold);
+    }
+    .header--inner .menu-toggle { color: #1d1d1e; }
+    .header--inner .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--inner .mega-trigger__link:hover { color: #1d1d1e !important; }
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+
+    /* Mega Menu */
+    .mega-trigger { position: static; }
+    .mega-trigger__link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .mega-menu {
+      position: fixed; top: var(--header-h); left: 0; right: 0;
+      background: var(--white); border-top: 1px solid var(--gray-200);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+    }
+    .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mega-menu__inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 40px; padding: 32px 24px; }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: var(--gray-700) !important; transition: background .2s ease, color .2s ease; text-decoration: none;
+    }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover { background: var(--gray-50); color: var(--blue-900) !important; }
+    .mega-menu__item:hover svg { color: var(--gold); }
+
+    /* Article top area */
+    .article-top {
+      margin-top: calc(var(--header-h) + 100px);
+      padding: 0;
+    }
+    .article-top .breadcrumb {
+      margin-top: 0;
+      padding: 0 0 16px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .article-top .breadcrumb a { color: var(--blue-900); font-weight: 500; }
+    .article-top .breadcrumb span { margin: 0 8px; color: var(--gray-400); }
+    .article-top h1 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 32px; font-weight: 600; color: var(--gray-900); margin: 0; letter-spacing: -.3px;
+    }
+
+    /* Article body — no box */
+    .article-body {
+      background: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .article-body h2 { font-weight: 600; }
+    .article-body h3 { font-weight: 600; }
+
+    /* Info box */
+    .info-box { margin-bottom: 1.5rem; }
+
+    /* Tags — outline style */
+    .tag {
+      background: transparent;
+      border: 1px solid currentColor;
+      padding-top: 0;
+      padding-bottom: 0;
+      transition: all .25s ease;
+    }
+    .tag:hover {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+
+    /* Badges — transparent bg, no side padding */
+    .badge { background: transparent !important; padding-left: 0 !important; padding-right: 0 !important; }
+
+    /* Contact box — no border */
+    .contact-box { border: none; }
+
+    /* CTA button pill */
+    .btn-primary.btn-lg { border-radius: 50px; }
+
+    /* Footer white */
+    .footer { background: #fff !important; color: var(--gray-500) !important; }
+    .footer h4, .footer h5 { color: var(--gray-900) !important; }
+    .footer__links h5 { color: var(--blue-900) !important; }
+    .footer__links a { color: var(--gray-500) !important; }
+    .footer__links a:hover { color: var(--blue-900) !important; }
+    .footer__bottom { border-top-color: var(--gray-200) !important; color: var(--gray-400) !important; }
+  </style>
 </head>
 <body>
 
   <!-- ===== HEADER ===== -->
-  <header class="header">
+  <header class="header header--inner" id="pageHeader">
     <div class="header__inner">
       <a href="index.html" class="header__brand">
-        <div class="header__logo">ID</div>
-        <div>
-          <div class="header__title">Portal do Pesquisador</div>
-          <div class="header__subtitle">IDOR</div>
-        </div>
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div><div class="header__title">Portal do Pesquisador</div></div>
       </a>
-      <nav class="header__nav">
-        <a href="index.html">Home</a>
-        <a href="oportunidades.html">Oportunidades</a>
-        <a href="compliance.html">Compliance</a>
-        <a href="open-science.html">Open Science</a>
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="header__nav">
+          <div class="mega-trigger">
+            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu"><div class="mega-menu__inner container">
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Acadêmico</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+              </div>
+            </div></div>
+          </div>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </nav>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
         <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
       </div>
@@ -39,32 +168,27 @@
       <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
       <a href="index.html">Home</a>
       <a href="oportunidades.html">Oportunidades</a>
-      <a href="compliance.html">Compliance e Etica</a>
+      <a href="compliance.html">Compliance e Ética</a>
       <a href="open-science.html">Open Science</a>
       <a href="login.html">Entrar</a>
     </div>
   </div>
 
-  <!-- ===== BREADCRUMB ===== -->
-  <section class="section" style="padding-top: 2rem; padding-bottom: 0;">
-    <div class="container">
+  <!-- ===== ARTICLE TOP ===== -->
+  <div class="article-top">
+    <div class="container" style="max-width: 960px;">
       <nav class="breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb__sep">&rsaquo;</span>
-        <a href="oportunidades.html">Oportunidades</a>
-        <span class="breadcrumb__sep">&rsaquo;</span>
-        <span class="breadcrumb__current">Edital FAPESP 2026/02</span>
+        <a href="index.html">Home</a><span>&rsaquo;</span><a href="oportunidades.html">Oportunidades</a><span>&rsaquo;</span>Edital FAPESP 2026/02
       </nav>
-    </div>
-  </section>
-
-  <!-- ===== TITULO DA OPORTUNIDADE ===== -->
-  <section class="section" style="padding-top: 1.5rem;">
-    <div class="container">
-      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
-        <h1 style="font-size: 2rem; font-weight: 800; color: var(--text); margin: 0;">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa</h1>
-        <span class="badge badge-open">Aberto</span>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+        <h1>Edital FAPESP 2026/02 &mdash; Auxílio à Pesquisa</h1>
+        <span class="badge badge-open"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="6"/><path d="M12 8v4l2 2"/></svg> Aberto</span>
       </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container" style="max-width: 960px;">
 
       <!-- ===== INFO BOX ===== -->
       <div class="info-box">
@@ -77,15 +201,15 @@
           <div class="info-box__value">Edital</div>
         </div>
         <div class="info-box__item">
-          <div class="info-box__label">Area</div>
+          <div class="info-box__label">Área</div>
           <div class="info-box__value">
             <span class="tag">Biomedicina</span>
-            <span class="tag">Saude</span>
+            <span class="tag">Saúde</span>
           </div>
         </div>
         <div class="info-box__item">
           <div class="info-box__label">Valor</div>
-          <div class="info-box__value">Ate R$200.000</div>
+          <div class="info-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Até R$200.000</div>
         </div>
         <div class="info-box__item">
           <div class="info-box__label">Origem</div>
@@ -97,65 +221,65 @@
       <div class="dates-box">
         <div class="dates-box__item">
           <div class="dates-box__label">Abertura</div>
-          <div class="dates-box__value">01/03/2026</div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 01/03/2026</div>
         </div>
         <div class="dates-box__item">
           <div class="dates-box__label">Encerramento</div>
-          <div class="dates-box__value">15/04/2026 <span class="dates-box__note">(em 16 dias)</span></div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 15/04/2026 <span class="dates-box__note">(em 16 dias)</span></div>
         </div>
         <div class="dates-box__item">
           <div class="dates-box__label">Resultado</div>
-          <div class="dates-box__value">Julho 2026 <span class="dates-box__note">(previsao)</span></div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Julho 2026 <span class="dates-box__note">(previsão)</span></div>
         </div>
       </div>
 
-      <!-- ===== DESCRICAO ===== -->
+      <!-- ===== DESCRIÇÃO ===== -->
       <div class="article-body">
-        <h2>Descricao</h2>
-        <p>A Fundacao de Amparo a Pesquisa do Estado de Sao Paulo (FAPESP) torna publico o Edital 2026/02, destinado ao financiamento de projetos de pesquisa na modalidade Auxilio a Pesquisa &mdash; Regular, com foco em investigacoes nas areas de Biomedicina e Saude. O objetivo desta chamada e fomentar estudos originais que contribuam para o avanco do conhecimento cientifico e para a melhoria de praticas clinicas e de saude publica no Brasil.</p>
-        <p>Serao apoiados projetos com duracao de 12 a 24 meses que proponham abordagens inovadoras em temas como mecanismos moleculares de doencas, desenvolvimento de biomarcadores, epidemiologia translacional, ensaios pre-clinicos e estrategias terapeuticas emergentes. A FAPESP incentiva particularmente propostas que envolvam colaboracoes interinstitucionais e que demonstrem potencial de impacto social e cientifico.</p>
-        <p>O valor maximo de financiamento por projeto e de R$200.000,00, incluindo despesas com material de consumo, servicos de terceiros, equipamentos de pequeno porte, diarias e passagens vinculadas ao projeto, e bolsas de treinamento tecnico. Nao e permitido o uso dos recursos para pagamento de salarios de pesquisadores permanentes.</p>
+        <h2>Descrição</h2>
+        <p>A Fundação de Amparo à Pesquisa do Estado de São Paulo (FAPESP) torna público o Edital 2026/02, destinado ao financiamento de projetos de pesquisa na modalidade Auxílio à Pesquisa &mdash; Regular, com foco em investigações nas áreas de Biomedicina e Saúde. O objetivo desta chamada é fomentar estudos originais que contribuam para o avanço do conhecimento científico e para a melhoria de práticas clínicas e de saúde pública no Brasil.</p>
+        <p>Serão apoiados projetos com duração de 12 a 24 meses que proponham abordagens inovadoras em temas como mecanismos moleculares de doenças, desenvolvimento de biomarcadores, epidemiologia translacional, ensaios pré-clínicos e estratégias terapêuticas emergentes. A FAPESP incentiva particularmente propostas que envolvam colaborações interinstitucionais e que demonstrem potencial de impacto social e científico.</p>
+        <p>O valor máximo de financiamento por projeto é de R$200.000,00, incluindo despesas com material de consumo, serviços de terceiros, equipamentos de pequeno porte, diárias e passagens vinculadas ao projeto, e bolsas de treinamento técnico. Não é permitido o uso dos recursos para pagamento de salários de pesquisadores permanentes.</p>
       </div>
 
       <!-- ===== ELEGIBILIDADE ===== -->
       <div class="article-body">
         <h2>Elegibilidade</h2>
         <ul>
-          <li>Pesquisador responsavel deve possuir titulo de Doutor ha pelo menos 3 anos</li>
-          <li>O proponente deve manter vinculo formal com instituicao de ensino superior ou instituto de pesquisa sediado no Estado de Sao Paulo</li>
-          <li>Pesquisadores vinculados a instituicoes de outros estados podem participar como co-investigadores, desde que a coordenacao do projeto seja realizada por pesquisador elegivel em SP</li>
-          <li>O proponente nao pode possuir pendencias com a FAPESP, incluindo relatorios atrasados ou prestacoes de contas em aberto</li>
-          <li>Projetos que envolvam pesquisa com seres humanos devem apresentar aprovacao do Comite de Etica em Pesquisa (CEP) ate a data de submissao</li>
-          <li>Projetos com experimentacao animal devem apresentar aprovacao da Comissao de Etica no Uso de Animais (CEUA)</li>
-          <li>Nao ha restricao de idade para o pesquisador responsavel</li>
+          <li>Pesquisador responsável deve possuir título de Doutor há pelo menos 3 anos</li>
+          <li>O proponente deve manter vínculo formal com instituição de ensino superior ou instituto de pesquisa sediado no Estado de São Paulo</li>
+          <li>Pesquisadores vinculados a instituições de outros estados podem participar como co-investigadores, desde que a coordenação do projeto seja realizada por pesquisador elegível em SP</li>
+          <li>O proponente não pode possuir pendências com a FAPESP, incluindo relatórios atrasados ou prestações de contas em aberto</li>
+          <li>Projetos que envolvam pesquisa com seres humanos devem apresentar aprovação do Comitê de Ética em Pesquisa (CEP) até a data de submissão</li>
+          <li>Projetos com experimentação animal devem apresentar aprovação da Comissão de Ética no Uso de Animais (CEUA)</li>
+          <li>Não há restrição de idade para o pesquisador responsável</li>
         </ul>
       </div>
 
-      <!-- ===== DOCUMENTACAO NECESSARIA ===== -->
+      <!-- ===== DOCUMENTAÇÃO NECESSÁRIA ===== -->
       <div class="article-body">
-        <h2>Documentacao Necessaria</h2>
+        <h2>Documentação Necessária</h2>
         <ul>
-          <li>Formulario de submissao preenchido na Plataforma SAGe/FAPESP</li>
-          <li>Projeto de pesquisa completo (maximo 20 paginas), incluindo introducao, objetivos, metodologia, cronograma e orcamento detalhado</li>
-          <li>Curriculo Lattes atualizado do pesquisador responsavel e dos co-investigadores</li>
-          <li>Carta de anuencia da instituicao sede, assinada pelo dirigente institucional</li>
-          <li>Parecer aprovado do Comite de Etica em Pesquisa (CEP), quando aplicavel</li>
-          <li>Parecer aprovado da Comissao de Etica no Uso de Animais (CEUA), quando aplicavel</li>
-          <li>Declaracao de infraestrutura disponivel para a execucao do projeto</li>
-          <li>Orcamento detalhado discriminando itens de custeio e capital</li>
-          <li>Carta de concordancia dos co-investigadores, quando houver</li>
+          <li>Formulário de submissão preenchido na Plataforma SAGe/FAPESP</li>
+          <li>Projeto de pesquisa completo (máximo 20 páginas), incluindo introdução, objetivos, metodologia, cronograma e orçamento detalhado</li>
+          <li>Currículo Lattes atualizado do pesquisador responsável e dos co-investigadores</li>
+          <li>Carta de anuência da instituição sede, assinada pelo dirigente institucional</li>
+          <li>Parecer aprovado do Comitê de Ética em Pesquisa (CEP), quando aplicável</li>
+          <li>Parecer aprovado da Comissão de Ética no Uso de Animais (CEUA), quando aplicável</li>
+          <li>Declaração de infraestrutura disponível para a execução do projeto</li>
+          <li>Orçamento detalhado discriminando itens de custeio e capital</li>
+          <li>Carta de concordância dos co-investigadores, quando houver</li>
         </ul>
       </div>
 
       <!-- ===== CTA ===== -->
       <div style="text-align: center; margin: 3rem 0 2rem;">
-        <a href="#" class="btn btn-primary btn-lg">Acessar inscricao na FAPESP</a>
+        <a href="#" class="btn btn-primary btn-lg" style="border-radius: 50px;">Acessar inscrição na FAPESP</a>
       </div>
 
       <!-- ===== CONTATO ===== -->
       <div class="contact-box">
-        <h3>Duvidas?</h3>
-        <p>Entre em contato com o <strong>NAPE &mdash; Nucleo de Apoio a Pesquisa e Ensino</strong> para orientacoes sobre submissao e documentacao.</p>
+        <h3>Dúvidas?</h3>
+        <p>Entre em contato com o <strong>NAPE &mdash; Núcleo de Apoio à Pesquisa e Ensino</strong> para orientações sobre submissão e documentação.</p>
         <p><a href="mailto:nape@idor.org.br">nape@idor.org.br</a></p>
       </div>
 
@@ -166,7 +290,8 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+        <h4>Portal do Pesquisador</h4>
         <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
       </div>
       <div class="footer__links">
@@ -180,14 +305,12 @@
         <div>
           <h5>Institucional</h5>
           <a href="#">IDOR</a>
-          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Rede D'Or São Luiz</a>
           <a href="#">Fale Conosco</a>
         </div>
       </div>
     </div>
-    <div class="footer__bottom">
-      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
-    </div>
+    <div class="footer__bottom">&copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.</div>
   </footer>
 
   <script src="main.js"></script>

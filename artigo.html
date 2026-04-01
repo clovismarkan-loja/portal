@@ -7,26 +7,184 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #fff !important; }
+
+    /* Header always white */
+    .header--inner {
+      background: var(--white) !important;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+    }
+    .header--inner .header__title { color: #1d1d1e; }
+    .header--inner .header__nav a { color: rgba(29,29,30,.6); }
+    .header--inner .header__nav a:hover,
+    .header--inner .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--inner .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent; border-radius: 50px;
+    }
+    .header--inner .btn-secondary:hover {
+      color: var(--white); background: var(--gold); border-color: var(--gold);
+    }
+    .header--inner .menu-toggle { color: #1d1d1e; }
+    .header--inner .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--inner .mega-trigger__link:hover { color: #1d1d1e !important; }
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+
+    /* Mega Menu */
+    .mega-trigger { position: static; }
+    .mega-trigger__link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .mega-menu {
+      position: fixed; top: var(--header-h); left: 0; right: 0;
+      background: var(--white); border-top: 1px solid var(--gray-200);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+    }
+    .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mega-menu__inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 40px; padding: 32px 24px; }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: var(--gray-700) !important; transition: background .2s ease, color .2s ease; text-decoration: none;
+    }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover { background: var(--gray-50); color: var(--blue-900) !important; }
+    .mega-menu__item:hover svg { color: var(--gold); }
+
+    /* Article top area */
+    .article-top {
+      margin-top: calc(var(--header-h) + 100px);
+      padding: 0;
+    }
+    .article-top .breadcrumb {
+      margin-top: 0;
+      padding: 0 0 16px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .article-top .breadcrumb a { color: var(--blue-900); font-weight: 500; }
+    .article-top .breadcrumb span { margin: 0 8px; color: var(--gray-400); }
+    .article-top h1 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 32px; font-weight: 600; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -.3px;
+    }
+    .article-top__meta {
+      font-size: 14px; color: var(--gray-500); margin-bottom: 32px;
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+
+    /* Downloads section — full width gray bg */
+    .downloads-full {
+      background: #71C5E8;
+      padding: 48px 0;
+      margin-top: 16px;
+    }
+    .downloads-full .download-list {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .downloads-full h2 {
+      max-width: 860px;
+      margin: 0 auto 20px;
+      padding: 0 24px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+    .downloads-full .download-item {
+      border: none;
+      background: #fff;
+    }
+
+    /* Article body — no box */
+    .article-body {
+      background: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    /* Tags — outline style */
+    .tags-section .tag {
+      background: transparent;
+      border: 1px solid currentColor;
+      padding-top: 0;
+      padding-bottom: 0;
+      transition: all .25s ease;
+    }
+    .tags-section .tag:hover {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+
+    .article-body h2 { font-weight: 600; }
+    .article-body h3 { font-weight: 600; }
+    .section__title { font-weight: 600; }
+    .article-card__title { font-weight: 600; }
+
+    /* Related articles — same as home */
+    .section--alt { background: #f4f4f1 !important; }
+    .section--alt .article-card { border-color: transparent; position: relative; overflow: hidden; }
+    .section--alt .article-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transform: scaleX(0); transition: transform .25s ease; transform-origin: left;
+    }
+    .section--alt .article-card:hover::before { transform: scaleX(1); }
+    .section--alt .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+
+    /* Footer white */
+    .footer { background: #fff !important; color: var(--gray-500) !important; }
+    .footer h4, .footer h5 { color: var(--gray-900) !important; }
+    .footer__links h5 { color: var(--blue-900) !important; }
+    .footer__links a { color: var(--gray-500) !important; }
+    .footer__links a:hover { color: var(--blue-900) !important; }
+    .footer__bottom { border-top-color: var(--gray-200) !important; color: var(--gray-400) !important; }
+  </style>
 </head>
 <body>
 
   <!-- ===== HEADER ===== -->
-  <header class="header">
+  <header class="header header--inner" id="pageHeader">
     <div class="header__inner">
       <a href="index.html" class="header__brand">
-        <div class="header__logo">ID</div>
-        <div>
-          <div class="header__title">Portal do Pesquisador</div>
-          <div class="header__subtitle">IDOR</div>
-        </div>
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div><div class="header__title">Portal do Pesquisador</div></div>
       </a>
-      <nav class="header__nav">
-        <a href="index.html">Home</a>
-        <a href="oportunidades.html">Oportunidades</a>
-        <a href="compliance.html">Compliance</a>
-        <a href="open-science.html">Open Science</a>
-      </nav>
-      <div class="header__actions">
+      <div class="header__right">
+        <nav class="header__nav">
+          <div class="mega-trigger">
+            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <!-- SAME mega-menu HTML as in categoria.html with all 15 items in 3 columns -->
+            <div class="mega-menu"><div class="mega-menu__inner container">
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Academico</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                <a href="categoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+              </div>
+            </div></div>
+          </div>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </nav>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
         <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
       </div>
@@ -39,38 +197,27 @@
       <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
       <a href="index.html">Home</a>
       <a href="oportunidades.html">Oportunidades</a>
-      <a href="compliance.html">Compliance e Etica</a>
+      <a href="compliance.html">Compliance e Ética</a>
       <a href="open-science.html">Open Science</a>
       <a href="login.html">Entrar</a>
     </div>
   </div>
 
-  <!-- ===== BREADCRUMB ===== -->
-  <section class="section" style="padding-top: calc(var(--header-h) + 24px); padding-bottom: 0;">
-    <div class="container">
-      <nav class="breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb__sep">&rsaquo;</span>
-        <a href="categoria.html">NAPE</a>
-        <span class="breadcrumb__sep">&rsaquo;</span>
-        <span class="breadcrumb__current">Como submeter um Projeto?</span>
-      </nav>
-    </div>
-  </section>
-
   <!-- ===== ARTICLE ===== -->
-  <section class="section" style="padding-top: 16px;">
+  <div class="article-top">
     <div class="container" style="max-width: 860px;">
-
-      <!-- Article Meta -->
-      <div class="article-meta">
-        <span class="article-meta__area">NAPE</span>
-        <span class="article-meta__date">Publicado em 15/03/2026</span>
-        <span class="article-meta__date">Atualizado em 28/03/2026</span>
-        <span class="badge badge-public">Publico</span>
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span>&rsaquo;</span><a href="categoria.html">NAPE</a><span>&rsaquo;</span>Como submeter um Projeto?
+      </nav>
+      <h1>Como submeter um Projeto de Pesquisa?</h1>
+      <div class="article-top__meta">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Publicado em 15/03/2026</span>
       </div>
+    </div>
+  </div>
 
-      <h1 style="font-size: 2rem; color: var(--gray-900); margin-bottom: 24px; line-height: 1.3;">Como submeter um Projeto de Pesquisa?</h1>
+  <section class="section" style="padding-top: 0;">
+    <div class="container" style="max-width: 860px;">
 
       <!-- Article Body -->
       <div class="article-body">
@@ -166,38 +313,6 @@
 
       </div>
 
-      <!-- ===== DOWNLOADS ===== -->
-      <div class="downloads-section">
-        <h2 style="font-size: 1.25rem; color: var(--gray-900); margin-bottom: 16px;">Downloads</h2>
-
-        <div class="download-item">
-          <div class="download-item__icon">PDF</div>
-          <div class="download-item__info">
-            <div class="download-item__name">Formulario de Submissao de Projeto</div>
-            <div class="download-item__size">PDF &mdash; 245 KB</div>
-          </div>
-          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
-        </div>
-
-        <div class="download-item">
-          <div class="download-item__icon">PDF</div>
-          <div class="download-item__info">
-            <div class="download-item__name">Manual de Orientacao CONEP &mdash; Pesquisa com Seres Humanos</div>
-            <div class="download-item__size">PDF &mdash; 1.2 MB</div>
-          </div>
-          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
-        </div>
-
-        <div class="download-item download-item--doc">
-          <div class="download-item__icon download-item__icon--doc">DOC</div>
-          <div class="download-item__info">
-            <div class="download-item__name">Template de Protocolo de Pesquisa</div>
-            <div class="download-item__size">DOCX &mdash; 89 KB</div>
-          </div>
-          <a href="#" class="btn btn-sm btn-outline">Baixar</a>
-        </div>
-      </div>
-
       <!-- ===== TAGS ===== -->
       <div class="tags-section">
         <span class="tag">submissao</span>
@@ -207,17 +322,39 @@
         <span class="tag">NAPE</span>
       </div>
 
-      <!-- ===== FEEDBACK ===== -->
-      <div class="feedback-box">
-        <p class="feedback-box__question">Este artigo foi util?</p>
-        <div class="feedback-box__btns">
-          <button class="btn btn-sm btn-outline feedback-btn" onclick="this.classList.add('feedback-btn--active'); this.nextElementSibling.classList.remove('feedback-btn--active');">&#x1F44D; Sim</button>
-          <button class="btn btn-sm btn-outline feedback-btn" onclick="this.classList.add('feedback-btn--active'); this.previousElementSibling.classList.remove('feedback-btn--active');">&#x1F44E; Nao</button>
-        </div>
-      </div>
-
     </div>
   </section>
+
+  <!-- ===== DOWNLOADS (full width) ===== -->
+  <div class="downloads-full">
+    <h2>Downloads</h2>
+    <div class="download-list">
+      <div class="download-item">
+        <div class="download-item__icon">PDF</div>
+        <div class="download-item__info">
+          <div class="download-item__name">Formulario de Submissao de Projeto</div>
+          <div class="download-item__size">PDF &mdash; 245 KB</div>
+        </div>
+        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </div>
+      <div class="download-item">
+        <div class="download-item__icon">PDF</div>
+        <div class="download-item__info">
+          <div class="download-item__name">Manual de Orientacao CONEP &mdash; Pesquisa com Seres Humanos</div>
+          <div class="download-item__size">PDF &mdash; 1.2 MB</div>
+        </div>
+        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </div>
+      <div class="download-item download-item--doc">
+        <div class="download-item__icon download-item__icon--doc">DOC</div>
+        <div class="download-item__info">
+          <div class="download-item__name">Template de Protocolo de Pesquisa</div>
+          <div class="download-item__size">DOCX &mdash; 89 KB</div>
+        </div>
+        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== ARTIGOS RELACIONADOS ===== -->
   <section class="section section--alt">
@@ -265,7 +402,8 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <h4>Portal do Pesquisador &mdash; IDOR</h4>
+        <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+        <h4>Portal do Pesquisador</h4>
         <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
       </div>
       <div class="footer__links">
@@ -279,14 +417,12 @@
         <div>
           <h5>Institucional</h5>
           <a href="#">IDOR</a>
-          <a href="#">Rede D'Or Sao Luiz</a>
+          <a href="#">Rede D'Or São Luiz</a>
           <a href="#">Fale Conosco</a>
         </div>
       </div>
     </div>
-    <div class="footer__bottom">
-      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
-    </div>
+    <div class="footer__bottom">&copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.</div>
   </footer>
 
   <script src="main.js"></script>
