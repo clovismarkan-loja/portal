@@ -32,10 +32,10 @@
       padding: 0;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       overflow: hidden;
       z-index: 0;
-      background: #fff !important;
+      background: url('imagem-hero-banner.jpg') center/cover no-repeat;
     }
     /* Spacer to push content below the fixed hero */
     .hero-spacer {
@@ -45,30 +45,7 @@
     }
     .hero--home::before { display: none !important; }
 
-    /* Video background — original size, centered, max 1168x623 */
-    .hero__video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-40%, -50%);
-      width: auto;
-      height: auto;
-      max-width: 1168px;
-      max-height: 623px;
-      z-index: 0;
-    }
-
-    /* Gradient: gray top -> white, only behind header area */
-    .hero--home::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(180deg, #ecedef 0%, #fff 100%);
-      z-index: 1;
-      pointer-events: none;
+    .hero--home::after { display: none !important;
     }
 
     /* Content: left-aligned */
@@ -76,9 +53,10 @@
       position: relative;
       z-index: 2;
       text-align: left;
-      max-width: 580px;
-      padding: 0 24px 0 0;
-      margin-left: max(24px, calc((100vw - 1280px) / 2 + 24px));
+      max-width: 640px;
+      padding: 0 24px;
+      margin: 0 auto;
+      text-align: center;
     }
     .hero--home .hero__title {
       font-size: clamp(30px, 4.5vw, 48px);
@@ -103,7 +81,7 @@
       color: #1d1d1e;
       text-shadow: none;
       line-height: 1.6;
-      max-width: 460px;
+      max-width: 100%;
     }
 
     /* Search box — minimal */
@@ -115,7 +93,7 @@
       display: flex;
       align-items: center;
       max-width: 520px;
-      margin: 0;
+      margin: 0 auto;
       background: var(--white);
     }
     .hero--home .search-box__icon {
@@ -152,7 +130,7 @@
     /* Hero filter links */
     .hero-filters {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 24px;
       margin-top: 24px;
       flex-wrap: wrap;
@@ -236,7 +214,6 @@
     }
     .version-btn:hover { background: var(--blue-900); color: var(--white); border-color: var(--blue-900); }
     .version-btn.active { background: var(--gold); color: var(--gray-900); border-color: var(--gold); }
-
     @keyframes bounceDown {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(5px); }
@@ -291,6 +268,10 @@
       color: var(--white); background: var(--gold); border-color: var(--gold);
     }
     .header--home .menu-toggle { color: #1d1d1e; }
+    .header--home .header-search-toggle { color: rgba(29,29,30,.5); }
+    .header--home .header-search-toggle:hover { color: #1d1d1e; }
+    .header--home .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--home .mega-trigger__link:hover { color: #1d1d1e !important; }
 
     .header.header--home.header--solid {
       background: var(--white) !important;
@@ -760,9 +741,6 @@
   <section class="hero hero--home">
 
       <!-- Video -->
-      <video class="hero__video" autoplay muted loop playsinline>
-        <source src="video-banner.mp4" type="video/mp4">
-      </video>
 
       <!-- Content left -->
       <div class="hero__content">
@@ -1083,9 +1061,9 @@
 
   <!-- Version switcher -->
   <div class="version-switcher">
-    <a href="home-opcao1.html" class="version-btn active">Op 1</a>
+    <a href="home-opcao1.html" class="version-btn">Op 1</a>
     <a href="home-opcao2.html" class="version-btn">Op 2</a>
-    <a href="home-opcao3.html" class="version-btn">Op 3</a>
+    <a href="home-opcao3.html" class="version-btn active">Op 3</a>
   </div>
 
   <script src="main.js"></script>

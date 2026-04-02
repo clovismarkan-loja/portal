@@ -45,17 +45,28 @@
     }
     .hero--home::before { display: none !important; }
 
-    /* Video background — original size, centered, max 1168x623 */
-    .hero__video {
+    /* Dots animation container — clipped to right half */
+    .dots-area {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-40%, -50%);
-      width: auto;
-      height: auto;
-      max-width: 1168px;
-      max-height: 623px;
+      top: var(--header-h);
+      right: 0;
+      width: 50%;
+      height: calc(100% - var(--header-h));
+      overflow: hidden;
       z-index: 0;
+    }
+    .dots-area .dot {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--blue-900);
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .dots-area { width: 60%; }
+      .dots-area .dot { width: 12px; height: 12px; }
     }
 
     /* Gradient: gray top -> white, only behind header area */
@@ -236,7 +247,6 @@
     }
     .version-btn:hover { background: var(--blue-900); color: var(--white); border-color: var(--blue-900); }
     .version-btn.active { background: var(--gold); color: var(--gray-900); border-color: var(--gold); }
-
     @keyframes bounceDown {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(5px); }
@@ -760,9 +770,8 @@
   <section class="hero hero--home">
 
       <!-- Video -->
-      <video class="hero__video" autoplay muted loop playsinline>
-        <source src="video-banner.mp4" type="video/mp4">
-      </video>
+      <!-- Dots animation area -->
+      <div class="dots-area" id="dotsArea"></div>
 
       <!-- Content left -->
       <div class="hero__content">
@@ -1083,8 +1092,8 @@
 
   <!-- Version switcher -->
   <div class="version-switcher">
-    <a href="home-opcao1.html" class="version-btn active">Op 1</a>
-    <a href="home-opcao2.html" class="version-btn">Op 2</a>
+    <a href="home-opcao1.html" class="version-btn">Op 1</a>
+    <a href="home-opcao2.html" class="version-btn active">Op 2</a>
     <a href="home-opcao3.html" class="version-btn">Op 3</a>
   </div>
 
@@ -1271,6 +1280,159 @@
         setTimeout(function() { isAnimating = false; }, 700);
       }
     })();
+  </script>
+
+  <!-- Dots animation engine -->
+  <script>
+  (function() {
+    var area = document.getElementById('dotsArea');
+    if (!area) return;
+
+    var COLS = 8;
+    var ROWS = 7;
+    var GAP = 48;
+    var DOT_SIZE = 28;
+    var HALF_GAP = (GAP - DOT_SIZE) / 2;
+    var MAX_MOVE = GAP * 3; // large movements allowed, overlapping ok
+    var dots = [];
+    var movingCount = 0;
+
+    // Grid: 1 = dot present
+    var grid = [
+      [0,0,1,1,1,1,1,1],
+      [0,0,1,1,1,1,1,0],
+      [0,1,1,1,1,1,1,0],
+      [1,1,1,1,1,1,1,1],
+      [0,0,0,0,1,1,1,1],
+      [0,0,0,0,0,1,1,1],
+      [0,0,0,0,0,0,1,1],
+    ];
+
+    var gridH = ROWS * GAP;
+    var areaH = area.offsetHeight;
+    var OFFSET_X = 40;
+    var OFFSET_Y = Math.max(0, (areaH - gridH) / 2) - 50;
+
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) {
+        if (!grid[r][c]) continue;
+
+        var dot = document.createElement('div');
+        dot.className = 'dot';
+        area.appendChild(dot);
+
+        var homeX = c * GAP + HALF_GAP + OFFSET_X;
+        var homeY = r * GAP + HALF_GAP + OFFSET_Y;
+
+        dot.style.left = homeX + 'px';
+        dot.style.top = homeY + 'px';
+
+        dots.push({
+          el: dot,
+          homeX: homeX,
+          homeY: homeY,
+          phase: 'home' // home | moving | paused | returning
+        });
+      }
+    }
+
+    var maxMoving = Math.max(1, Math.floor(dots.length * 0.1));
+
+    // Pick a random axis-aligned direction (up/down/left/right)
+    function pickTarget(d) {
+      var axis = Math.random() < 0.5 ? 'x' : 'y';
+      var sign = Math.random() < 0.5 ? 1 : -1;
+      var dist = 20 + Math.random() * MAX_MOVE;
+      d.targetX = axis === 'x' ? d.homeX + sign * dist : d.homeX;
+      d.targetY = axis === 'y' ? d.homeY + sign * dist : d.homeY;
+      d.startX = d.homeX;
+      d.startY = d.homeY;
+      d.moveStart = performance.now();
+      d.moveDur = 1000 + Math.random() * 1500;
+      d.phase = 'moving';
+      movingCount++;
+    }
+
+    function returnHome(d) {
+      d.startX = d.curX;
+      d.startY = d.curY;
+      d.targetX = d.homeX;
+      d.targetY = d.homeY;
+      d.moveStart = performance.now();
+      d.moveDur = 800 + Math.random() * 1000;
+      d.phase = 'returning';
+    }
+
+    function scheduleMove(d) {
+      var wait = 1500 + Math.random() * 4000;
+      d.nextMove = performance.now() + wait;
+      d.phase = 'waiting';
+    }
+
+    // Start all as waiting with staggered times
+    dots.forEach(function(d) {
+      d.nextMove = performance.now() + Math.random() * 3000;
+      d.phase = 'waiting';
+      d.curX = d.homeX;
+      d.curY = d.homeY;
+    });
+
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function tick(now) {
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+
+        // Waiting to move
+        if (d.phase === 'waiting') {
+          if (now >= d.nextMove && movingCount < maxMoving) {
+            pickTarget(d);
+          }
+          continue;
+        }
+
+        if (d.phase === 'home') continue;
+
+        // Animate
+        if (d.phase === 'moving' || d.phase === 'returning') {
+          var elapsed = now - d.moveStart;
+          var t = Math.min(elapsed / d.moveDur, 1);
+          var e = easeInOut(t);
+
+          d.curX = d.startX + (d.targetX - d.startX) * e;
+          d.curY = d.startY + (d.targetY - d.startY) * e;
+
+          var dx = d.curX - d.homeX;
+          var dy = d.curY - d.homeY;
+          d.el.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+
+          if (t >= 1) {
+            if (d.phase === 'moving') {
+              // Pause then return
+              d.phase = 'paused';
+              d.pauseEnd = now + 300 + Math.random() * 800;
+            } else if (d.phase === 'returning') {
+              d.el.style.transform = 'translate(0,0)';
+              d.curX = d.homeX;
+              d.curY = d.homeY;
+              movingCount--;
+              scheduleMove(d);
+            }
+          }
+          continue;
+        }
+
+        // Paused after moving
+        if (d.phase === 'paused' && now >= d.pauseEnd) {
+          returnHome(d);
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
   </script>
 </body>
 </html>
