@@ -1,5 +1,22 @@
 /* Portal do Pesquisador IDOR — JavaScript */
 
+/* --- Global Header Search --- */
+function toggleHeaderSearch() {
+  var bar = document.getElementById('headerSearch');
+  if (bar) {
+    bar.classList.toggle('open');
+    if (bar.classList.contains('open')) {
+      bar.querySelector('input').focus();
+    }
+  }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var bar = document.getElementById('headerSearch');
+    if (bar) bar.classList.remove('open');
+  }
+});
+
 /* --- Mobile Navigation --- */
 function toggleMobileNav() {
   document.getElementById('mobileNav').classList.add('open');

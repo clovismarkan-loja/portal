@@ -150,7 +150,66 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 0;
+      margin-bottom: 0;
     }
+    .filter-group h4 .chevron {
+      margin-left: auto;
+      transition: transform .25s ease;
+      color: var(--gray-400);
+    }
+    .filter-group.open h4 .chevron { transform: rotate(180deg); }
+    .filter-group__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .filter-group.open .filter-group__body {
+      max-height: 300px;
+    }
+
+    /* Header search toggle */
+    .header-search-toggle {
+      background: none; border: none; cursor: pointer;
+      color: rgba(29,29,30,.5); padding: 6px;
+      transition: color .2s ease; display: flex; align-items: center;
+    }
+    .header-search-toggle:hover { color: #1d1d1e; }
+
+    /* Global search bar — dropdown */
+    .header-search {
+      position: fixed;
+      top: var(--header-h);
+      left: 0; right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      z-index: 998;
+      opacity: 0; visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+    }
+    .header-search.open {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    .header-search__inner {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 24px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .header-search__icon { color: var(--gray-400); flex-shrink: 0; }
+    .header-search__input {
+      flex: 1; border: none; font-size: 16px;
+      outline: none; background: transparent; color: var(--gray-900);
+    }
+    .header-search__input::placeholder { color: var(--gray-400); }
+    .header-search__close {
+      background: none; border: none; font-size: 24px;
+      cursor: pointer; color: var(--gray-400); padding: 4px;
+      transition: color .2s ease; line-height: 1;
+    }
+    .header-search__close:hover { color: var(--gray-900); }
 
     /* Space after banner + remove borders */
     .page-banner + .section,
@@ -163,6 +222,30 @@
     .opp-list-card .tag:hover { background: var(--blue-900); color: var(--white); }
     .opp-list-card__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .filters-sidebar { border: none; background: transparent; padding: 0; }
+    .sidebar-search {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .sidebar-search__icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+    .sidebar-search input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 50px;
+      font-size: 13px;
+      background: var(--white);
+      outline: none;
+      transition: border-color .2s ease;
+    }
+    .sidebar-search input:focus { border-color: var(--blue-900); }
+    .sidebar-search input::placeholder { color: var(--gray-400); }
     .filters-sidebar .filter-clear {
       background: none; border: none; padding: 4px; cursor: pointer;
       color: var(--gray-400); transition: color .2s ease; width: auto;
@@ -338,11 +421,21 @@
           <a href="compliance.html">Compliance</a>
           <a href="open-science.html">Open Science</a>
         </nav>
+        <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
         <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
       </div>
     </div>
   </header>
+
+  <!-- Global Search Bar -->
+  <div class="header-search" id="headerSearch">
+    <div class="header-search__inner container">
+      <svg class="header-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
+      <button class="header-search__close" onclick="toggleHeaderSearch()">&times;</button>
+    </div>
+  </div>
 
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
@@ -365,13 +458,7 @@
         Oportunidades
       </nav>
       <h1>Banco de Oportunidades</h1>
-      <div class="page-banner__bottom">
-        <p class="page-banner__text">Encontre editais, grants, bolsas e financiamentos para impulsionar sua pesquisa. Filtre por área, valor, prazo e elegibilidade para descobrir as melhores oportunidades disponíveis.</p>
-        <div class="page-banner__search">
-          <input type="text" placeholder="Busque por editais, grants, bolsas...">
-          <button><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-        </div>
-      </div>
+      <p>Encontre editais, grants, bolsas e financiamentos para impulsionar sua pesquisa.</p>
     </div>
   </div>
 
@@ -383,6 +470,11 @@
         <!-- Sidebar Filters -->
         <aside class="filters-sidebar">
 
+          <div class="sidebar-search">
+            <svg class="sidebar-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar oportunidades...">
+          </div>
+
           <div class="active-filters__header">
             <span class="active-filters__title">Filtros</span>
             <button class="filter-clear" id="clearFiltersBtn" title="Limpar filtros"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
@@ -392,52 +484,64 @@
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Tipo</h4>
-            <label class="filter-check"><input type="checkbox"> Edital</label>
-            <label class="filter-check"><input type="checkbox"> Grant</label>
-            <label class="filter-check"><input type="checkbox"> Bolsa</label>
-            <label class="filter-check"><input type="checkbox"> Financiamento</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Tipo <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Edital</label>
+              <label class="filter-check"><input type="checkbox"> Grant</label>
+              <label class="filter-check"><input type="checkbox"> Bolsa</label>
+              <label class="filter-check"><input type="checkbox"> Financiamento</label>
+            </div>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Area</h4>
-            <label class="filter-check"><input type="checkbox"> Saúde</label>
-            <label class="filter-check"><input type="checkbox"> Biomedicina</label>
-            <label class="filter-check"><input type="checkbox"> Neurociência</label>
-            <label class="filter-check"><input type="checkbox"> Oncologia</label>
-            <label class="filter-check"><input type="checkbox"> Genética</label>
-            <label class="filter-check"><input type="checkbox"> Multidisciplinar</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Área <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Saúde</label>
+              <label class="filter-check"><input type="checkbox"> Biomedicina</label>
+              <label class="filter-check"><input type="checkbox"> Neurociência</label>
+              <label class="filter-check"><input type="checkbox"> Oncologia</label>
+              <label class="filter-check"><input type="checkbox"> Genética</label>
+              <label class="filter-check"><input type="checkbox"> Multidisciplinar</label>
+            </div>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo</h4>
-            <label class="filter-check"><input type="checkbox"> Em aberto</label>
-            <label class="filter-check"><input type="checkbox"> Próximos 30 dias</label>
-            <label class="filter-check"><input type="checkbox"> Próximos 90 dias</label>
-            <label class="filter-check"><input type="checkbox"> Encerrados</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Em aberto</label>
+              <label class="filter-check"><input type="checkbox"> Próximos 30 dias</label>
+              <label class="filter-check"><input type="checkbox"> Próximos 90 dias</label>
+              <label class="filter-check"><input type="checkbox"> Encerrados</label>
+            </div>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Valor</h4>
-            <label class="filter-check"><input type="checkbox"> Até R$50.000</label>
-            <label class="filter-check"><input type="checkbox"> R$50.000 &ndash; R$200.000</label>
-            <label class="filter-check"><input type="checkbox"> R$200.000 &ndash; R$1.000.000</label>
-            <label class="filter-check"><input type="checkbox"> Acima de R$1.000.000</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Valor <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Até R$50.000</label>
+              <label class="filter-check"><input type="checkbox"> R$50.000 &ndash; R$200.000</label>
+              <label class="filter-check"><input type="checkbox"> R$200.000 &ndash; R$1.000.000</label>
+              <label class="filter-check"><input type="checkbox"> Acima de R$1.000.000</label>
+            </div>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Elegibilidade</h4>
-            <label class="filter-check"><input type="checkbox"> Pesquisador</label>
-            <label class="filter-check"><input type="checkbox"> Pós-doc</label>
-            <label class="filter-check"><input type="checkbox"> Doutorando</label>
-            <label class="filter-check"><input type="checkbox"> Equipe</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Elegibilidade <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Pesquisador</label>
+              <label class="filter-check"><input type="checkbox"> Pós-doc</label>
+              <label class="filter-check"><input type="checkbox"> Doutorando</label>
+              <label class="filter-check"><input type="checkbox"> Equipe</label>
+            </div>
           </div>
 
           <div class="filter-group">
-            <h4 class="filter-group__title"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Origem</h4>
-            <label class="filter-check"><input type="checkbox"> IDOR Interno</label>
-            <label class="filter-check"><input type="checkbox"> Nacional</label>
-            <label class="filter-check"><input type="checkbox"> Internacional</label>
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Origem <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> IDOR Interno</label>
+              <label class="filter-check"><input type="checkbox"> Nacional</label>
+              <label class="filter-check"><input type="checkbox"> Internacional</label>
+            </div>
           </div>
 
         </aside>
