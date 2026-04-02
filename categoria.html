@@ -213,6 +213,7 @@
     .sidebar__block { border: none; }
     .article-list-item { border: none; }
     .sidebar__block:last-child { display: none; }
+    .layout-with-sidebar { grid-template-columns: 320px 1fr; }
 
     /* --- Footer white (same as home) --- */
     .footer {
@@ -388,6 +389,30 @@
     <div class="container">
       <div class="layout-with-sidebar">
 
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+          <div class="sidebar__block">
+            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Mais lidos</h4>
+            <a href="artigo.html" class="sidebar__link">Como submeter um projeto de pesquisa</a>
+            <a href="artigo.html" class="sidebar__link">Submissão ao CEP/CONEP</a>
+            <a href="artigo.html" class="sidebar__link">Modelos de TCLE e documentos regulatórios</a>
+            <a href="artigo.html" class="sidebar__link">Registro de ensaios clínicos</a>
+            <a href="artigo.html" class="sidebar__link">Fluxo de orçamento para projetos</a>
+          </div>
+
+          <div class="sidebar__block">
+            <h4>Categorias</h4>
+            <a href="categoria.html" class="sidebar__link">TI</a>
+            <a href="categoria.html" class="sidebar__link">Software de Apoio Acadêmico</a>
+            <a href="categoria.html" class="sidebar__link">Inovação e Propriedade Intelectual</a>
+            <a href="categoria.html" class="sidebar__link">Recursos Humanos (RH)</a>
+            <a href="categoria.html" class="sidebar__link">Assessoria Científica</a>
+            <a href="categoria.html" class="sidebar__link">Editais IDOR</a>
+          </div>
+
+        </aside>
+
         <!-- Main: Article List -->
         <div class="article-list">
 
@@ -454,30 +479,6 @@
           </div>
 
         </div>
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-
-          <div class="sidebar__block">
-            <h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Mais lidos</h4>
-            <a href="artigo.html" class="sidebar__link">Como submeter um projeto de pesquisa</a>
-            <a href="artigo.html" class="sidebar__link">Submissão ao CEP/CONEP</a>
-            <a href="artigo.html" class="sidebar__link">Modelos de TCLE e documentos regulatórios</a>
-            <a href="artigo.html" class="sidebar__link">Registro de ensaios clínicos</a>
-            <a href="artigo.html" class="sidebar__link">Fluxo de orçamento para projetos</a>
-          </div>
-
-          <div class="sidebar__block">
-            <h4>Categorias</h4>
-            <a href="categoria.html" class="sidebar__link">TI</a>
-            <a href="categoria.html" class="sidebar__link">Software de Apoio Acadêmico</a>
-            <a href="categoria.html" class="sidebar__link">Inovação e Propriedade Intelectual</a>
-            <a href="categoria.html" class="sidebar__link">Recursos Humanos (RH)</a>
-            <a href="categoria.html" class="sidebar__link">Assessoria Científica</a>
-            <a href="categoria.html" class="sidebar__link">Editais IDOR</a>
-          </div>
-
-        </aside>
 
       </div>
     </div>

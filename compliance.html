@@ -158,17 +158,18 @@
     /* --- Accordion overrides --- */
     .accordion { max-width: 900px; }
     .accordion__item {
-      background: transparent !important;
+      background: #fff !important;
       border: none !important;
-      border-radius: 0 !important;
-      border-bottom: 1px solid var(--gray-200) !important;
-      overflow: visible !important;
+      border-radius: 12px !important;
+      border-bottom: none !important;
+      overflow: hidden !important;
+      margin-bottom: 12px;
     }
-    .accordion__item:last-child { border-bottom: none !important; }
+    .accordion__item:last-child { margin-bottom: 0; }
     .accordion__trigger {
-      padding: 24px 0 !important;
+      padding: 20px 24px !important;
       background: transparent !important;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
       color: var(--blue-900);
     }
@@ -185,12 +186,12 @@
     .accordion__body {
       max-height: 0;
       overflow: hidden;
-      padding: 0 !important;
+      padding: 0 24px !important;
       transition: max-height .4s ease;
     }
     .accordion__item.open .accordion__body {
       max-height: 800px;
-      padding: 0 0 24px !important;
+      padding: 0 24px 24px !important;
     }
     .accordion__body-inner {
       padding: 0 0 8px;
@@ -223,6 +224,72 @@
     .acc-download span { flex: 1; }
     .acc-download__dl { margin-left: 16px; color: var(--gray-400); }
     .acc-download:hover .acc-download__dl { color: var(--blue-900); }
+
+    /* Layout with sidebar (same pattern as categoria) */
+    .compliance-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .compliance-sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+    }
+    .compliance-sidebar .sidebar__block { border: none; }
+    .compliance-sidebar .sidebar__block h4 {
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--blue-900);
+    }
+
+    /* CTA banner */
+    .cta-full {
+      position: relative;
+      padding: 80px 24px;
+      text-align: center;
+      background: url('News Background 01.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .cta-full::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(1,40,70,.7);
+    }
+    .cta-full__content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cta-full__content h3 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta-full__content p {
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 32px;
+    }
+    .cta-full__content .btn {
+      background: #71C5E8;
+      color: #003DA5;
+      border-radius: 50px;
+      border: none;
+    }
+    .cta-full__content .btn:hover {
+      background: #fff;
+      color: #003DA5;
+    }
+
+    @media (max-width: 768px) {
+      .compliance-layout { grid-template-columns: 1fr; }
+      .compliance-sidebar { position: static; }
+    }
 
     /* --- Footer white (same as home) --- */
     .footer {
@@ -326,9 +393,29 @@
   <section class="section">
     <div class="container">
 
-      <div class="compliance-intro">
-        <p>Esta página centraliza as boas práticas, diretrizes éticas e regulamentações aplicáveis à pesquisa no IDOR. Aqui você encontra orientações sobre comitês de ética, formulários obrigatórios, normativas vigentes e recursos para garantir a integridade e transparência em todas as etapas do processo científico.</p>
-      </div>
+      <div class="compliance-layout">
+
+        <!-- Sidebar -->
+        <aside class="compliance-sidebar">
+          <div class="sidebar__block">
+            <h4><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Links úteis</h4>
+            <a href="#" class="sidebar__link">Plataforma Brasil</a>
+            <a href="#" class="sidebar__link">CONEP — Comissão Nacional de Ética</a>
+            <a href="#" class="sidebar__link">CNPq — Conselho Nacional de Pesquisa</a>
+            <a href="#" class="sidebar__link">ANVISA — Pesquisa Clínica</a>
+            <a href="#" class="sidebar__link">COPE — Committee on Publication Ethics</a>
+            <a href="#" class="sidebar__link">Declaração de Helsinque</a>
+            <a href="#" class="sidebar__link">LGPD — Lei Geral de Proteção de Dados</a>
+            <a href="#" class="sidebar__link">FAPESP — Boas Práticas Científicas</a>
+            <a href="#" class="sidebar__link">ICH-GCP — Good Clinical Practice</a>
+          </div>
+        </aside>
+
+        <!-- Main content -->
+        <div>
+          <div class="compliance-intro">
+            <p>Esta página centraliza as boas práticas, diretrizes éticas e regulamentações aplicáveis à pesquisa no IDOR. Aqui você encontra orientações sobre comitês de ética, formulários obrigatórios, normativas vigentes e recursos para garantir a integridade e transparência em todas as etapas do processo científico.</p>
+          </div>
 
       <div class="accordion">
 
@@ -414,21 +501,7 @@
           </div>
         </div>
 
-        <!-- 6. Links Úteis -->
-        <div class="accordion__item">
-          <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Links Úteis
-            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-          </button>
-          <div class="accordion__body">
-            <div class="accordion__body-inner">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.</p>
-              <p>Praesent eu nulla at sem molestie sodales. Etiam ut neque. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. FAQ de Compliance -->
+        <!-- 6. FAQ de Compliance -->
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
             FAQ de Compliance
@@ -443,6 +516,17 @@
         </div>
 
       </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-full">
+    <div class="cta-full__content">
+      <h3>Não encontrou o que procura?</h3>
+      <p>Nossa equipe está pronta para ajudar você a encontrar as informações que precisa.</p>
+      <a href="mailto:portalpesquisador@idor.org" class="btn btn-primary btn-lg">Fale Conosco</a>
     </div>
   </section>
 
