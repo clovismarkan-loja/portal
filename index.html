@@ -391,6 +391,8 @@
     }
     .home-content > .section:first-child > .container {
       width: 100%;
+      position: relative;
+      z-index: 1;
     }
     .home-content .cat-grid {
       grid-template-columns: repeat(5, 1fr);
@@ -650,7 +652,16 @@
         max-width: 100%;
       }
       .hero--home .hero__desc { max-width: 100%; }
-      .hero--home .search-box { max-width: 100%; }
+      .hero--home .search-box {
+        max-width: 100%;
+        flex-direction: row !important;
+        border-radius: 14px !important;
+      }
+      .hero--home .search-box button {
+        border-radius: 0 !important;
+        white-space: nowrap;
+        padding: 0 20px !important;
+      }
       .hero-filters { justify-content: center; }
       .hero--home .hero__title { font-size: 26px; }
       .scroll-hint {
@@ -660,7 +671,169 @@
       }
       .home-content { border-radius: 16px 16px 0 0; }
       .home-content > .section:first-child { padding-top: 48px; }
+
+      /* Header solid on mobile always */
+      .header.header--home {
+        background: var(--white) !important;
+        box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+      }
+      .header--home .header__title { color: #1d1d1e !important; }
+      .header--home .menu-toggle { color: #1d1d1e !important; }
+
+      /* Hide Entrar button and search toggle on mobile header */
+      .header--home .btn-secondary { display: none !important; }
+      .header-search-toggle { display: none !important; }
+
+      /* Mobile nav panel top spacing */
+      .mobile-nav__panel { padding-top: 72px; }
+
+      /* Submenu trigger */
+      .mobile-nav__submenu-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--gray-900);
+        border-bottom: 1px solid var(--gray-100);
+        cursor: pointer;
+      }
+      .mobile-nav__submenu-trigger svg {
+        transition: transform .25s ease;
+        color: var(--gray-400);
+      }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+
+      /* Submenu items */
+      .mobile-nav__submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease;
+      }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu {
+        max-height: 800px;
+      }
+      .mobile-nav__submenu a {
+        padding: 10px 0 10px 20px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: var(--gray-600) !important;
+        border-bottom: none !important;
+      }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+
+      /* Scroll hint hide on mobile */
+      .scroll-hint { display: none; }
+
+      /* Hero mobile: video on top, content below */
+      .hero--home {
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: calc(var(--header-h) + 20px) !important;
+      }
+      .hero__video {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: translateX(-20%) !important;
+        width: 90% !important;
+        max-width: 400px !important;
+        max-height: 250px !important;
+        margin-bottom: 20px;
+      }
+      .hero--home .hero__content {
+        padding: 0 24px !important;
+      }
+
+      /* Mobile nav search item */
+      .mobile-nav__search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--blue-900);
+        border-bottom: 1px solid var(--gray-100);
+        cursor: pointer;
+      }
+
+      /* Cards: icon on top in mobile */
+      .home-content .cat-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+      .home-content .cat-card__icon {
+        grid-row: auto;
+      }
+      .home-content .cat-card__desc {
+        grid-column: 1;
+      }
+
+      /* Hide first "Ver todos" button on mobile */
+      #sectionEditais .section__header .btn-ghost { display: none !important; }
+
+      /* Dots pattern behind: lower z-index everywhere */
+      .home-content > .section:first-child::after,
+      #sectionEditais::before {
+        z-index: 0 !important;
+        opacity: .1 !important;
+      }
+      .home-content > .section:first-child > .container,
+      #sectionEditais > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .btn-ver-todos { display: inline-flex !important; position: relative; z-index: 1; }
+
+      /* Footer mobile: logo + text side by side */
+      .footer__brand {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+      }
+      .footer__brand img { margin-bottom: 0 !important; }
+      .footer__brand h4 { margin-bottom: 0; }
+      .footer__brand p { display: none; }
     }
+    /* Ver todos button — pill, gray — mobile only */
+    .btn-ver-todos {
+      display: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--gray-200);
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: all .25s ease;
+    }
+    .btn-ver-todos:hover {
+      background: var(--gray-300);
+      color: var(--gray-900);
+    }
+
+    /* Hide mobile search on desktop */
+    .mobile-nav__search { display: none; }
+
+    /* Footer: logo beside title */
+    .home-content .footer__brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .home-content .footer__brand img { margin-bottom: 0 !important; }
+    .home-content .footer__brand h4 { margin: 0; }
+    .home-content .footer__brand p { width: 100%; margin-top: -4px; }
+
     /* Header search toggle */
     .header-search-toggle {
       background: none; border: none; cursor: pointer;
@@ -730,7 +903,7 @@
         </nav>
         <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
-        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+        <button class="menu-toggle" onclick="toggleMobileNavToggle()">&#9776;</button>
       </div>
     </div>
   </header>
@@ -747,10 +920,33 @@
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
     <div class="mobile-nav__panel">
-      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
-      <a href="index.html">Home</a>
+      <div class="mobile-nav__search" onclick="closeMobileNavDirect(); setTimeout(function(){toggleHeaderSearch()},300);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar
+      </div>
+      <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+        <span>Áreas de Serviço</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mobile-nav__submenu">
+        <a href="categoria.html">NAPE</a>
+        <a href="categoria.html">TI</a>
+        <a href="categoria.html">Software Acadêmico</a>
+        <a href="categoria.html">Agendamento de Salas</a>
+        <a href="categoria.html">Publicações Científicas</a>
+        <a href="categoria.html">Inovação e P.I.</a>
+        <a href="categoria.html">Recursos Humanos</a>
+        <a href="categoria.html">Plataformas IDOR</a>
+        <a href="categoria.html">Editais IDOR</a>
+        <a href="categoria.html">Eventos IDOR</a>
+        <a href="categoria.html">Captação de Recursos</a>
+        <a href="categoria.html">Assessoria Científica</a>
+        <a href="categoria.html">Lattes Desk</a>
+        <a href="categoria.html">Editais Externos</a>
+        <a href="categoria.html">Gestão de Projetos</a>
+      </div>
       <a href="oportunidades.html">Oportunidades</a>
-      <a href="compliance.html">Compliance e Etica</a>
+      <a href="compliance.html">Compliance e Ética</a>
       <a href="open-science.html">Open Science</a>
       <a href="login.html">Entrar</a>
     </div>
@@ -768,9 +964,9 @@
       <div class="hero__content">
         <h1 class="hero__title"><span class="hero__title-gray">Procure informações sobre serviços e</span> <span class="hero__title-grad">Plataformas do IDOR</span></h1>
         <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
-        <div class="search-box">
+        <div class="search-box search-box--inline">
           <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Busque por servicos, artigos, oportunidades, editais...">
+          <input type="text" placeholder="">
           <button>Buscar</button>
         </div>
         <div class="hero-filters">
@@ -991,6 +1187,9 @@
             </div>
           </div>
         </div>
+        <div style="text-align:center; margin-top:32px;">
+          <a href="oportunidades.html" class="btn-ver-todos">Ver todos</a>
+        </div>
       </section>
 
       <!-- ARTIGOS RECENTES -->
@@ -1091,6 +1290,9 @@
   <script src="main.js"></script>
   <script>
     (function() {
+      var isMobile = window.innerWidth <= 768;
+      window.addEventListener('resize', function() { isMobile = window.innerWidth <= 768; });
+
       var wrapper = document.getElementById('homeWrapper');
       var header = document.getElementById('homeHeader');
       var content = document.getElementById('homeContent');
@@ -1189,6 +1391,7 @@
 
       /* --- Wheel: snap between sections --- */
       wrapper.addEventListener('wheel', function(e) {
+        if (isMobile) return; // disable snap on mobile
         var scrollY = wrapper.scrollTop;
         var info = getNeighborSnaps(scrollY);
         var pts = getSnapPoints();
@@ -1237,6 +1440,7 @@
         touchStartY = e.touches[0].clientY;
       }, { passive: true });
       wrapper.addEventListener('touchend', function(e) {
+        if (isMobile) return; // disable snap on mobile
         var scrollY = wrapper.scrollTop;
         var deltaY = touchStartY - e.changedTouches[0].clientY;
         var info = getNeighborSnaps(scrollY);

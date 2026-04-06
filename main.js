@@ -21,6 +21,14 @@ document.addEventListener('keydown', function(e) {
 function toggleMobileNav() {
   document.getElementById('mobileNav').classList.add('open');
 }
+function toggleMobileNavToggle() {
+  var nav = document.getElementById('mobileNav');
+  if (nav.classList.contains('open')) {
+    nav.classList.remove('open');
+  } else {
+    nav.classList.add('open');
+  }
+}
 function closeMobileNav(event) {
   if (event.target === event.currentTarget) {
     document.getElementById('mobileNav').classList.remove('open');

@@ -637,6 +637,9 @@ img { max-width: 100%; display: block; }
   .search-box { flex-direction: column; border-radius: var(--radius-lg); }
   .search-box input { padding: 16px 20px; }
   .search-box button { padding: 14px; justify-content: center; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+  .search-box--inline { flex-direction: row !important; border-radius: 14px !important; }
+  .search-box--inline input { padding: 14px 12px 14px 40px !important; }
+  .search-box--inline button { padding: 0 16px !important; margin-right: 4px !important; justify-content: center !important; border-radius: 0 !important; min-width: auto !important; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .cat-card { padding: 20px 16px; }
   .section { padding: 40px 0; }

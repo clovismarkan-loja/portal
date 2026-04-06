@@ -133,6 +133,24 @@
     .header-search__input::placeholder { color: var(--gray-400); }
     .header-search__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 4px; transition: color .2s ease; line-height: 1; }
     .header-search__close:hover { color: var(--gray-900); }
+    .mobile-nav__search { display: none; }
+    @media (max-width: 768px) {
+      .header--inner .btn-secondary { display: none !important; }
+      .header-search-toggle { display: none !important; }
+      .mobile-nav__panel { padding-top: 72px; }
+      .mobile-nav__submenu-trigger {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 0; font-size: 16px; font-weight: 600;
+        color: var(--gray-900); border-bottom: 1px solid var(--gray-100); cursor: pointer;
+      }
+      .mobile-nav__submenu-trigger svg { transition: transform .25s ease; color: var(--gray-400); }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+      .mobile-nav__submenu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu { max-height: 800px; }
+      .mobile-nav__submenu a { padding: 10px 0 10px 20px !important; font-size: 14px !important; font-weight: 500 !important; color: var(--gray-600) !important; border-bottom: none !important; }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+      .mobile-nav__search { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--blue-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
+    }
   </style>
 </head>
 <body>
@@ -178,7 +196,7 @@
         </nav>
         <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
-        <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+        <button class="menu-toggle" onclick="toggleMobileNavToggle()">&#9776;</button>
       </div>
     </div>
   </header>
@@ -195,8 +213,31 @@
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
     <div class="mobile-nav__panel">
-      <button class="mobile-nav__close" onclick="closeMobileNavDirect()">&times;</button>
-      <a href="index.html">Home</a>
+      <div class="mobile-nav__search" onclick="closeMobileNavDirect(); setTimeout(function(){toggleHeaderSearch()},300);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar
+      </div>
+      <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+        <span>Áreas de Serviço</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mobile-nav__submenu">
+        <a href="categoria.html">NAPE</a>
+        <a href="categoria.html">TI</a>
+        <a href="categoria.html">Software Acadêmico</a>
+        <a href="categoria.html">Agendamento de Salas</a>
+        <a href="categoria.html">Publicações Científicas</a>
+        <a href="categoria.html">Inovação e P.I.</a>
+        <a href="categoria.html">Recursos Humanos</a>
+        <a href="categoria.html">Plataformas IDOR</a>
+        <a href="categoria.html">Editais IDOR</a>
+        <a href="categoria.html">Eventos IDOR</a>
+        <a href="categoria.html">Captação de Recursos</a>
+        <a href="categoria.html">Assessoria Científica</a>
+        <a href="categoria.html">Lattes Desk</a>
+        <a href="categoria.html">Editais Externos</a>
+        <a href="categoria.html">Gestão de Projetos</a>
+      </div>
       <a href="oportunidades.html">Oportunidades</a>
       <a href="compliance.html">Compliance e Ética</a>
       <a href="open-science.html">Open Science</a>
