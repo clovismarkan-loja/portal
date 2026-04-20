@@ -35,7 +35,7 @@
       justify-content: center;
       overflow: hidden;
       z-index: 0;
-      background: url('imagem-hero-banner.jpg') center/cover no-repeat;
+      background: #fff;
     }
     /* Spacer to push content below the fixed hero */
     .hero-spacer {
@@ -45,6 +45,18 @@
     }
     .hero--home::before { display: none !important; }
 
+    /* Video background fullscreen */
+    .hero__bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero--home .hero__content { position: relative; z-index: 1; }
     .hero--home::after { display: none !important;
     }
 
@@ -53,7 +65,7 @@
       position: relative;
       z-index: 2;
       text-align: left;
-      max-width: 640px;
+      max-width: 900px;
       padding: 0 24px;
       margin: 0 auto;
       text-align: center;
@@ -68,12 +80,12 @@
       color: #494a4b;
       text-shadow: none;
     }
-    .hero__title-gray { color: #494a4b; }
+    .hero__title-gray { color: #494a4b; white-space: nowrap; }
     .hero__title-grad {
-      background: linear-gradient(90deg, #003DA5, #71C5E8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #003DA5;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      white-space: nowrap;
     }
     .hero--home .hero__desc {
       font-size: clamp(15px, 1.8vw, 18px);
@@ -787,9 +799,12 @@
   <!-- HERO: fixed behind everything -->
   <section class="hero hero--home">
 
-      <!-- Video -->
+      <!-- Background Video -->
+      <video class="hero__bg-video" autoplay muted loop playsinline>
+        <source src="video-banner-3.mp4" type="video/mp4">
+      </video>
 
-      <!-- Content left -->
+      <!-- Content -->
       <div class="hero__content">
         <h1 class="hero__title"><span class="hero__title-gray">Procure informações sobre serviços e</span> <span class="hero__title-grad">Plataformas do IDOR</span></h1>
         <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
