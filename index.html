@@ -32,10 +32,10 @@
       padding: 0;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       overflow: hidden;
       z-index: 0;
-      background: #fff !important;
+      background: #fff;
     }
     /* Spacer to push content below the fixed hero */
     .hero-spacer {
@@ -45,30 +45,19 @@
     }
     .hero--home::before { display: none !important; }
 
-    /* Video background — original size, centered, max 1168x623 */
-    .hero__video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-40%, -50%);
-      width: auto;
-      height: auto;
-      max-width: 1168px;
-      max-height: 623px;
-      z-index: 0;
-    }
-
-    /* Gradient: gray top -> white, only behind header area */
-    .hero--home::after {
-      content: '';
+    /* Video background fullscreen */
+    .hero__bg-video {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(180deg, #ecedef 0%, #fff 100%);
-      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
       pointer-events: none;
+    }
+    .hero--home .hero__content { position: relative; z-index: 1; }
+    .hero--home::after { display: none !important;
     }
 
     /* Content: left-aligned */
@@ -76,9 +65,10 @@
       position: relative;
       z-index: 2;
       text-align: left;
-      max-width: 580px;
-      padding: 0 24px 0 0;
-      margin-left: max(24px, calc((100vw - 1280px) / 2 + 24px));
+      max-width: 900px;
+      padding: 0 24px;
+      margin: 0 auto;
+      text-align: center;
     }
     .hero--home .hero__title {
       font-size: clamp(30px, 4.5vw, 48px);
@@ -90,12 +80,12 @@
       color: #494a4b;
       text-shadow: none;
     }
-    .hero__title-gray { color: #494a4b; }
+    .hero__title-gray { color: #494a4b; white-space: nowrap; }
     .hero__title-grad {
-      background: linear-gradient(90deg, #003DA5, #71C5E8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #003DA5;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      white-space: nowrap;
     }
     .hero--home .hero__desc {
       font-size: clamp(15px, 1.8vw, 18px);
@@ -103,7 +93,7 @@
       color: #1d1d1e;
       text-shadow: none;
       line-height: 1.6;
-      max-width: 460px;
+      max-width: 100%;
     }
 
     /* Search box — minimal */
@@ -115,7 +105,7 @@
       display: flex;
       align-items: center;
       max-width: 520px;
-      margin: 0;
+      margin: 0 auto;
       background: var(--white);
     }
     .hero--home .search-box__icon {
@@ -152,7 +142,7 @@
     /* Hero filter links */
     .hero-filters {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 24px;
       margin-top: 24px;
       flex-wrap: wrap;
@@ -205,38 +195,6 @@
       animation: bounceDown 2s ease infinite;
     }
     .scroll-hint__arrow::after { display: none; }
-    /* Version switcher */
-    .version-switcher {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      z-index: 9999;
-    }
-    .version-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid var(--white);
-      background: rgba(0,0,0,.4);
-      backdrop-filter: blur(8px);
-      color: var(--white);
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1.1;
-      transition: all .2s ease;
-      text-decoration: none;
-    }
-    .version-btn:hover { background: var(--blue-900); color: var(--white); border-color: var(--blue-900); }
-    .version-btn.active { background: var(--gold); color: var(--gray-900); border-color: var(--gold); }
-
     @keyframes bounceDown {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(5px); }
@@ -291,6 +249,10 @@
       color: var(--white); background: var(--gold); border-color: var(--gold);
     }
     .header--home .menu-toggle { color: #1d1d1e; }
+    .header--home .header-search-toggle { color: rgba(29,29,30,.5); }
+    .header--home .header-search-toggle:hover { color: #1d1d1e; }
+    .header--home .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--home .mega-trigger__link:hover { color: #1d1d1e !important; }
 
     .header.header--home.header--solid {
       background: var(--white) !important;
@@ -391,8 +353,6 @@
     }
     .home-content > .section:first-child > .container {
       width: 100%;
-      position: relative;
-      z-index: 1;
     }
     .home-content .cat-grid {
       grid-template-columns: repeat(5, 1fr);
@@ -652,16 +612,7 @@
         max-width: 100%;
       }
       .hero--home .hero__desc { max-width: 100%; }
-      .hero--home .search-box {
-        max-width: 100%;
-        flex-direction: row !important;
-        border-radius: 14px !important;
-      }
-      .hero--home .search-box button {
-        border-radius: 0 !important;
-        white-space: nowrap;
-        padding: 0 20px !important;
-      }
+      .hero--home .search-box { max-width: 100%; }
       .hero-filters { justify-content: center; }
       .hero--home .hero__title { font-size: 26px; }
       .scroll-hint {
@@ -671,7 +622,6 @@
       }
       .home-content { border-radius: 16px 16px 0 0; }
       .home-content > .section:first-child { padding-top: 48px; }
-
       /* Header solid on mobile always */
       .header.header--home {
         background: var(--white) !important;
@@ -679,161 +629,24 @@
       }
       .header--home .header__title { color: #1d1d1e !important; }
       .header--home .menu-toggle { color: #1d1d1e !important; }
-
-      /* Hide Entrar button and search toggle on mobile header */
       .header--home .btn-secondary { display: none !important; }
       .header-search-toggle { display: none !important; }
-
-      /* Mobile nav panel top spacing */
-      .mobile-nav__panel { padding-top: 72px; }
-
-      /* Submenu trigger */
-      .mobile-nav__submenu-trigger {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--gray-900);
-        border-bottom: 1px solid var(--gray-100);
-        cursor: pointer;
-      }
-      .mobile-nav__submenu-trigger svg {
-        transition: transform .25s ease;
-        color: var(--gray-400);
-      }
-      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
-
-      /* Submenu items */
-      .mobile-nav__submenu {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height .35s ease;
-      }
-      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu {
-        max-height: 800px;
-      }
-      .mobile-nav__submenu a {
-        padding: 10px 0 10px 20px !important;
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        color: var(--gray-600) !important;
-        border-bottom: none !important;
-      }
-      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
-
-      /* Scroll hint hide on mobile */
       .scroll-hint { display: none; }
-
-      /* Hero mobile: video on top, content below */
-      .hero--home {
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: center !important;
-        padding-top: calc(var(--header-h) + 20px) !important;
+      .mobile-nav__panel { padding-top: 72px; }
+      .mobile-nav__submenu-trigger {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 0; font-size: 16px; font-weight: 600;
+        color: var(--gray-900); border-bottom: 1px solid var(--gray-100); cursor: pointer;
       }
-      .hero__video {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: translateX(-20%) !important;
-        width: 90% !important;
-        max-width: 400px !important;
-        max-height: 250px !important;
-        margin-bottom: 20px;
-      }
-      .hero--home .hero__content {
-        padding: 0 24px !important;
-      }
-
-      /* Mobile nav search item */
-      .mobile-nav__search {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--blue-900);
-        border-bottom: 1px solid var(--gray-100);
-        cursor: pointer;
-      }
-
-      /* Cards: icon on top in mobile */
-      .home-content .cat-card {
-        grid-template-columns: 1fr;
-        text-align: center;
-        justify-items: center;
-      }
-      .home-content .cat-card__icon {
-        grid-row: auto;
-      }
-      .home-content .cat-card__desc {
-        grid-column: 1;
-      }
-
-      /* Hide first "Ver todos" button on mobile */
-      #sectionEditais .section__header .btn-ghost { display: none !important; }
-
-      /* Dots pattern behind: lower z-index everywhere */
-      .home-content > .section:first-child::after,
-      #sectionEditais::before {
-        z-index: 0 !important;
-        opacity: .1 !important;
-      }
-      .home-content > .section:first-child > .container,
-      #sectionEditais > .container {
-        position: relative;
-        z-index: 1;
-      }
-      .btn-ver-todos { display: inline-flex !important; position: relative; z-index: 1; }
-
-      /* Footer mobile: logo + text side by side */
-      .footer__brand {
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 12px !important;
-      }
-      .footer__brand img { margin-bottom: 0 !important; }
-      .footer__brand h4 { margin-bottom: 0; }
-      .footer__brand p { display: none; }
+      .mobile-nav__submenu-trigger svg { transition: transform .25s ease; color: var(--gray-400); }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+      .mobile-nav__submenu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu { max-height: 800px; }
+      .mobile-nav__submenu a { padding: 10px 0 10px 20px !important; font-size: 14px !important; font-weight: 500 !important; color: var(--gray-600) !important; border-bottom: none !important; }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+      .mobile-nav__search { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--blue-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
     }
-    /* Ver todos button — pill, gray — mobile only */
-    .btn-ver-todos {
-      display: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 32px;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
-      background: var(--gray-200);
-      color: var(--gray-700);
-      text-decoration: none;
-      transition: all .25s ease;
-    }
-    .btn-ver-todos:hover {
-      background: var(--gray-300);
-      color: var(--gray-900);
-    }
-
-    /* Hide mobile search on desktop */
     .mobile-nav__search { display: none; }
-
-    /* Footer: logo beside title */
-    .home-content .footer__brand {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .home-content .footer__brand img { margin-bottom: 0 !important; }
-    .home-content .footer__brand h4 { margin: 0; }
-    .home-content .footer__brand p { width: 100%; margin-top: -4px; }
-
     /* Header search toggle */
     .header-search-toggle {
       background: none; border: none; cursor: pointer;
@@ -955,18 +768,18 @@
   <!-- HERO: fixed behind everything -->
   <section class="hero hero--home">
 
-      <!-- Video -->
-      <video class="hero__video" autoplay muted loop playsinline>
-        <source src="video-banner.mp4" type="video/mp4">
+      <!-- Background Video -->
+      <video class="hero__bg-video" autoplay muted loop playsinline>
+        <source src="video-banner-3.mp4" type="video/mp4">
       </video>
 
-      <!-- Content left -->
+      <!-- Content -->
       <div class="hero__content">
         <h1 class="hero__title"><span class="hero__title-gray">Procure informações sobre serviços e</span> <span class="hero__title-grad">Plataformas do IDOR</span></h1>
         <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
-        <div class="search-box search-box--inline">
+        <div class="search-box">
           <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="Busque por servicos, artigos, oportunidades, editais...">
           <button>Buscar</button>
         </div>
         <div class="hero-filters">
@@ -1187,9 +1000,6 @@
             </div>
           </div>
         </div>
-        <div style="text-align:center; margin-top:32px;">
-          <a href="oportunidades.html" class="btn-ver-todos">Ver todos</a>
-        </div>
       </section>
 
       <!-- ARTIGOS RECENTES -->
@@ -1280,19 +1090,9 @@
     </div><!-- /home-content -->
   </div><!-- /home-wrapper -->
 
-  <!-- Version switcher -->
-  <div class="version-switcher">
-    <a href="home-opcao1.html" class="version-btn active">Op 1</a>
-    <a href="home-opcao2.html" class="version-btn">Op 2</a>
-    <a href="home-opcao3.html" class="version-btn">Op 3</a>
-  </div>
-
   <script src="main.js"></script>
   <script>
     (function() {
-      var isMobile = window.innerWidth <= 768;
-      window.addEventListener('resize', function() { isMobile = window.innerWidth <= 768; });
-
       var wrapper = document.getElementById('homeWrapper');
       var header = document.getElementById('homeHeader');
       var content = document.getElementById('homeContent');
@@ -1391,7 +1191,6 @@
 
       /* --- Wheel: snap between sections --- */
       wrapper.addEventListener('wheel', function(e) {
-        if (isMobile) return; // disable snap on mobile
         var scrollY = wrapper.scrollTop;
         var info = getNeighborSnaps(scrollY);
         var pts = getSnapPoints();
@@ -1440,7 +1239,6 @@
         touchStartY = e.touches[0].clientY;
       }, { passive: true });
       wrapper.addEventListener('touchend', function(e) {
-        if (isMobile) return; // disable snap on mobile
         var scrollY = wrapper.scrollTop;
         var deltaY = touchStartY - e.changedTouches[0].clientY;
         var info = getNeighborSnaps(scrollY);
