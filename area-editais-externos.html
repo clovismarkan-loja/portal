@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editais Externos — Portal do Pesquisador IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #f4f4f1 !important; }
+    .header--inner { background: var(--white) !important; box-shadow: 0 1px 8px rgba(0,0,0,.06) !important; }
+    .header--inner .header__title { color: #1d1d1e; }
+    .header--inner .header__nav a { color: rgba(29,29,30,.6); }
+    .header--inner .header__nav a:hover, .header--inner .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--inner .btn-secondary { color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent; border-radius: 50px; }
+    .header--inner .btn-secondary:hover { color: var(--white); background: var(--gold); border-color: var(--gold); }
+    .header--inner .menu-toggle { color: #1d1d1e; }
+    .header--inner .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--inner .mega-trigger__link:hover { color: #1d1d1e !important; }
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+    .mega-trigger { position: static; }
+    .mega-trigger__link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .mega-menu { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-200); box-shadow: 0 8px 24px rgba(0,0,0,.06); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999; }
+    .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mega-menu__inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 40px; padding: 32px 24px; }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-700) !important; transition: background .2s ease, color .2s ease; text-decoration: none; }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover { background: var(--gray-50); color: var(--blue-900) !important; }
+    .mega-menu__item:hover svg { color: var(--gold); }
+    .page-banner { height: 250px; position: relative; display: flex; align-items: flex-end; background: radial-gradient(circle at 90% 100%, #71C5E8 0%, #003DA5 50%); margin-top: var(--header-h); overflow: hidden; }
+    .page-banner::before { display: none; }
+    .page-banner__content { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; padding: 0 24px 40px; width: 100%; text-shadow: none; }
+    .page-banner__breadcrumb { font-size: 13px; margin-bottom: 12px; }
+    .page-banner__breadcrumb, .page-banner__breadcrumb a { color: rgba(255,255,255,.6); }
+    .page-banner__breadcrumb a:hover { color: var(--white); }
+    .page-banner__breadcrumb span { margin: 0 8px; }
+    .page-banner h1 { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 36px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: -.3px; }
+    .page-banner p { font-size: 16px; color: rgba(255,255,255,.75); }
+    @media (max-width: 768px) { .page-banner { height: 280px; } .page-banner h1 { font-size: 26px; } .page-banner__content { padding-bottom: 28px; } }
+    .areas-nav { background: #f4f4f1; overflow: visible; padding-top: 28px; }
+    .areas-nav__track { display: flex; align-items: stretch; gap: 0; overflow: visible; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .areas-nav__item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 12px 12px; min-width: 80px; flex-shrink: 0; text-decoration: none; color: var(--gray-900); font-size: 0; font-weight: 500; text-align: center; line-height: 1.2; transition: color .2s ease; white-space: nowrap; position: relative; }
+    .areas-nav__item svg { color: var(--gray-900); transition: color .2s ease; }
+    .areas-nav__item:hover { color: var(--gold-dark); }
+    .areas-nav__item:hover svg { color: var(--gold-dark); }
+    .areas-nav__item.active { color: var(--gold-dark); }
+    .areas-nav__item.active svg { color: var(--gold-dark); }
+    .areas-nav__item::after { content: attr(data-label); position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: var(--blue-900); color: var(--white); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+    .areas-nav__item:hover::after { opacity: 1; }
+    .article-list-item__title { font-weight: 600; }
+    .sidebar__block h4 { font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--blue-900); }
+    .sidebar__block { border: none; }
+    .article-list-item { border: none; }
+    .layout-with-sidebar { grid-template-columns: 320px 1fr; }
+    /* Opp-style layout for area pages */
+    .opp-layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: flex-start; }
+    .area-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 36px; font-weight: 700; color: var(--blue-900); margin-bottom: 16px; letter-spacing: -.5px; line-height: 1.2; }
+    @media (max-width: 768px) { .area-title { font-size: 28px; } }
+    .area-intro { margin-bottom: 24px; font-size: 16px; color: var(--gray-600); line-height: 1.7; }
+    .filters-sidebar { border: none; background: transparent; padding: 0; }
+    .sidebar-search { position: relative; margin-bottom: 24px; }
+    .sidebar-search__icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray-400); pointer-events: none; }
+    .sidebar-search input { width: 100%; padding: 10px 14px 10px 40px; border: 1.5px solid var(--gray-200); border-radius: 50px; font-size: 13px; background: var(--white); outline: none; transition: border-color .2s ease; }
+    .sidebar-search input:focus { border-color: var(--blue-900); }
+    .sidebar-search input::placeholder { color: var(--gray-400); }
+    .filters-sidebar .filter-clear { background: none; border: none; padding: 4px; cursor: pointer; color: var(--gray-400); transition: color .2s ease; width: auto; }
+    .filters-sidebar .filter-clear:hover { color: var(--red); }
+    .filter-group { border: none; margin-bottom: 8px; }
+    .filter-group h4 { font-weight: 600; font-size: 11px; display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 8px 0; margin-bottom: 0; text-transform: uppercase; letter-spacing: .5px; color: var(--gray-900); }
+    .filter-group h4 .chevron { margin-left: auto; transition: transform .25s ease; color: var(--gray-400); }
+    .filter-group.open h4 .chevron { transform: rotate(180deg); }
+    .filter-group__body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .filter-group.open .filter-group__body { max-height: 400px; }
+    .active-filters__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .active-filters__title { font-size: 16px; font-weight: 600; color: var(--blue-900); }
+    .active-filters__list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; min-height: 0; }
+    .active-filters__item { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px; background: var(--white); border-radius: 6px; font-size: 13px; color: var(--gray-700); animation: fadeIn .2s ease; }
+    .active-filters__remove { background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 16px; padding: 0 0 0 8px; line-height: 1; transition: color .2s ease; }
+    .active-filters__remove:hover { color: var(--red); }
+    .active-filters__empty { font-size: 12px; color: var(--gray-400); font-style: italic; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .sort-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .sort-bar__count { font-size: 14px; color: var(--gray-500); }
+    .custom-sort { display: flex; align-items: center; gap: 8px; position: relative; }
+    .custom-sort__label { font-size: 13px; color: var(--gray-500); }
+    .custom-sort__trigger { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--blue-900); cursor: pointer; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: border-color .2s ease; }
+    .custom-sort__trigger:hover { border-bottom-color: var(--blue-900); }
+    .custom-sort__trigger svg { transition: transform .2s ease; }
+    .custom-sort.open .custom-sort__trigger svg { transform: rotate(180deg); }
+    .custom-sort__dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--white); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.1); padding: 8px 0; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease, visibility .2s ease; z-index: 50; }
+    .custom-sort.open .custom-sort__dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .custom-sort__option { padding: 10px 20px; font-size: 14px; color: var(--gray-700); cursor: pointer; transition: background .15s ease, color .15s ease; }
+    .custom-sort__option:hover { background: var(--gray-50); color: var(--blue-900); }
+    .custom-sort__option.active { color: var(--blue-900); font-weight: 600; }
+    .filter-check { display: flex; align-items: center; gap: 10px; padding: 6px 0; cursor: pointer; font-size: 14px; color: var(--gray-700); }
+    .filter-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue-900); cursor: pointer; }
+    .mobile-filters-trigger { display: none; }
+    .mobile-filters-body { max-height: none; overflow: visible; }
+    .footer { background: #fff !important; color: var(--gray-500) !important; }
+    .footer h4, .footer h5 { color: var(--gray-900) !important; }
+    .footer__links h5 { color: var(--blue-900) !important; }
+    .footer__links a { color: var(--gray-500) !important; }
+    .footer__links a:hover { color: var(--blue-900) !important; }
+    .footer__bottom { border-top-color: var(--gray-200) !important; color: var(--gray-400) !important; }
+    .header-search-toggle { background: none; border: none; cursor: pointer; color: rgba(29,29,30,.5); padding: 6px; transition: color .2s ease; display: flex; align-items: center; }
+    .header-search-toggle:hover { color: #1d1d1e; }
+    .header-search { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--white); box-shadow: 0 8px 24px rgba(0,0,0,.08); z-index: 998; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; }
+    .header-search.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .header-search__inner { display: flex; align-items: center; gap: 12px; padding: 16px 24px; max-width: var(--max-w); margin: 0 auto; }
+    .header-search__icon { color: var(--gray-400); flex-shrink: 0; }
+    .header-search__input { flex: 1; border: none; font-size: 16px; outline: none; background: transparent; color: var(--gray-900); }
+    .header-search__input::placeholder { color: var(--gray-400); }
+    .header-search__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 4px; transition: color .2s ease; line-height: 1; }
+    .header-search__close:hover { color: var(--gray-900); }
+    .mobile-nav__search { display: none; }
+    @media (max-width: 768px) {
+      .header--inner .btn-secondary { display: none !important; }
+      .header-search-toggle { display: none !important; }
+      .mobile-nav__panel { padding-top: 72px; }
+      .mobile-nav__submenu-trigger { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--gray-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
+      .mobile-nav__submenu-trigger svg { transition: transform .25s ease; color: var(--gray-400); }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+      .mobile-nav__submenu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu { max-height: 800px; }
+      .mobile-nav__submenu a { padding: 10px 0 10px 20px !important; font-size: 14px !important; font-weight: 500 !important; color: var(--gray-600) !important; border-bottom: none !important; }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+      .mobile-nav__search { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--blue-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
+      .mobile-filters-trigger { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--white); border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--blue-900); cursor: pointer; margin-bottom: 12px; }
+      .mobile-filters-trigger span { display: flex; align-items: center; gap: 6px; }
+      .mobile-filters-chevron { color: var(--gray-400); transition: transform .25s ease; }
+      .mobile-filters-trigger.open .mobile-filters-chevron { transform: rotate(180deg); }
+      .mobile-filters-body { max-height: 0 !important; overflow: hidden !important; transition: max-height .35s ease; }
+      .mobile-filters-body.open { max-height: 2000px !important; }
+      .active-filters__header { display: none; }
+      .active-filters__list { display: none; }
+      .opp-layout { grid-template-columns: 1fr !important; gap: 24px; }
+      .sort-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .custom-sort__dropdown { right: auto; left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--inner" id="pageHeader">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div><div class="header__title">Portal do Pesquisador</div></div>
+      </a>
+      <div class="header__right">
+        <nav class="header__nav">
+          <div class="mega-trigger">
+            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu">
+              <div class="mega-menu__inner container">
+                <div class="mega-menu__col">
+                  <a href="area-nape.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                  <a href="area-ti.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                  <a href="area-software-academico.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Academico</a>
+                  <a href="area-agendamento-salas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                  <a href="area-publicacoes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="area-inovacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                  <a href="area-rh.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                  <a href="area-plataformas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                  <a href="area-editais-idor.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                  <a href="area-eventos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="area-captacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                  <a href="area-assessoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                  <a href="area-lattes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                  <a href="area-editais-externos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                  <a href="area-gestao-projetos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </nav>
+        <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNavToggle()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Search Bar -->
+  <div class="header-search" id="headerSearch">
+    <div class="header-search__inner container">
+      <svg class="header-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
+      <button class="header-search__close" onclick="toggleHeaderSearch()">&times;</button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <div class="mobile-nav__search" onclick="closeMobileNavDirect(); setTimeout(function(){toggleHeaderSearch()},300);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar
+      </div>
+      <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+        <span>Áreas de Serviço</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mobile-nav__submenu">
+        <a href="area-nape.html">NAPE</a>
+        <a href="area-ti.html">TI</a>
+        <a href="area-software-academico.html">Software Acadêmico</a>
+        <a href="area-agendamento-salas.html">Agendamento de Salas</a>
+        <a href="area-publicacoes.html">Publicações Científicas</a>
+        <a href="area-inovacao.html">Inovação e P.I.</a>
+        <a href="area-rh.html">Recursos Humanos</a>
+        <a href="area-plataformas.html">Plataformas IDOR</a>
+        <a href="area-editais-idor.html">Editais IDOR</a>
+        <a href="area-eventos.html">Eventos IDOR</a>
+        <a href="area-captacao.html">Captação de Recursos</a>
+        <a href="area-assessoria.html">Assessoria Científica</a>
+        <a href="area-lattes.html">Lattes Desk</a>
+        <a href="area-editais-externos.html">Editais Externos</a>
+        <a href="area-gestao-projetos.html">Gestão de Projetos</a>
+      </div>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Ética</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+    <!-- PAGE BANNER -->
+  <div class="page-banner">
+    <div class="page-banner__content">
+      <nav class="page-banner__breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&rsaquo;</span>
+        Editais Externos
+      </nav>
+      <h1>Áreas de Serviço</h1>
+    </div>
+  </div>
+
+<!-- AREAS NAV -->
+  <nav class="areas-nav">
+    <div class="areas-nav__track">
+      <a href="area-nape.html" class="areas-nav__item" data-label="NAPE"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></a>
+      <a href="area-ti.html" class="areas-nav__item" data-label="TI"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></a>
+      <a href="area-software-academico.html" class="areas-nav__item" data-label="Software Acadêmico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></a>
+      <a href="area-agendamento-salas.html" class="areas-nav__item" data-label="Agendamento de Salas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></a>
+      <a href="area-publicacoes.html" class="areas-nav__item" data-label="Publicações Científicas"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></a>
+      <a href="area-inovacao.html" class="areas-nav__item" data-label="Inovação e P.I."><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+      <a href="area-rh.html" class="areas-nav__item" data-label="Recursos Humanos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></a>
+      <a href="area-plataformas.html" class="areas-nav__item" data-label="Plataformas IDOR"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></a>
+      <a href="area-editais-idor.html" class="areas-nav__item" data-label="Editais IDOR"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></a>
+      <a href="area-eventos.html" class="areas-nav__item" data-label="Eventos IDOR"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg></a>
+      <a href="area-captacao.html" class="areas-nav__item" data-label="Captação de Recursos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></a>
+      <a href="area-assessoria.html" class="areas-nav__item" data-label="Assessoria Científica"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></a>
+      <a href="area-lattes.html" class="areas-nav__item" data-label="Lattes Desk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></a>
+      <a href="area-editais-externos.html" class="areas-nav__item active" data-label="Editais Externos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+      <a href="area-gestao-projetos.html" class="areas-nav__item" data-label="Gestão de Projetos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></a>
+    </div>
+  </nav>
+
+  
+  <!-- CONTENT + SIDEBAR -->
+  <section class="section">
+    <div class="container">
+      <div class="opp-layout">
+
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+
+          <div class="sidebar-search">
+            <svg class="sidebar-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar em Editais Externos...">
+          </div>
+
+          <div class="active-filters__header">
+            <span class="active-filters__title">Filtros</span>
+            <button class="filter-clear" id="clearFiltersBtn" title="Limpar filtros"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div>
+          <div class="active-filters__list" id="activeFiltersList">
+            <span class="active-filters__empty">Nenhum filtro selecionado</span>
+          </div>
+
+          <div class="mobile-filters-accordion">
+            <div class="mobile-filters-trigger" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Adicionar filtro</span>
+              <svg class="mobile-filters-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="mobile-filters-body">
+
+          <div class="filter-group">
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Tipo de Conteúdo <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Artigo</label>
+              <label class="filter-check"><input type="checkbox"> Guia</label>
+              <label class="filter-check"><input type="checkbox"> Tutorial</label>
+              <label class="filter-check"><input type="checkbox"> Ajuda</label>
+              <label class="filter-check"><input type="checkbox"> Sistema</label>
+              <label class="filter-check"><input type="checkbox"> Dúvida</label>
+              <label class="filter-check"><input type="checkbox"> Documento</label>
+              <label class="filter-check"><input type="checkbox"> Formulário</label>
+              <label class="filter-check"><input type="checkbox"> Procedimento</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Unidade <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> IDOR RJ Botafogo</label>
+              <label class="filter-check"><input type="checkbox"> IDOR SP Jabaquara</label>
+              <label class="filter-check"><input type="checkbox"> IDOR BA CBTC</label>
+              <label class="filter-check"><input type="checkbox"> Todas</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Nível de Acesso <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Público</label>
+              <label class="filter-check"><input type="checkbox"> Restrito</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h4 class="filter-group__title" onclick="this.parentElement.classList.toggle('open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Data <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></h4>
+            <div class="filter-group__body">
+              <label class="filter-check"><input type="checkbox"> Última semana</label>
+              <label class="filter-check"><input type="checkbox"> Último mês</label>
+              <label class="filter-check"><input type="checkbox"> Últimos 3 meses</label>
+              <label class="filter-check"><input type="checkbox"> Últimos 6 meses</label>
+              <label class="filter-check"><input type="checkbox"> Último ano</label>
+            </div>
+          </div>
+
+            </div><!-- /mobile-filters-body -->
+          </div><!-- /mobile-filters-accordion -->
+
+        </aside>
+
+        <div class="opp-results">
+
+          <h2 class="area-title">Editais Externos</h2>
+          <div class="area-intro">
+            <p>Oportunidades de financiamento externas — FAPESP, CNPq, NIH, FINEP, CAPES, agências internacionais e fundações privadas.</p>
+          </div>
+
+          <div class="sort-bar">
+            <span class="sort-bar__count">Exibindo <strong>1</strong> artigos</span>
+            <div class="custom-sort">
+              <span class="custom-sort__label">Ordenar por</span>
+              <div class="custom-sort__trigger" onclick="this.parentElement.classList.toggle('open')">
+                <span>Mais recentes</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="custom-sort__dropdown">
+                <div class="custom-sort__option active" data-value="Mais recentes">Mais recentes</div>
+                <div class="custom-sort__option" data-value="Mais antigos">Mais antigos</div>
+                <div class="custom-sort__option" data-value="Mais relevantes">Mais relevantes</div>
+                <div class="custom-sort__option" data-value="A-Z">A-Z</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="article-list">
+
+          <a href="artigo-editais-ext-como-acessar-informacoes-sobre-editais-externos.html" class="article-list-item">
+            <div class="article-list-item__title">Como acessar informações sobre Editais Externos?</div>
+            <div class="article-list-item__excerpt">Conteúdo em desenvolvimento. Em breve, este artigo trará informações detalhadas sobre o serviço.</div>
+            <div class="article-list-item__footer">
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 15/04/2026</span>
+              <span class="badge badge-public">Em desenvolvimento</span>
+            </div>
+          </a>
+
+          <div class="pagination">
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">&raquo;</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+        <h4>Portal do Pesquisador</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or São Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
