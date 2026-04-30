@@ -16,17 +16,21 @@
       scroll-behavior: smooth;
       position: relative;
       z-index: 1;
+      pointer-events: none;
     }
+    .home-wrapper > * { pointer-events: auto; }
+    .hero-spacer { pointer-events: none; }
 
     /* Force white everywhere */
     body { background: #fff !important; }
 
-    /* --- HERO: sticky, behind content --- */
+    /* --- HERO: fixed behind content (curtain effect) --- */
     .hero--home {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       height: 100vh;
-      z-index: 0;
       margin-top: 0;
       padding: 0;
       display: flex;
@@ -39,7 +43,6 @@
     /* Spacer to push content below the fixed hero */
     .hero-spacer {
       height: 100vh;
-      pointer-events: none;
       background: transparent;
     }
     .hero--home::before { display: none !important; }
@@ -764,11 +767,7 @@
     </div>
   </div>
 
-  
-  <!-- SCROLL WRAPPER -->
-  <div class="home-wrapper" id="homeWrapper">
-
-    <!-- HERO: fixed behind everything -->
+<!-- HERO: fixed behind everything -->
   <section class="hero hero--home">
 
       <!-- Background Video -->
@@ -814,6 +813,14 @@
         <span>Áreas de Serviço</span>
       </div>
   </section>
+
+  <!-- SCROLL WRAPPER -->
+  <div class="home-wrapper" id="homeWrapper">
+
+    <!-- Spacer for fixed hero -->
+    <div class="hero-spacer"></div>
+
+    
 
     <!-- CONTENT PANEL -->
     <div class="home-content" id="homeContent">
@@ -1231,6 +1238,15 @@
         }
       }
       wrapper.addEventListener('wheel', wheelHandler, { passive: false });
+      // Hero is fixed (outside wrapper). Capture wheel events on hero area via window.
+      window.addEventListener('wheel', function(e) {
+        if (wrapper.contains(e.target)) return;
+        wheelHandler(e);
+        if (!e.defaultPrevented && !isMobile) {
+          wrapper.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+          e.preventDefault();
+        }
+      }, { passive: false });
 
       /* --- Touch support --- */
       var touchStartY = 0;
