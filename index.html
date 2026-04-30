@@ -10,15 +10,12 @@
   <style>
     /* ===== HOME 2 — HUNA STYLE ===== */
 
+    /* Use native body scroll instead of wrapper scroll */
+    html { scroll-behavior: smooth; }
     .home-wrapper {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-behavior: smooth;
       position: relative;
       z-index: 1;
-      pointer-events: none;
     }
-    .home-wrapper > * { pointer-events: auto; }
     .hero-spacer { pointer-events: none; }
 
     /* Force white everywhere */
@@ -1106,18 +1103,18 @@
       var hasSnapped = false;
       var isAnimating = false;
 
-      // Snap points: hero=0, categories=heroH, editais=heroH+catH
+      // Snap points: hero=0, categories=heroH, editais=editais top, artigos=artigos top
       function getSnapPoints() {
         var heroH = window.innerHeight;
         var headerH = header.offsetHeight;
-        var editaisPos = heroH + editais.offsetTop - headerH;
-        var artigosPos = heroH + artigos.offsetTop - headerH;
+        var editaisPos = editais.getBoundingClientRect().top + window.scrollY - headerH;
+        var artigosPos = artigos.getBoundingClientRect().top + window.scrollY - headerH;
         return [0, heroH, editaisPos, artigosPos];
       }
 
       /* --- Scroll listener for header + animations --- */
-      wrapper.addEventListener('scroll', function() {
-        var scrollY = wrapper.scrollTop;
+      window.addEventListener('scroll', function() {
+        var scrollY = window.scrollY;
         var pts = getSnapPoints();
 
         // Header solid after hero
@@ -1196,12 +1193,12 @@
       /* --- Wheel: snap between sections --- */
       function wheelHandler(e) {
         if (isMobile) return;
-        var scrollY = wrapper.scrollTop;
+        var scrollY = window.scrollY;
         var info = getNeighborSnaps(scrollY);
         var pts = getSnapPoints();
         var lastSnap = pts[pts.length - 1];
 
-        var maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
         // Past the last snap point
         if (scrollY > lastSnap + 80) {
@@ -1237,24 +1234,15 @@
           else if (e.deltaY < 0 && info.prev !== null) { smoothScrollTo(info.prev); }
         }
       }
-      wrapper.addEventListener('wheel', wheelHandler, { passive: false });
-      // Hero is fixed (outside wrapper). Capture wheel events on hero area via window.
-      window.addEventListener('wheel', function(e) {
-        if (wrapper.contains(e.target)) return;
-        wheelHandler(e);
-        if (!e.defaultPrevented && !isMobile) {
-          wrapper.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
-          e.preventDefault();
-        }
-      }, { passive: false });
+      window.addEventListener('wheel', wheelHandler, { passive: false });
 
       /* --- Touch support --- */
       var touchStartY = 0;
-      wrapper.addEventListener('touchstart', function(e) {
+      window.addEventListener('touchstart', function(e) {
         touchStartY = e.touches[0].clientY;
       }, { passive: true });
-      wrapper.addEventListener('touchend', function(e) {
-        var scrollY = wrapper.scrollTop;
+      window.addEventListener('touchend', function(e) {
+        var scrollY = window.scrollY;
         var deltaY = touchStartY - e.changedTouches[0].clientY;
         var info = getNeighborSnaps(scrollY);
         if (deltaY > 40 && info.next !== null) { smoothScrollTo(info.next); }
@@ -1284,7 +1272,7 @@
       function smoothScrollTo(target) {
         if (isAnimating) return;
         isAnimating = true;
-        wrapper.scrollTo({ top: target, behavior: 'smooth' });
+        window.scrollTo({ top: target, behavior: 'smooth' });
         setTimeout(function() { isAnimating = false; }, 700);
       }
     })();
