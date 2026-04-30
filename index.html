@@ -722,11 +722,11 @@
 
   <!-- Global Search Bar -->
   <div class="header-search" id="headerSearch">
-    <div class="header-search__inner container">
+    <form class="header-search__inner container" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
       <svg class="header-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
+      <input type="text" name="q" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
       <button class="header-search__close" onclick="toggleHeaderSearch()">&times;</button>
-    </div>
+    </form>
   </div>
 
   <!-- Mobile Nav -->
@@ -776,11 +776,11 @@
       <div class="hero__content">
         <h1 class="hero__title"><span class="hero__title-gray">Procure informações sobre serviços e</span> <span class="hero__title-grad">Plataformas do IDOR</span></h1>
         <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
-        <div class="search-box">
+        <form class="search-box" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
           <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Busque por servicos, artigos, oportunidades, editais...">
-          <button>Buscar</button>
-        </div>
+          <input type="text" name="q" placeholder="Busque por servicos, artigos, oportunidades, editais...">
+          <button type="submit">Buscar</button>
+        </form>
         <div class="hero-filters">
           <a href="#" class="hero-filter active">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
