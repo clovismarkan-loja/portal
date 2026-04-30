@@ -1239,11 +1239,17 @@
       }
       wrapper.addEventListener('wheel', wheelHandler, { passive: false });
       // Hero is fixed and behind wrapper (which is pointer-events:none); listen on window so
-      // wheel events on hero area still trigger snap navigation
+      // wheel events on hero area still trigger snap navigation AND manual scrolling
       window.addEventListener('wheel', function(e) {
         // Avoid double handling when target is inside wrapper
         if (wrapper.contains(e.target)) return;
         wheelHandler(e);
+        // If wheelHandler didn't preventDefault (free scroll zone), manually scroll the wrapper
+        // since the wrapper has pointer-events:none and won't auto-scroll from window wheels
+        if (!e.defaultPrevented && !isMobile) {
+          wrapper.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+          e.preventDefault();
+        }
       }, { passive: false });
 
       /* --- Touch support --- */
