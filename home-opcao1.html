@@ -305,23 +305,21 @@
       display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
     }
     .mega-menu {
-      position: fixed;
-      top: var(--header-h);
-      left: 0;
-      right: 0;
+      position: fixed; top: calc(var(--header-h) + 8px); left: 50%;
+      width: calc(100% - 48px); max-width: var(--max-w);
       background: var(--white);
-      border-top: 1px solid var(--gray-200);
-      box-shadow: 0 8px 24px rgba(0,0,0,.06);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-8px);
-      transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
-      z-index: 999;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+      border: 1px solid var(--gray-100);
+      opacity: 0; visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+      overflow: hidden;
     }
     .mega-trigger:hover .mega-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
     .mega-menu__inner {
       display: grid;
