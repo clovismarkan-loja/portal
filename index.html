@@ -15,7 +15,9 @@
     .home-wrapper {
       position: relative;
       z-index: 1;
+      pointer-events: none; /* let clicks fall through to hero behind */
     }
+    .home-wrapper > .home-content { pointer-events: auto; }
     .hero-spacer { pointer-events: none; }
 
     /* Force white everywhere */
