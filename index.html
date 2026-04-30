@@ -16,7 +16,11 @@
       scroll-behavior: smooth;
       position: relative;
       z-index: 1;
+      pointer-events: none;
     }
+    .home-spacer, .hero-spacer { pointer-events: none; }
+    .home-content { pointer-events: auto; }
+    .hero--home, .hero--home * { pointer-events: auto; }
 
     /* Force white everywhere */
     body { background: #fff !important; }
@@ -1190,7 +1194,8 @@
       }
 
       /* --- Wheel: snap between sections --- */
-      wrapper.addEventListener('wheel', function(e) {
+      function wheelHandler(e) {
+        if (isMobile) return;
         var scrollY = wrapper.scrollTop;
         var info = getNeighborSnaps(scrollY);
         var pts = getSnapPoints();
@@ -1231,6 +1236,14 @@
           if (e.deltaY > 0 && info.next !== null) { smoothScrollTo(info.next); }
           else if (e.deltaY < 0 && info.prev !== null) { smoothScrollTo(info.prev); }
         }
+      }
+      wrapper.addEventListener('wheel', wheelHandler, { passive: false });
+      // Hero is fixed and behind wrapper (which is pointer-events:none); listen on window so
+      // wheel events on hero area still trigger snap navigation
+      window.addEventListener('wheel', function(e) {
+        // Avoid double handling when target is inside wrapper
+        if (wrapper.contains(e.target)) return;
+        wheelHandler(e);
       }, { passive: false });
 
       /* --- Touch support --- */
