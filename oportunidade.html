@@ -97,6 +97,18 @@
       color: var(--white);
     }
 
+    /* Veja também (related opportunities) */
+    .section--alt { background: #f4f4f1 !important; padding: 64px 0; }
+    .section--alt .article-card { border-color: transparent; position: relative; overflow: hidden; background: var(--white); }
+    .section--alt .article-card__title { font-weight: 600; }
+    .section--alt .article-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transform: scaleX(0); transition: transform .25s ease; transform-origin: left;
+    }
+    .section--alt .article-card:hover::before { transform: scaleX(1); }
+    .section--alt .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+    .section--alt .section__title { font-weight: 600; }
+
     /* Badges — transparent bg, no side padding */
     .badge { background: transparent !important; padding-left: 0 !important; padding-right: 0 !important; }
 
@@ -354,6 +366,58 @@
         <p><a href="mailto:nape@idor.org.br">nape@idor.org.br</a></p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ===== VEJA TAMBÉM ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Veja também</h2>
+      </div>
+      <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+
+        <a href="oportunidade.html" class="article-card">
+          <div class="article-card__cat">FAPESP</div>
+          <div class="article-card__title">Edital FAPESP 2026/02 — Auxílio à Pesquisa Regular</div>
+          <div class="article-card__excerpt">Auxílio para projetos de pesquisa em biomedicina e saúde com financiamento de até R$200.000.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 15/04/2026</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+        <a href="oportunidade.html" class="article-card">
+          <div class="article-card__cat">NIH</div>
+          <div class="article-card__title">Grant NIH R21 — Exploratory/Developmental Research</div>
+          <div class="article-card__excerpt">Financiamento de pesquisa exploratória de até US$275.000 para projetos em neurociência.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 30/06/2026</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+        <a href="oportunidade.html" class="article-card">
+          <div class="article-card__cat">CNPq</div>
+          <div class="article-card__title">Bolsa de Produtividade em Pesquisa — CNPq 2026</div>
+          <div class="article-card__excerpt">Bolsa mensal de R$1.500 por 36 meses para pesquisadores com produção científica destacada.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 05/04/2026</span>
+            <span class="badge badge-public">Urgente</span>
+          </div>
+        </a>
+
+        <a href="oportunidade.html" class="article-card">
+          <div class="article-card__cat">IDOR Interno</div>
+          <div class="article-card__title">Seed Grant IDOR — Pesquisa Translacional 2026</div>
+          <div class="article-card__excerpt">Edital interno para fomento de projetos translacionais com financiamento de até R$80.000.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 30/05/2026</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+      </div>
     </div>
   </section>
 
