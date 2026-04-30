@@ -16,22 +16,17 @@
       scroll-behavior: smooth;
       position: relative;
       z-index: 1;
-      pointer-events: none;
     }
-    .home-spacer, .hero-spacer { pointer-events: none; }
-    .home-content { pointer-events: auto; }
-    .hero--home, .hero--home * { pointer-events: auto; }
 
     /* Force white everywhere */
     body { background: #fff !important; }
 
-    /* --- HERO: fullscreen, fixed behind content --- */
+    /* --- HERO: sticky, behind content --- */
     .hero--home {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
       height: 100vh;
+      z-index: 0;
       margin-top: 0;
       padding: 0;
       display: flex;
@@ -769,7 +764,11 @@
     </div>
   </div>
 
-  <!-- HERO: fixed behind everything -->
+  
+  <!-- SCROLL WRAPPER -->
+  <div class="home-wrapper" id="homeWrapper">
+
+    <!-- HERO: fixed behind everything -->
   <section class="hero hero--home">
 
       <!-- Background Video -->
@@ -815,12 +814,6 @@
         <span>Áreas de Serviço</span>
       </div>
   </section>
-
-  <!-- SCROLL WRAPPER -->
-  <div class="home-wrapper" id="homeWrapper">
-
-    <!-- Spacer for fixed hero -->
-    <div class="hero-spacer"></div>
 
     <!-- CONTENT PANEL -->
     <div class="home-content" id="homeContent">
@@ -1238,19 +1231,6 @@
         }
       }
       wrapper.addEventListener('wheel', wheelHandler, { passive: false });
-      // Hero is fixed and behind wrapper (which is pointer-events:none); listen on window so
-      // wheel events on hero area still trigger snap navigation AND manual scrolling
-      window.addEventListener('wheel', function(e) {
-        // Avoid double handling when target is inside wrapper
-        if (wrapper.contains(e.target)) return;
-        wheelHandler(e);
-        // If wheelHandler didn't preventDefault (free scroll zone), manually scroll the wrapper
-        // since the wrapper has pointer-events:none and won't auto-scroll from window wheels
-        if (!e.defaultPrevented && !isMobile) {
-          wrapper.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
-          e.preventDefault();
-        }
-      }, { passive: false });
 
       /* --- Touch support --- */
       var touchStartY = 0;
