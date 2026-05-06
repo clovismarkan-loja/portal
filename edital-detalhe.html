@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seed Grant IDOR — Pesquisa Translacional 2026 — Portal do Pesquisador — IDOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #fff !important; }
+
+    /* Header always white */
+    .header--inner {
+      background: var(--white) !important;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+    }
+    .header--inner .header__title { color: #1d1d1e; }
+    .header--inner .header__nav a { color: rgba(29,29,30,.6); }
+    .header--inner .header__nav a:hover,
+    .header--inner .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--inner .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent; border-radius: 50px;
+    }
+    .header--inner .btn-secondary:hover {
+      color: var(--white); background: var(--gold); border-color: var(--gold);
+    }
+    .header--inner .menu-toggle { color: #1d1d1e; }
+    .header--inner .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--inner .mega-trigger__link:hover { color: #1d1d1e !important; }
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+
+    /* Mega Menu */
+    .mega-trigger { position: static; }
+    .mega-trigger__link { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .mega-menu {
+      position: fixed; top: calc(var(--header-h) + 8px); left: 50%;
+      width: calc(100% - 48px); max-width: var(--max-w);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+      border: 1px solid var(--gray-100);
+      opacity: 0; visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+      overflow: hidden;
+    }
+    .mega-trigger:hover .mega-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .mega-menu__inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 40px; padding: 32px 24px; }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+      color: var(--gray-700) !important; transition: background .2s ease, color .2s ease; text-decoration: none;
+    }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover { background: var(--gray-50); color: var(--blue-900) !important; }
+    .mega-menu__item:hover svg { color: var(--gold); }
+
+    /* Article top area */
+    .article-top {
+      margin-top: calc(var(--header-h) + 100px);
+      padding: 0;
+    }
+    .article-top .breadcrumb {
+      margin-top: 0;
+      padding: 0 0 16px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .article-top .breadcrumb a { color: var(--blue-900); font-weight: 500; }
+    .article-top .breadcrumb span { margin: 0 8px; color: var(--gray-400); }
+    .article-top h1 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 32px; font-weight: 600; color: var(--gray-900); margin: 0; letter-spacing: -.3px;
+    }
+
+    /* Article body — no box */
+    .article-body {
+      background: transparent;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .article-body h2 { font-weight: 600; }
+    .article-body h3 { font-weight: 600; }
+
+    /* Info box */
+    .info-box { margin-bottom: 1.5rem; }
+
+    /* Tags — outline style */
+    .tag {
+      background: transparent;
+      border: 1px solid currentColor;
+      padding-top: 0;
+      padding-bottom: 0;
+      transition: all .25s ease;
+    }
+    .tag:hover {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+
+    /* Veja também (related opportunities) */
+    .section--alt { background: #f4f4f1 !important; padding: 64px 0; }
+    .section--alt .article-card { border-color: transparent; position: relative; overflow: hidden; background: var(--white); }
+    .section--alt .article-card__title { font-weight: 600; }
+    .section--alt .article-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transform: scaleX(0); transition: transform .25s ease; transform-origin: left;
+    }
+    .section--alt .article-card:hover::before { transform: scaleX(1); }
+    .section--alt .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+    .section--alt .section__title { font-weight: 600; }
+
+    /* Badges — transparent bg, no side padding */
+    .badge { background: transparent !important; padding-left: 0 !important; padding-right: 0 !important; }
+
+    /* Contact box — no border */
+    .contact-box { border: none; }
+
+    /* CTA button pill */
+    .btn-primary.btn-lg { border-radius: 50px; }
+
+    /* Footer white */
+    .footer { background: #fff !important; color: var(--gray-500) !important; }
+    .footer h4, .footer h5 { color: var(--gray-900) !important; }
+    .footer__links h5 { color: var(--blue-900) !important; }
+    .footer__links a { color: var(--gray-500) !important; }
+    .footer__links a:hover { color: var(--blue-900) !important; }
+    .footer__bottom { border-top-color: var(--gray-200) !important; color: var(--gray-400) !important; }
+    /* Header search toggle */
+    .header-search-toggle {
+      background: none; border: none; cursor: pointer;
+      color: rgba(29,29,30,.5); padding: 6px;
+      transition: color .2s ease; display: flex; align-items: center;
+    }
+    .header-search-toggle:hover { color: #1d1d1e; }
+    .header-search { position: fixed; top: calc(var(--header-h) + 8px); left: 50%; width: calc(100% - 48px); max-width: var(--max-w); background: var(--white); border-radius: 16px; box-shadow: 0 12px 32px rgba(0,0,0,.12); border: 1px solid var(--gray-100); z-index: 998; opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; }
+    .header-search.open { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .header-search__inner { display: flex; align-items: center; gap: 12px; padding: 16px 24px; }
+    .header-search__icon { color: var(--gray-400); flex-shrink: 0; }
+    .header-search__input { flex: 1; border: none; font-size: 16px; outline: none; background: transparent; color: var(--gray-900); }
+    .header-search__input::placeholder { color: var(--gray-400); }
+    .header-search__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 4px; transition: color .2s ease; line-height: 1; }
+    .header-search__close:hover { color: var(--gray-900); }
+    .mobile-nav__search { display: none; }
+    @media (max-width: 768px) {
+      .header--inner .btn-secondary { display: none !important; }
+      .header-search-toggle { display: none !important; }
+      .mobile-nav__panel { padding-top: 72px; }
+      .mobile-nav__submenu-trigger {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 0; font-size: 16px; font-weight: 600;
+        color: var(--gray-900); border-bottom: 1px solid var(--gray-100); cursor: pointer;
+      }
+      .mobile-nav__submenu-trigger svg { transition: transform .25s ease; color: var(--gray-400); }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+      .mobile-nav__submenu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu { max-height: 800px; }
+      .mobile-nav__submenu a { padding: 10px 0 10px 20px !important; font-size: 14px !important; font-weight: 500 !important; color: var(--gray-600) !important; border-bottom: none !important; }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+      .mobile-nav__search { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--blue-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header header--inner" id="pageHeader">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div><div class="header__title">Portal do Pesquisador</div></div>
+      </a>
+      <div class="header__right">
+        <nav class="header__nav">
+          <div class="mega-trigger">
+            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu"><div class="mega-menu__inner container">
+              <div class="mega-menu__col">
+                <a href="area-nape.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                <a href="area-ti.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                <a href="area-software-academico.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Acadêmico</a>
+                <a href="area-agendamento-salas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                <a href="area-publicacoes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="area-inovacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                <a href="area-rh.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                <a href="area-plataformas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                <a href="area-editais-idor.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                <a href="area-eventos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+              </div>
+              <div class="mega-menu__col">
+                <a href="area-captacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                <a href="area-assessoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                <a href="area-lattes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                <a href="area-editais-externos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                <a href="area-gestao-projetos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+              </div>
+            </div></div>
+          </div>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </nav>
+        <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNavToggle()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Search Bar -->
+  <div class="header-search" id="headerSearch">
+    <form class="header-search__inner container" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
+      <svg class="header-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" name="q" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
+      <button type="button" class="header-search__close" onclick="toggleHeaderSearch()">&times;</button>
+    </form>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <div class="mobile-nav__search" onclick="closeMobileNavDirect(); setTimeout(function(){toggleHeaderSearch()},300);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar
+      </div>
+      <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+        <span>Áreas de Serviço</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mobile-nav__submenu">
+        <a href="area-nape.html">NAPE</a>
+        <a href="area-ti.html">TI</a>
+        <a href="area-software-academico.html">Software Acadêmico</a>
+        <a href="area-agendamento-salas.html">Agendamento de Salas</a>
+        <a href="area-publicacoes.html">Publicações Científicas</a>
+        <a href="area-inovacao.html">Inovação e P.I.</a>
+        <a href="area-rh.html">Recursos Humanos</a>
+        <a href="area-plataformas.html">Plataformas IDOR</a>
+        <a href="area-editais-idor.html">Editais IDOR</a>
+        <a href="area-eventos.html">Eventos IDOR</a>
+        <a href="area-captacao.html">Captação de Recursos</a>
+        <a href="area-assessoria.html">Assessoria Científica</a>
+        <a href="area-lattes.html">Lattes Desk</a>
+        <a href="area-editais-externos.html">Editais Externos</a>
+        <a href="area-gestao-projetos.html">Gestão de Projetos</a>
+      </div>
+      <a href="oportunidades.html">Oportunidades</a>
+      <a href="compliance.html">Compliance e Ética</a>
+      <a href="open-science.html">Open Science</a>
+      <a href="login.html">Entrar</a>
+    </div>
+  </div>
+
+  <!-- ===== ARTICLE TOP ===== -->
+  <div class="article-top">
+    <div class="container" style="max-width: 960px;">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span>&rsaquo;</span><a href="area-editais-idor.html">Editais IDOR</a><span>&rsaquo;</span>Seed Grant IDOR &mdash; Pesquisa Translacional 2026
+      </nav>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+        <h1>Seed Grant IDOR &mdash; Pesquisa Translacional 2026</h1>
+        <span class="badge badge-open"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="6"/><path d="M12 8v4l2 2"/></svg> Aberto</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container" style="max-width: 960px;">
+
+      <!-- ===== INFO BOX ===== -->
+      <div class="info-box">
+        <div class="info-box__item">
+          <div class="info-box__label">Financiador</div>
+          <div class="info-box__value">IDOR Interno</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Tipo</div>
+          <div class="info-box__value">Edital interno &mdash; Seed Grant</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Área</div>
+          <div class="info-box__value">
+            <span class="tag">Pesquisa Translacional</span>
+            <span class="tag">Multidisciplinar</span>
+          </div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Valor</div>
+          <div class="info-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Até R$ 80.000 por projeto</div>
+        </div>
+        <div class="info-box__item">
+          <div class="info-box__label">Duração</div>
+          <div class="info-box__value">12 meses</div>
+        </div>
+      </div>
+
+      <!-- ===== DATES BOX ===== -->
+      <div class="dates-box">
+        <div class="dates-box__item">
+          <div class="dates-box__label">Abertura</div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 15/04/2026</div>
+        </div>
+        <div class="dates-box__item">
+          <div class="dates-box__label">Encerramento</div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 30/05/2026 <span class="dates-box__note">(prazo final)</span></div>
+        </div>
+        <div class="dates-box__item">
+          <div class="dates-box__label">Resultado</div>
+          <div class="dates-box__value"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agosto 2026 <span class="dates-box__note">(previsão)</span></div>
+        </div>
+      </div>
+
+      <!-- ===== DESCRIÇÃO ===== -->
+      <div class="article-body">
+        <h2>Descrição</h2>
+        <p>O Programa Seed Grant IDOR &mdash; Pesquisa Translacional 2026 é um edital interno destinado a apoiar pesquisadores do Instituto D'Or de Pesquisa e Ensino na execução de projetos com potencial translacional, isto é, projetos cuja pesquisa básica possa avançar em direção a aplicações clínicas, diagnósticas ou terapêuticas concretas no curto a médio prazo.</p>
+        <p>Serão selecionados projetos com duração de 12 meses que proponham hipóteses inovadoras em temas como mecanismos moleculares de doenças, desenvolvimento de biomarcadores, validação de alvos terapêuticos e estudos pré-clínicos exploratórios. O programa incentiva especialmente propostas multidisciplinares e colaborações entre os diferentes núcleos e unidades IDOR.</p>
+        <p>O valor máximo de financiamento por projeto aprovado é de R$ 80.000,00, podendo ser utilizado em material de consumo, serviços laboratoriais, equipamentos de pequeno porte e diárias relacionadas à execução do projeto.</p>
+      </div>
+
+      <!-- ===== ELEGIBILIDADE ===== -->
+      <div class="article-body">
+        <h2>Elegibilidade</h2>
+        <ul>
+          <li>Pesquisador responsável deve manter vínculo ativo com o IDOR (pesquisador principal, associado ou pós-doutorando)</li>
+          <li>Possuir título de Doutor obtido há, no máximo, 8 anos no momento da submissão</li>
+          <li>Não estar com pendências em projetos anteriormente financiados pelo IDOR (relatórios, prestações de contas)</li>
+          <li>Projetos com pesquisa em seres humanos devem apresentar aprovação do CEP até a contratação</li>
+          <li>Projetos com experimentação animal devem apresentar aprovação da CEUA até a contratação</li>
+          <li>Cada pesquisador pode submeter, no máximo, uma proposta como responsável principal por edital</li>
+        </ul>
+      </div>
+
+      <!-- ===== DOCUMENTAÇÃO NECESSÁRIA ===== -->
+      <div class="article-body">
+        <h2>Documentação Necessária</h2>
+        <ul>
+          <li>Formulário de submissão preenchido no Portal do Pesquisador IDOR</li>
+          <li>Projeto de pesquisa completo (máximo 12 páginas) com introdução, objetivos, metodologia, cronograma e orçamento</li>
+          <li>Currículo Lattes atualizado do pesquisador responsável e da equipe</li>
+          <li>Plano de translação descrevendo o potencial de aplicação clínica ou diagnóstica</li>
+          <li>Orçamento detalhado em modelo IDOR</li>
+          <li>Cartas de anuência das unidades IDOR envolvidas, quando aplicável</li>
+          <li>Parecer do CEP/CEUA, quando aplicável (pode ser apresentado até a contratação)</li>
+        </ul>
+      </div>
+
+      <!-- ===== CTA ===== -->
+      <div style="text-align: center; margin: 3rem 0 2rem;">
+        <a href="#" class="btn btn-primary btn-lg" style="border-radius: 50px;">Inscrever-se no edital</a>
+      </div>
+
+      <!-- ===== CONTATO ===== -->
+      <div class="contact-box">
+        <h3>Dúvidas?</h3>
+        <p>Entre em contato com o <strong>NAPE &mdash; Núcleo de Apoio à Pesquisa e Ensino</strong> para orientações sobre submissão, documentação e plano de translação.</p>
+        <p><a href="mailto:nape@idor.org.br">nape@idor.org.br</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== VEJA TAMBÉM ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Outros editais IDOR</h2>
+      </div>
+      <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+
+        <a href="edital-detalhe.html" class="article-card">
+          <div class="article-card__cat">IDOR Interno</div>
+          <div class="article-card__title">Bolsa IDOR Pós-Doc Oncologia 2026</div>
+          <div class="article-card__excerpt">Bolsa mensal de R$ 9.500 por 24 meses para pós-doutorandos em oncologia translacional.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 15/06/2026</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+        <a href="edital-detalhe.html" class="article-card">
+          <div class="article-card__cat">IDOR Interno</div>
+          <div class="article-card__title">Auxílio Participação em Congressos</div>
+          <div class="article-card__excerpt">Apoio de até R$ 5.000 para apresentação de trabalho em congressos nacionais e internacionais.</div>
+          <div class="article-card__footer">
+            <span>Fluxo contínuo</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+        <a href="edital-detalhe.html" class="article-card">
+          <div class="article-card__cat">IDOR Interno</div>
+          <div class="article-card__title">Programa IDOR de Iniciação Científica</div>
+          <div class="article-card__excerpt">Bolsa de R$ 1.500/mês para alunos de graduação atuando em projetos de pesquisa IDOR.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 30/04/2026</span>
+            <span class="badge badge-public">Urgente</span>
+          </div>
+        </a>
+
+        <a href="edital-detalhe.html" class="article-card">
+          <div class="article-card__cat">IDOR Interno</div>
+          <div class="article-card__title">Edital Inovação e P.I. 2026</div>
+          <div class="article-card__excerpt">Apoio a projetos com potencial de geração de propriedade intelectual e ativos de inovação.</div>
+          <div class="article-card__footer">
+            <span>Prazo: 20/07/2026</span>
+            <span class="badge badge-public">Aberto</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+        <h4>Portal do Pesquisador</h4>
+        <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h5>Portal</h5>
+          <a href="index.html">Home</a>
+          <a href="oportunidades.html">Oportunidades</a>
+          <a href="compliance.html">Compliance</a>
+          <a href="open-science.html">Open Science</a>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">IDOR</a>
+          <a href="#">Rede D'Or São Luiz</a>
+          <a href="#">Fale Conosco</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">&copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.</div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

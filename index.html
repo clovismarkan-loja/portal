@@ -793,7 +793,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             Servicos
           </a>
-          <a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
+          <a href="#sectionEditaisIdor" class="hero-filter" data-scroll="sectionEditaisIdor">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
             Editais
           </a>
@@ -817,97 +817,117 @@
     <!-- CONTENT PANEL -->
     <div class="home-content" id="homeContent">
 
-      <!-- CATEGORIAS -->
-      <section class="section" id="sectionAreas">
+      <!-- PROGRAMACAO E EVENTOS -->
+      <section class="section" id="sectionEventos">
         <div class="container">
           <div class="section__header">
-            <h2 class="section__title">Áreas e Serviços</h2>
+            <h2 class="section__title">Programação e Eventos</h2>
+            <a href="#" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
-          <div class="cat-grid">
-            <a href="area-nape.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
-              <div class="cat-card__title">NAPE</div>
-              <div class="cat-card__desc">Nucleo de Apoio a Pesquisa e Ensino</div>
-            </a>
-            <a href="area-ti.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <div class="cat-card__title">TI</div>
-              <div class="cat-card__desc">Suporte tecnico e infraestrutura digital</div>
-            </a>
-            <a href="area-software-academico.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
-              <div class="cat-card__title">Software de Apoio Academico</div>
-              <div class="cat-card__desc">Ferramentas e sistemas academicos</div>
-            </a>
-            <a href="area-agendamento-salas.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-              <div class="cat-card__title">Agendamento de Salas</div>
-              <div class="cat-card__desc">Reserve salas de reuniao e laboratorios</div>
-            </a>
-            <a href="area-publicacoes.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-              <div class="cat-card__title">Acesso a Publicacoes Cientificas</div>
-              <div class="cat-card__desc">Bases de dados e periodicos</div>
-            </a>
-            <a href="area-inovacao.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-              <div class="cat-card__title">Inovacao e Propriedade Intelectual</div>
-              <div class="cat-card__desc">Patentes, transferencia de tecnologia</div>
-            </a>
-            <a href="area-rh.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <div class="cat-card__title">Recursos Humanos (RH)</div>
-              <div class="cat-card__desc">Beneficios, folha e documentacao</div>
-            </a>
-            <a href="area-plataformas.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-              <div class="cat-card__title">Plataformas IDOR</div>
-              <div class="cat-card__desc">Sistemas e ferramentas internas</div>
-            </a>
-            <a href="area-editais-idor.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
-              <div class="cat-card__title">Editais IDOR</div>
-              <div class="cat-card__desc">Editais internos e chamadas do instituto</div>
-            </a>
-            <a href="area-eventos.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg></div>
-              <div class="cat-card__title">Eventos IDOR</div>
-              <div class="cat-card__desc">Congressos, seminarios e workshops</div>
-            </a>
-            <a href="area-captacao.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-              <div class="cat-card__title">Apoio a Captacao de Recursos</div>
-              <div class="cat-card__desc">Grants, financiamentos e parcerias</div>
-            </a>
-            <a href="area-assessoria.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-              <div class="cat-card__title">Assessoria Cientifica</div>
-              <div class="cat-card__desc">Consultoria para projetos de pesquisa</div>
-            </a>
-            <a href="area-lattes.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-              <div class="cat-card__title">Lattes Desk</div>
-              <div class="cat-card__desc">Apoio na gestao do curriculo Lattes</div>
-            </a>
-            <a href="area-editais-externos.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-              <div class="cat-card__title">Editais Externos</div>
-              <div class="cat-card__desc">FAPESP, CNPq, NIH e outras agencias</div>
-            </a>
-            <a href="area-gestao-projetos.html" class="cat-card">
-              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-              <div class="cat-card__title">Apoio a Gestao de Projetos</div>
-              <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
-            </a>
+          <div class="carousel">
+            <div class="carousel__track">
+
+              <a href="#" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">22/05/2026 · Botafogo</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Evento</span>
+                </div>
+                <div class="opp-card__title">VIII Simpósio IDOR de Neurociência</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Botafogo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Neurociência</span>
+                  <span class="tag">Presencial</span>
+                </div>
+              </a>
+
+              <a href="#" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">28/05/2026 · Online</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Workshop</span>
+                </div>
+                <div class="opp-card__title">Estatística aplicada à pesquisa clínica</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Estatística</span>
+                  <span class="tag">Capacitação</span>
+                </div>
+              </a>
+
+              <a href="#" class="opp-card opp-card--urgent">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">05/06/2026 · Jabaquara</span>
+                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg> Urgente</span>
+                </div>
+                <div class="opp-card__title">Capacitação REDCap Avançado</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Jabaquara</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">REDCap</span>
+                  <span class="tag">Sistemas</span>
+                </div>
+              </a>
+
+              <a href="#" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">12/06/2026 · Online</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Seminário</span>
+                </div>
+                <div class="opp-card__title">Seminário Open Science</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Open Science</span>
+                </div>
+              </a>
+
+              <a href="#" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">18-20/06/2026 · Botafogo</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Congresso</span>
+                </div>
+                <div class="opp-card__title">Congresso de Oncologia Translacional</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Botafogo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Translacional</span>
+                </div>
+              </a>
+
+              <a href="#" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">25/06/2026 · Online</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Workshop</span>
+                </div>
+                <div class="opp-card__title">Submissão de propostas FAPESP</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">FAPESP</span>
+                  <span class="tag">Captação</span>
+                </div>
+              </a>
+
+            </div>
+            <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+            <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           </div>
         </div>
       </section>
 
-      <!-- EDITAIS E OPORTUNIDADES RECENTES -->
+      <!-- GRANTS E OPORTUNIDADES -->
       <section class="section section--alt" id="sectionEditais">
         <div class="container">
           <div class="section__header">
-            <h2 class="section__title">Editais e Oportunidades Recentes</h2>
+            <h2 class="section__title">Grants e Oportunidades</h2>
             <a href="oportunidades.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
           <div class="carousel">
@@ -994,6 +1014,214 @@
               <button class="carousel__dot"></button>
               <button class="carousel__dot"></button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDITAIS IDOR (locked when logged out) -->
+      <section class="section" id="sectionEditaisIdor">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Editais IDOR</h2>
+            <a href="area-editais-idor.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track">
+
+              <a href="edital-detalhe.html" class="opp-card opp-card--open locked-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Seed Grant IDOR — Pesquisa Translacional 2026</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 80.000</span>
+                  <span>Prazo: 30/05/2026</span>
+                </div>
+              </a>
+
+              <a href="edital-detalhe.html" class="opp-card opp-card--open locked-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Bolsa IDOR Pós-Doc Oncologia 2026</div>
+                <div class="opp-card__meta">
+                  <span>R$ 9.500/mês</span>
+                  <span>Prazo: 15/06/2026</span>
+                </div>
+              </a>
+
+              <a href="edital-detalhe.html" class="opp-card opp-card--open locked-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__title">Auxílio Participação em Congressos</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 5.000</span>
+                  <span>Fluxo contínuo</span>
+                </div>
+              </a>
+
+              <a href="edital-detalhe.html" class="opp-card opp-card--urgent locked-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-urgent">Urgente</span>
+                </div>
+                <div class="opp-card__title">Programa IDOR de Iniciação Científica</div>
+                <div class="opp-card__meta">
+                  <span>R$ 1.500/mês</span>
+                  <span>Prazo: 30/04/2026</span>
+                </div>
+              </a>
+
+              <a href="edital-detalhe.html" class="opp-card opp-card--open locked-card">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Edital Inovação e P.I. 2026</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 50.000</span>
+                  <span>Prazo: 20/07/2026</span>
+                </div>
+              </a>
+
+            </div>
+            <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+            <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICOS PARA PESQUISADORES (restricted area) -->
+      <section class="section section--alt" id="sectionServicosRestritos">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Serviços para Pesquisadores</h2>
+            <span class="show-logged-out" style="font-size:13px;color:var(--gray-500);display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Área restrita</span>
+          </div>
+          <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+
+            <a href="#" class="feature-card locked-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Submeter projeto NAPE</h3>
+              </div>
+              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">Acesso ao sistema interno de submissão de projetos de pesquisa.</p>
+            </a>
+
+            <a href="#" class="feature-card locked-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Reservar salas e laboratórios</h3>
+              </div>
+              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">Sistema SAA para reserva de espaços compartilhados.</p>
+            </a>
+
+            <a href="#" class="feature-card locked-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Plataformas internas IDOR</h3>
+              </div>
+              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">NST, LPI, Biobanco e demais plataformas de pesquisa.</p>
+            </a>
+
+            <a href="#" class="feature-card locked-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Bases de dados científicas</h3>
+              </div>
+              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">PubMed, Scopus, Web of Science e demais periódicos assinados.</p>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CATEGORIAS -->
+      <section class="section" id="sectionAreas">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Áreas e Serviços</h2>
+          </div>
+          <div class="cat-grid">
+            <a href="area-nape.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+              <div class="cat-card__title">NAPE</div>
+              <div class="cat-card__desc">Nucleo de Apoio a Pesquisa e Ensino</div>
+            </a>
+            <a href="area-ti.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="cat-card__title">TI</div>
+              <div class="cat-card__desc">Suporte tecnico e infraestrutura digital</div>
+            </a>
+            <a href="area-software-academico.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+              <div class="cat-card__title">Software de Apoio Academico</div>
+              <div class="cat-card__desc">Ferramentas e sistemas academicos</div>
+            </a>
+            <a href="area-agendamento-salas.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="cat-card__title">Agendamento de Salas</div>
+              <div class="cat-card__desc">Reserve salas de reuniao e laboratorios</div>
+            </a>
+            <a href="area-publicacoes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <div class="cat-card__title">Acesso a Publicacoes Cientificas</div>
+              <div class="cat-card__desc">Bases de dados e periodicos</div>
+            </a>
+            <a href="area-inovacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+              <div class="cat-card__title">Inovacao e Propriedade Intelectual</div>
+              <div class="cat-card__desc">Patentes, transferencia de tecnologia</div>
+            </a>
+            <a href="area-rh.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="cat-card__title">Recursos Humanos (RH)</div>
+              <div class="cat-card__desc">Beneficios, folha e documentacao</div>
+            </a>
+            <a href="area-plataformas.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+              <div class="cat-card__title">Plataformas IDOR</div>
+              <div class="cat-card__desc">Sistemas e ferramentas internas</div>
+            </a>
+            <a href="area-editais-idor.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
+              <div class="cat-card__title">Editais IDOR</div>
+              <div class="cat-card__desc">Editais internos e chamadas do instituto</div>
+            </a>
+            <a href="area-eventos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg></div>
+              <div class="cat-card__title">Eventos IDOR</div>
+              <div class="cat-card__desc">Congressos, seminarios e workshops</div>
+            </a>
+            <a href="area-captacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div class="cat-card__title">Apoio a Captacao de Recursos</div>
+              <div class="cat-card__desc">Grants, financiamentos e parcerias</div>
+            </a>
+            <a href="area-assessoria.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="cat-card__title">Assessoria Cientifica</div>
+              <div class="cat-card__desc">Consultoria para projetos de pesquisa</div>
+            </a>
+            <a href="area-lattes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+              <div class="cat-card__title">Lattes Desk</div>
+              <div class="cat-card__desc">Apoio na gestao do curriculo Lattes</div>
+            </a>
+            <a href="area-editais-externos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="cat-card__title">Editais Externos</div>
+              <div class="cat-card__desc">FAPESP, CNPq, NIH e outras agencias</div>
+            </a>
+            <a href="area-gestao-projetos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="cat-card__title">Apoio a Gestao de Projetos</div>
+              <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
+            </a>
           </div>
         </div>
       </section>
