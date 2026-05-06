@@ -16,6 +16,7 @@ function authLogout() {
   var apply = function() {
     document.body.classList.toggle('logged-in', isLoggedIn());
     document.body.classList.toggle('logged-out', !isLoggedIn());
+    if (isLoggedIn()) localStorage.setItem('idor_user_name', 'Dr. João Silva');
     var nameEls = document.querySelectorAll('[data-user-name]');
     var name = localStorage.getItem('idor_user_name') || 'Dr. João Silva';
     nameEls.forEach(function(el) { el.textContent = name; });
