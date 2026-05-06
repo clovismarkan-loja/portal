@@ -340,8 +340,17 @@
       grid-template-columns: auto 1fr;
       grid-template-rows: auto auto;
       align-items: center;
-      border-color: transparent;
+      border: 1px solid transparent;
       background: #fff;
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
+    }
+    .home-content .cat-card:hover {
+      background: var(--blue-900);
+      border-color: var(--blue-900);
+    }
+    .home-content .cat-card:hover .cat-card__title,
+    .home-content .cat-card:hover .cat-card__desc {
+      color: var(--white);
     }
     .home-content .cat-card__icon {
       width: 36px;
@@ -358,6 +367,7 @@
     .home-content .cat-card:hover .cat-card__icon {
       color: var(--gold);
     }
+    .home-content .cat-card:hover .cat-card__icon svg { stroke: var(--gold); }
     .home-content .cat-card__title {
       font-size: 16px;
       font-weight: 600;
@@ -405,8 +415,8 @@
     #sectionEditais .opp-card--urgent .tag:hover { background: var(--white); color: var(--blue-900); }
     #sectionEditais .opp-card--closed .tag:hover { background: var(--gray-500); color: var(--white); }
     #sectionEditais .opp-card:hover {
-      transform: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
     }
     /* Card colors by status */
     /* Aberto = light blue */
@@ -509,9 +519,9 @@
     }
     #sectionEventos .opp-card:hover,
     #sectionEditaisIdor .opp-card:hover {
-      transform: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-      border-color: var(--gray-300);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: var(--gray-200);
     }
     #sectionEventos .opp-card__title,
     #sectionEditaisIdor .opp-card__title { font-weight: 600; }
@@ -730,9 +740,9 @@
       transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
     }
     .platform-card:hover {
-      border-color: var(--gold);
-      box-shadow: 0 4px 16px rgba(0,0,0,.06);
       transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: var(--gray-200);
     }
     .platform-card__header {
       display: flex;
