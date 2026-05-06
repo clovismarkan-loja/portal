@@ -394,25 +394,7 @@
     }
     #sectionEditais .opp-card__title { font-weight: 600; }
     #sectionEditais .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
-    .home-content .article-card__title { font-weight: 600; }
-    #sectionArtigos { background: #f4f4f1; }
-    #sectionArtigos .article-card {
-      border-color: transparent;
-      position: relative;
-      overflow: hidden;
-    }
-    #sectionArtigos .article-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform .25s ease;
-      transform-origin: left;
-    }
-    #sectionArtigos .article-card:hover::before { transform: scaleX(1); }
-    #sectionArtigos .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+    #sectionServicosRestritos { background: #f4f4f1; }
     .home-content .btn-ghost { border-radius: 50px; }
     .home-content .btn-ghost:hover { background: var(--gold); color: var(--white); }
     #sectionEditais .tag {
@@ -853,11 +835,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             Todos
           </a>
-          <a href="#sectionArtigos" class="hero-filter" data-scroll="sectionArtigos">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            Artigos
-          </a>
-          <a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
+<a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Oportunidades
           </a>
@@ -1227,53 +1205,6 @@
         </div>
       </section>
 
-      <!-- ARTIGOS RECENTES -->
-      <section class="section" id="sectionArtigos">
-        <div class="container">
-          <div class="section__header">
-            <h2 class="section__title">Artigos Recentes</h2>
-          </div>
-          <div class="cat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
-            <a href="artigo.html" class="article-card">
-              <div class="article-card__cat">NAPE</div>
-              <div class="article-card__title">Como submeter um Projeto de Pesquisa?</div>
-              <div class="article-card__excerpt">Cadastre-se como proponente na Plataforma NAPE e registre seu projeto para avaliacao e aprovacao previa.</div>
-              <div class="article-card__footer">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 15/03/2026</span>
-                <span class="badge badge-public"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Publico</span>
-              </div>
-            </a>
-            <a href="artigo.html" class="article-card">
-              <div class="article-card__cat">TI</div>
-              <div class="article-card__title">Acesso a bases de dados cientificas</div>
-              <div class="article-card__excerpt">Guia completo para acessar PubMed, Scopus, Web of Science e outras plataformas disponiveis.</div>
-              <div class="article-card__footer">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 10/03/2026</span>
-                <span class="badge badge-public"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Publico</span>
-              </div>
-            </a>
-            <a href="artigo.html" class="article-card">
-              <div class="article-card__cat">NAPE</div>
-              <div class="article-card__title">Estruturacao de documentos para publicacao</div>
-              <div class="article-card__excerpt">Como solicitar apoio na estruturacao de documentos para publicacao em periodicos cientificos.</div>
-              <div class="article-card__footer">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 05/03/2026</span>
-                <span class="badge badge-restricted"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Restrito</span>
-              </div>
-            </a>
-            <a href="artigo.html" class="article-card">
-              <div class="article-card__cat">Administracao</div>
-              <div class="article-card__title">Agendamento de salas &mdash; Novo sistema</div>
-              <div class="article-card__excerpt">Conheca o novo sistema de reserva de salas de reuniao e laboratorios do IDOR.</div>
-              <div class="article-card__footer">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 01/03/2026</span>
-                <span class="badge badge-public"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Publico</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
       <!-- CTA -->
       <section class="cta-full">
         <div class="cta-full__content">
@@ -1322,18 +1253,17 @@
       var header = document.getElementById('homeHeader');
       var content = document.getElementById('homeContent');
       var editais = document.getElementById('sectionEditais');
-      var artigos = document.getElementById('sectionArtigos');
       var scrollHint = document.querySelector('.scroll-hint');
       var hasSnapped = false;
       var isAnimating = false;
 
-      // Snap points: hero=0, categories=heroH, editais=editais top, artigos=artigos top
+      // Snap points: hero=0, categories=heroH, editais=editais top
       function getSnapPoints() {
         var heroH = window.innerHeight;
         var headerH = header.offsetHeight;
-        var editaisPos = editais.getBoundingClientRect().top + window.scrollY - headerH;
-        var artigosPos = artigos.getBoundingClientRect().top + window.scrollY - headerH;
-        return [0, heroH, editaisPos, artigosPos];
+        var pts = [0, heroH];
+        if (editais) pts.push(editais.getBoundingClientRect().top + window.scrollY - headerH);
+        return pts;
       }
 
       /* --- Scroll listener for header + animations --- */
