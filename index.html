@@ -631,6 +631,87 @@
       color: #003DA5;
     }
 
+    /* --- NAPE highlight section --- */
+    .nape-section {
+      position: relative;
+      background: #003DA5;
+      padding: 80px 24px;
+      overflow: hidden;
+      color: var(--white);
+    }
+    .nape-section__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .nape-section__title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 20px;
+      letter-spacing: -.3px;
+    }
+    .nape-section__desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.85);
+      margin: 0 0 28px;
+      max-width: 560px;
+    }
+    .nape-section__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #71C5E8;
+      color: #003DA5;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nape-section__btn:hover {
+      background: var(--white);
+      color: #003DA5;
+    }
+    .nape-section__image {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .nape-section__image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 260px;
+    }
+    .nape-section::before {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: -20px;
+      width: 320px;
+      height: 160px;
+      background-image: radial-gradient(rgba(255,255,255,.6) 6px, transparent 6px);
+      background-size: 28px 28px;
+      opacity: .25;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 768px) {
+      .nape-section { padding: 56px 24px; }
+      .nape-section__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .nape-section__desc { margin-left: auto; margin-right: auto; }
+      .nape-section__image { justify-content: center; }
+      .nape-section__image img { max-height: 200px; }
+    }
+
     @media (max-width: 1200px) {
       .home-content .cat-grid { grid-template-columns: repeat(3, 1fr); }
     }
@@ -1235,6 +1316,20 @@
               <div class="cat-card__title">Gestão de Projetos</div>
               <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAPE highlight -->
+      <section class="nape-section" id="sectionNape">
+        <div class="nape-section__inner">
+          <div class="nape-section__content">
+            <h2 class="nape-section__title">NAPE &mdash; Núcleo de Apoio à Pesquisa e Ensino</h2>
+            <p class="nape-section__desc">O objetivo principal é a padronização de processos e disponibilização de ferramentas que auxiliam os proponentes, no processo de submissão de projetos dentro da Rede D'Or São Luiz, buscando auxiliar na melhor adequação dos projetos e pacotes regulatórios previamente à submissão ao CEP, evitando pendências.</p>
+            <a href="area-nape.html" class="nape-section__btn">Saiba mais <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="nape-section__image">
+            <img src="NAPE.png" alt="NAPE">
           </div>
         </div>
       </section>
