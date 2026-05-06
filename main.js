@@ -4,7 +4,7 @@
 function isLoggedIn() { return localStorage.getItem('idor_auth') === '1'; }
 function authLogin() {
   localStorage.setItem('idor_auth', '1');
-  localStorage.setItem('idor_user_name', 'Dr. Pesquisador IDOR');
+  localStorage.setItem('idor_user_name', 'Dr. João Silva');
   location.reload();
 }
 function authLogout() {
@@ -17,7 +17,7 @@ function authLogout() {
     document.body.classList.toggle('logged-in', isLoggedIn());
     document.body.classList.toggle('logged-out', !isLoggedIn());
     var nameEls = document.querySelectorAll('[data-user-name]');
-    var name = localStorage.getItem('idor_user_name') || 'Pesquisador';
+    var name = localStorage.getItem('idor_user_name') || 'Dr. João Silva';
     nameEls.forEach(function(el) { el.textContent = name; });
     injectAuthToggle();
     injectUserMenu();
@@ -51,8 +51,8 @@ function injectUserMenu() {
   wrap.className = 'user-menu-wrap show-logged-in';
   wrap.innerHTML =
     '<div class="user-menu" onclick="this.parentElement.classList.toggle(\'open\')">' +
-      '<div class="user-menu__avatar">DR</div>' +
-      '<span class="user-menu__name" data-user-name>Pesquisador</span>' +
+      '<div class="user-menu__avatar"><img src="avatar-user.png" alt=""></div>' +
+      '<span class="user-menu__name" data-user-name>Dr. João Silva</span>' +
       '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
     '</div>' +
     '<div class="user-menu__dropdown">' +
