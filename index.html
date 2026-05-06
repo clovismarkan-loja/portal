@@ -690,12 +690,13 @@
       max-width: 100%;
       height: auto;
       max-height: 260px;
+      transform: translate(200px, -100px);
     }
     .nape-section::before {
       content: '';
       position: absolute;
       bottom: -30px;
-      left: -20px;
+      right: -20px;
       width: 320px;
       height: 160px;
       background-image: radial-gradient(rgba(255,255,255,.6) 6px, transparent 6px);
@@ -709,7 +710,7 @@
       .nape-section__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
       .nape-section__desc { margin-left: auto; margin-right: auto; }
       .nape-section__image { justify-content: center; }
-      .nape-section__image img { max-height: 200px; }
+      .nape-section__image img { max-height: 200px; transform: none; }
     }
 
     @media (max-width: 1200px) {
@@ -1324,7 +1325,7 @@
       <section class="nape-section" id="sectionNape">
         <div class="nape-section__inner">
           <div class="nape-section__content">
-            <h2 class="nape-section__title">NAPE &mdash; Núcleo de Apoio à Pesquisa e Ensino</h2>
+            <h2 class="nape-section__title">Núcleo de Apoio à Pesquisa e Ensino</h2>
             <p class="nape-section__desc">O objetivo principal é a padronização de processos e disponibilização de ferramentas que auxiliam os proponentes, no processo de submissão de projetos dentro da Rede D'Or São Luiz, buscando auxiliar na melhor adequação dos projetos e pacotes regulatórios previamente à submissão ao CEP, evitando pendências.</p>
             <a href="area-nape.html" class="nape-section__btn">Saiba mais <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
