@@ -876,6 +876,116 @@
     .header-search__input::placeholder { color: var(--gray-400); }
     .header-search__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 4px; transition: color .2s ease; line-height: 1; }
     .header-search__close:hover { color: var(--gray-900); }
+
+    /* --- Login modal --- */
+    .login-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9998;
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+    .login-modal-backdrop.open { opacity: 1; visibility: visible; }
+    .login-modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(.96);
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      width: calc(100% - 32px);
+      max-width: 420px;
+      z-index: 9999;
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+    }
+    .login-modal.open {
+      opacity: 1; visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .login-modal__close {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: none; border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 22px;
+      color: var(--gray-500);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s ease, color .2s ease;
+      line-height: 1;
+    }
+    .login-modal__close:hover { background: var(--gray-100); color: var(--gray-900); }
+    .login-modal__logo { text-align: center; margin-bottom: 24px; }
+    .login-modal__logo img { height: 40px; width: auto; margin-bottom: 16px; }
+    .login-modal__logo h2 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px; font-weight: 600; color: var(--gray-900);
+      margin: 0 0 6px;
+    }
+    .login-modal__logo p {
+      font-size: 13px; color: var(--gray-500); margin: 0;
+    }
+    .login-modal .form-group { margin-bottom: 16px; }
+    .login-modal .form-group label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--gray-700); margin-bottom: 6px;
+    }
+    .login-modal .label-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .login-modal .label-row label { margin-bottom: 0; }
+    .login-modal .label-row a {
+      font-size: 12px; color: var(--gray-500); text-decoration: none;
+    }
+    .login-modal .label-row a:hover { color: var(--blue-900); }
+    .login-modal .form-input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .2s ease;
+    }
+    .login-modal .form-input:focus { border-color: var(--blue-900); }
+    .login-modal .form-input::placeholder { color: var(--gray-400); }
+    .login-modal .btn-login {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--blue-900);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s ease;
+      margin-top: 8px;
+    }
+    .login-modal .btn-login:hover { background: #002b75; }
+    .login-modal__footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .login-modal__footer a {
+      color: var(--blue-900); font-weight: 600; text-decoration: none;
+    }
+    .login-modal__footer a:hover { text-decoration: underline; }
+    @media (max-width: 480px) {
+      .login-modal { padding: 32px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -1495,7 +1605,66 @@
     </div><!-- /home-content -->
   </div><!-- /home-wrapper -->
 
+  <!-- Login Modal -->
+  <div class="login-modal-backdrop" id="loginModalBackdrop" onclick="closeLoginModal()"></div>
+  <div class="login-modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <button class="login-modal__close" type="button" aria-label="Fechar" onclick="closeLoginModal()">&times;</button>
+    <div class="login-modal__logo">
+      <img src="Logo IDOR.svg" alt="IDOR">
+      <h2 id="loginModalTitle">Portal do Pesquisador</h2>
+      <p>Acesse sua conta para continuar.</p>
+    </div>
+    <form onsubmit="event.preventDefault(); authLogin();">
+      <div class="form-group">
+        <label for="modalEmail">E-mail*</label>
+        <input type="email" id="modalEmail" class="form-input" placeholder="seu.email@idor.org.br" required>
+      </div>
+      <div class="form-group">
+        <div class="label-row">
+          <label for="modalPassword">Senha*</label>
+          <a href="#" onclick="event.preventDefault();">Esqueceu a senha?</a>
+        </div>
+        <input type="password" id="modalPassword" class="form-input" placeholder="Digite sua senha" required>
+      </div>
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+    <div class="login-modal__footer">
+      Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a>
+    </div>
+  </div>
+
   <script src="main.js"></script>
+  <script>
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('open');
+      document.getElementById('loginModalBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ var i = document.getElementById('modalEmail'); if (i) i.focus(); }, 50);
+    }
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
+      document.getElementById('loginModalBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLoginModal();
+    });
+    /* Intercept "Ver todos" of restricted sections when logged out */
+    document.addEventListener('DOMContentLoaded', function() {
+      var selectors = [
+        '#sectionEventos .section__header a',
+        '#sectionEditaisIdor .section__header a'
+      ];
+      document.querySelectorAll(selectors.join(',')).forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+            e.preventDefault();
+            openLoginModal();
+          }
+        });
+      });
+    });
+  </script>
   <script>
     (function() {
       var wrapper = document.getElementById('homeWrapper');
