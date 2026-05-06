@@ -327,32 +327,7 @@
       color: var(--gray-400);
     }
 
-    /* Categories section — fills viewport, all visible */
     .home-content .section__title { color: var(--blue-900); }
-    .home-content > .section:first-child {
-      min-height: calc(100vh - var(--header-h));
-      display: flex;
-      align-items: center;
-      background: #f4f4f1;
-      position: relative;
-      overflow: hidden;
-    }
-    .home-content > .section:first-child::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      right: -20px;
-      width: 320px;
-      height: 150px;
-      background-image: radial-gradient(var(--gold) 6px, transparent 6px);
-      background-size: 28px 28px;
-      opacity: .25;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .home-content > .section:first-child > .container {
-      width: 100%;
-    }
     .home-content .cat-grid {
       grid-template-columns: repeat(5, 1fr);
       gap: 16px;
