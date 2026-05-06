@@ -31,8 +31,47 @@
   background: var(--gray-400);
   color: var(--white);
   cursor: not-allowed;
-  pointer-events: none;
+  position: relative;
 }
+.info-btn--locked::after {
+  content: 'Faça login ou cadastre-se';
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1d1d1e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
+  z-index: 100;
+}
+.info-btn--locked::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1d1d1e;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s ease;
+  z-index: 100;
+}
+.info-btn--locked:hover::after,
+.info-btn--locked:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.info-btn--locked:hover::after { transform: translateX(-50%) translateY(0); }
 .info-btn--unlocked {
   background: var(--gold);
   color: var(--white);
