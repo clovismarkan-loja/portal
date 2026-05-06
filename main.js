@@ -17,11 +17,10 @@ function authLogout() {
     document.body.classList.toggle('logged-in', isLoggedIn());
     document.body.classList.toggle('logged-out', !isLoggedIn());
     if (isLoggedIn()) localStorage.setItem('idor_user_name', 'Dr. João');
-    var nameEls = document.querySelectorAll('[data-user-name]');
-    var name = localStorage.getItem('idor_user_name') || 'Dr. João';
-    nameEls.forEach(function(el) { el.textContent = name; });
     injectAuthToggle();
     injectUserMenu();
+    var name = localStorage.getItem('idor_user_name') || 'Dr. João';
+    document.querySelectorAll('[data-user-name]').forEach(function(el) { el.textContent = name; });
   };
   if (document.body) apply();
   else document.addEventListener('DOMContentLoaded', apply);
@@ -53,7 +52,7 @@ function injectUserMenu() {
   wrap.innerHTML =
     '<div class="user-menu" onclick="this.parentElement.classList.toggle(\'open\')">' +
       '<div class="user-menu__avatar"><img src="avatar-user.png" alt=""></div>' +
-      '<span class="user-menu__name" data-user-name>Dr. João Silva</span>' +
+      '<span class="user-menu__name" data-user-name>Dr. João</span>' +
       '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
     '</div>' +
     '<div class="user-menu__dropdown">' +
