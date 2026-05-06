@@ -841,7 +841,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Oportunidades
           </a>
-          <a href="#sectionServicosRestritos" class="hero-filter" data-scroll="sectionServicosRestritos">
+          <a href="#sectionServicosRestritos" class="hero-filter show-logged-in" data-scroll="sectionServicosRestritos">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             Servicos
           </a>
@@ -1173,51 +1173,68 @@
         </div>
       </section>
 
-      <!-- SERVICOS PARA PESQUISADORES (restricted area) -->
-      <section class="section section--alt" id="sectionServicosRestritos">
+      <!-- SERVICOS PARA PESQUISADORES (restricted area — only visible when logged in) -->
+      <section class="section section--alt show-logged-in" id="sectionServicosRestritos">
         <div class="container">
           <div class="section__header">
             <h2 class="section__title">Serviços para Pesquisadores</h2>
-            <span class="show-logged-out" style="font-size:13px;color:var(--gray-500);display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Área restrita</span>
           </div>
-          <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-
-            <div class="feature-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Submeter projeto NAPE</h3>
-              </div>
-              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">Acesso ao sistema interno de submissão de projetos de pesquisa.</p>
-                          <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-            </div>
-
-            <div class="feature-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Reservar salas e laboratórios</h3>
-              </div>
-              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">Sistema SAA para reserva de espaços compartilhados.</p>
-                          <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-            </div>
-
-            <div class="feature-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Plataformas internas IDOR</h3>
-              </div>
-              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">NST, LPI, Biobanco e demais plataformas de pesquisa.</p>
-                          <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-            </div>
-
-            <div class="feature-card" style="background:#fff;padding:28px 24px;border:none;text-align:left;text-decoration:none;color:inherit;">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--gold-dark);">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                <h3 style="font-weight:600;color:var(--gray-900);font-size:16px;margin:0;">Bases de dados científicas</h3>
-              </div>
-              <p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin:0;">PubMed, Scopus, Web of Science e demais periódicos assinados.</p>
-                          <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-            </div>
-
+          <div class="cat-grid">
+            <a href="area-ti.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="cat-card__title">TI</div>
+              <div class="cat-card__desc">Suporte tecnico e infraestrutura digital</div>
+            </a>
+            <a href="area-software-academico.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+              <div class="cat-card__title">Software Acadêmico</div>
+              <div class="cat-card__desc">Ferramentas e sistemas academicos</div>
+            </a>
+            <a href="area-agendamento-salas.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="cat-card__title">Agendamento de Salas</div>
+              <div class="cat-card__desc">Reserve salas de reuniao e laboratorios</div>
+            </a>
+            <a href="area-publicacoes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <div class="cat-card__title">Publicações Científicas</div>
+              <div class="cat-card__desc">Bases de dados e periodicos</div>
+            </a>
+            <a href="area-inovacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+              <div class="cat-card__title">Inovação e P.I.</div>
+              <div class="cat-card__desc">Patentes, transferencia de tecnologia</div>
+            </a>
+            <a href="area-rh.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="cat-card__title">Recursos Humanos</div>
+              <div class="cat-card__desc">Beneficios, folha e documentacao</div>
+            </a>
+            <a href="area-editais-externos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="cat-card__title">Editais Externos</div>
+              <div class="cat-card__desc">FAPESP, CNPq, NIH e outras agencias</div>
+            </a>
+            <a href="area-captacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div class="cat-card__title">Captação de Recursos</div>
+              <div class="cat-card__desc">Grants, financiamentos e parcerias</div>
+            </a>
+            <a href="area-assessoria.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="cat-card__title">Assessoria Científica</div>
+              <div class="cat-card__desc">Consultoria para projetos de pesquisa</div>
+            </a>
+            <a href="area-lattes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+              <div class="cat-card__title">Lattes Desk</div>
+              <div class="cat-card__desc">Apoio na gestao do curriculo Lattes</div>
+            </a>
+            <a href="area-gestao-projetos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="cat-card__title">Gestão de Projetos</div>
+              <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
+            </a>
           </div>
         </div>
       </section>
