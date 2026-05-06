@@ -730,8 +730,11 @@
       </a>
       <div class="header__right">
         <nav class="header__nav">
-          <div class="mega-trigger">
-            <a href="#" class="mega-trigger__link">Áreas de Serviço <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <a href="#sectionEventos">Programação e Eventos</a>
+          <a href="#sectionEditais">Grants e Oportunidades</a>
+          <a href="#sectionEditaisIdor">Editais IDOR</a>
+          <div class="mega-trigger show-logged-in">
+            <a href="#sectionServicosRestritos" class="mega-trigger__link">Serviços para Pesquisadores <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="mega-menu">
               <div class="mega-menu__inner container">
                 <div class="mega-menu__col">
@@ -758,9 +761,6 @@
               </div>
             </div>
           </div>
-          <a href="oportunidades.html">Oportunidades</a>
-          <a href="compliance.html">Compliance</a>
-          <a href="open-science.html">Open Science</a>
         </nav>
         <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
         <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
@@ -785,31 +785,33 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Buscar
       </div>
-      <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
-        <span>Áreas de Serviço</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      <a href="#sectionEventos" onclick="closeMobileNavDirect()">Programação e Eventos</a>
+      <a href="#sectionEditais" onclick="closeMobileNavDirect()">Grants e Oportunidades</a>
+      <a href="#sectionEditaisIdor" onclick="closeMobileNavDirect()">Editais IDOR</a>
+      <div class="show-logged-in">
+        <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+          <span>Serviços para Pesquisadores</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="mobile-nav__submenu">
+          <a href="area-nape.html">NAPE</a>
+          <a href="area-ti.html">TI</a>
+          <a href="area-software-academico.html">Software Acadêmico</a>
+          <a href="area-agendamento-salas.html">Agendamento de Salas</a>
+          <a href="area-publicacoes.html">Publicações Científicas</a>
+          <a href="area-inovacao.html">Inovação e P.I.</a>
+          <a href="area-rh.html">Recursos Humanos</a>
+          <a href="area-plataformas.html">Plataformas IDOR</a>
+          <a href="area-editais-idor.html">Editais IDOR</a>
+          <a href="area-eventos.html">Eventos IDOR</a>
+          <a href="area-captacao.html">Captação de Recursos</a>
+          <a href="area-assessoria.html">Assessoria Científica</a>
+          <a href="area-lattes.html">Lattes Desk</a>
+          <a href="area-editais-externos.html">Editais Externos</a>
+          <a href="area-gestao-projetos.html">Gestão de Projetos</a>
+        </div>
       </div>
-      <div class="mobile-nav__submenu">
-        <a href="area-nape.html">NAPE</a>
-        <a href="area-ti.html">TI</a>
-        <a href="area-software-academico.html">Software Acadêmico</a>
-        <a href="area-agendamento-salas.html">Agendamento de Salas</a>
-        <a href="area-publicacoes.html">Publicações Científicas</a>
-        <a href="area-inovacao.html">Inovação e P.I.</a>
-        <a href="area-rh.html">Recursos Humanos</a>
-        <a href="area-plataformas.html">Plataformas IDOR</a>
-        <a href="area-editais-idor.html">Editais IDOR</a>
-        <a href="area-eventos.html">Eventos IDOR</a>
-        <a href="area-captacao.html">Captação de Recursos</a>
-        <a href="area-assessoria.html">Assessoria Científica</a>
-        <a href="area-lattes.html">Lattes Desk</a>
-        <a href="area-editais-externos.html">Editais Externos</a>
-        <a href="area-gestao-projetos.html">Gestão de Projetos</a>
-      </div>
-      <a href="oportunidades.html">Oportunidades</a>
-      <a href="compliance.html">Compliance e Ética</a>
-      <a href="open-science.html">Open Science</a>
-      <a href="login.html">Entrar</a>
+      <a href="login.html" class="show-logged-out">Entrar</a>
     </div>
   </div>
 

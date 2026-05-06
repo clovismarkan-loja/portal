@@ -4,7 +4,7 @@
 function isLoggedIn() { return localStorage.getItem('idor_auth') === '1'; }
 function authLogin() {
   localStorage.setItem('idor_auth', '1');
-  localStorage.setItem('idor_user_name', 'Dr. João Silva');
+  localStorage.setItem('idor_user_name', 'Dr. João');
   location.reload();
 }
 function authLogout() {
@@ -16,9 +16,9 @@ function authLogout() {
   var apply = function() {
     document.body.classList.toggle('logged-in', isLoggedIn());
     document.body.classList.toggle('logged-out', !isLoggedIn());
-    if (isLoggedIn()) localStorage.setItem('idor_user_name', 'Dr. João Silva');
+    if (isLoggedIn()) localStorage.setItem('idor_user_name', 'Dr. João');
     var nameEls = document.querySelectorAll('[data-user-name]');
-    var name = localStorage.getItem('idor_user_name') || 'Dr. João Silva';
+    var name = localStorage.getItem('idor_user_name') || 'Dr. João';
     nameEls.forEach(function(el) { el.textContent = name; });
     injectAuthToggle();
     injectUserMenu();
