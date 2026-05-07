@@ -1650,14 +1650,15 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeLoginModal();
     });
-    /* Intercept "Ver todos" of restricted sections when logged out */
+    /* Intercept "Ver todos" of restricted sections + locked "Mais informações" buttons when logged out */
     document.addEventListener('DOMContentLoaded', function() {
       var selectors = [
         '#sectionEventos .section__header a',
-        '#sectionEditaisIdor .section__header a'
+        '#sectionEditaisIdor .section__header a',
+        '.info-btn--locked'
       ];
-      document.querySelectorAll(selectors.join(',')).forEach(function(a) {
-        a.addEventListener('click', function(e) {
+      document.querySelectorAll(selectors.join(',')).forEach(function(el) {
+        el.addEventListener('click', function(e) {
           if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
             e.preventDefault();
             openLoginModal();
