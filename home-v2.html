@@ -64,23 +64,14 @@
       max-width: 92vw;
       max-height: calc(100vh - var(--header-h) - 64px);
       position: relative;
-      border-radius: 20px;
       overflow: hidden;
       background-color: #003DA5;
       background-size: cover;
       background-position: center;
-      transition: transform .9s cubic-bezier(.5,.05,.1,1), opacity .9s ease;
-      transform: scale(.94);
-      opacity: .35;
       color: var(--white);
       display: flex;
       flex-direction: column;
       padding: 56px 56px 48px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.12);
-    }
-    .hero-card.is-active {
-      transform: scale(1);
-      opacity: 1;
     }
     .hero-card::before {
       content: '';
@@ -1769,7 +1760,7 @@
       });
     });
 
-    /* --- Hero events carousel --- */
+    /* --- Hero events carousel (true infinite loop with clones on both sides) --- */
     document.addEventListener('DOMContentLoaded', function() {
       var track = document.getElementById('heroCarouselTrack');
       if (!track) return;
@@ -1777,10 +1768,30 @@
       var total = originalCards.length;
       if (!total) return;
 
-      // Clone the first card and append it to enable seamless wrap-around
-      var firstClone = originalCards[0].cloneNode(true);
-      firstClone.setAttribute('data-clone', '1');
-      track.appendChild(firstClone);
+      var TRANSITION = 'transform .9s cubic-bezier(.5,.05,.1,1)';
+      var DURATION = 900;
+
+      // Add two clones at the start (so the left peek is always filled) and two at the end
+      var leadClones = [originalCards[total - 2].cloneNode(true), originalCards[total - 1].cloneNode(true)];
+      var trailClones = [originalCards[0].cloneNode(true), originalCards[1].cloneNode(true)];
+      leadClones.forEach(function(c) { c.setAttribute('data-clone', '1'); track.insertBefore(c, track.children[0]); });
+      // After insertBefore, children indices shifted; insert lead in correct order
+      // Reset: do it cleanly by removing what we did
+      while (track.firstChild) track.removeChild(track.firstChild);
+      // Rebuild: [N-2', N-1', 0, 1, ..., N-1, 0', 1']
+      var arr = [
+        originalCards[total - 2].cloneNode(true),
+        originalCards[total - 1].cloneNode(true)
+      ];
+      arr.forEach(function(c) { c.setAttribute('data-clone', '1'); });
+      originalCards.forEach(function(c) { arr.push(c); });
+      var t1 = originalCards[0].cloneNode(true); t1.setAttribute('data-clone', '1'); arr.push(t1);
+      var t2 = originalCards[1].cloneNode(true); t2.setAttribute('data-clone', '1'); arr.push(t2);
+      arr.forEach(function(c) { track.appendChild(c); });
+
+      // Real card at trackIndex = 2..total+1 ; lead clones at 0,1 ; trail clones at total+2, total+3
+      var FIRST_REAL = 2;
+      var LAST_REAL = total + 1;
 
       var dotsContainer = document.getElementById('heroCarouselDots');
       var dots = [];
@@ -1793,33 +1804,37 @@
         dots.push(d);
       }
 
-      var current = 0;
+      var current = FIRST_REAL;
       var isTransitioning = false;
       var interval = null;
 
       function cardStep() {
-        var first = track.children[0];
-        return first.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 32);
+        var c = track.children[FIRST_REAL];
+        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 32);
+        return c.getBoundingClientRect().width + gap;
       }
 
       function centerOffset() {
-        var first = track.children[0];
-        var cardWidth = first.getBoundingClientRect().width;
+        var c = track.children[FIRST_REAL];
+        var cardWidth = c.getBoundingClientRect().width;
         return (window.innerWidth - cardWidth) / 2;
       }
 
-      function applyTransform(index, animate) {
-        var offset = centerOffset() - index * cardStep();
-        track.style.transition = animate ? 'transform .9s cubic-bezier(.5,.05,.1,1)' : 'none';
+      function applyTransform(trackIdx, animate) {
+        var offset = centerOffset() - trackIdx * cardStep();
+        track.style.transition = animate ? TRANSITION : 'none';
         track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
       }
 
-      function updateActive(index) {
-        var cards = track.children;
-        for (var i = 0; i < cards.length; i++) cards[i].classList.remove('is-active');
-        var realIndex = index % total;
-        cards[index].classList.add('is-active');
-        for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('is-active', d === realIndex);
+      function realIndexOf(trackIdx) {
+        if (trackIdx < FIRST_REAL) return total - (FIRST_REAL - trackIdx);
+        if (trackIdx > LAST_REAL) return trackIdx - LAST_REAL - 1;
+        return trackIdx - FIRST_REAL;
+      }
+
+      function updateDots() {
+        var ri = realIndexOf(current);
+        for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('is-active', d === ri);
       }
 
       function next() {
@@ -1827,26 +1842,45 @@
         isTransitioning = true;
         current++;
         applyTransform(current, true);
-        updateActive(current);
-        if (current === total) {
+        updateDots();
+        if (current > LAST_REAL) {
+          // landed on a trail clone, snap to equivalent real card silently
           setTimeout(function() {
-            current = 0;
-            applyTransform(0, false);
-            updateActive(0);
+            current = FIRST_REAL + (current - LAST_REAL - 1);
+            applyTransform(current, false);
             isTransitioning = false;
-          }, 900);
+          }, DURATION);
         } else {
-          setTimeout(function() { isTransitioning = false; }, 900);
+          setTimeout(function() { isTransitioning = false; }, DURATION);
         }
       }
 
-      function goTo(index) {
-        if (isTransitioning || index === current) return;
+      function prev() {
+        if (isTransitioning) return;
         isTransitioning = true;
-        current = index;
+        current--;
         applyTransform(current, true);
-        updateActive(current);
-        setTimeout(function() { isTransitioning = false; }, 900);
+        updateDots();
+        if (current < FIRST_REAL) {
+          setTimeout(function() {
+            current = LAST_REAL - (FIRST_REAL - current - 1);
+            applyTransform(current, false);
+            isTransitioning = false;
+          }, DURATION);
+        } else {
+          setTimeout(function() { isTransitioning = false; }, DURATION);
+        }
+      }
+
+      function goTo(realIdx) {
+        if (isTransitioning) return;
+        var trackIdx = FIRST_REAL + realIdx;
+        if (trackIdx === current) return;
+        isTransitioning = true;
+        current = trackIdx;
+        applyTransform(current, true);
+        updateDots();
+        setTimeout(function() { isTransitioning = false; }, DURATION);
       }
 
       dots.forEach(function(dot) {
@@ -1857,8 +1891,8 @@
       function resetTimer() { clearInterval(interval); startTimer(); }
 
       window.addEventListener('resize', function() { applyTransform(current, false); });
-      applyTransform(0, false);
-      updateActive(0);
+      applyTransform(current, false);
+      updateDots();
       startTimer();
     });
   </script>
