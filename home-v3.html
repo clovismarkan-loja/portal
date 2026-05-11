@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Pesquisador — IDOR (v3)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== HOME 2 — HUNA STYLE ===== */
+
+    /* Use native body scroll instead of wrapper scroll */
+    html { scroll-behavior: smooth; }
+    .home-wrapper { position: relative; z-index: 1; }
+    .hero-spacer { display: none; }
+
+    /* Force white everywhere */
+    body { background: #fff !important; }
+
+    /* --- HERO: scrolls with the page (no fixed/curtain effect) --- */
+    .hero--home {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: auto;
+      margin-top: 0;
+      padding: 0 0 56px;
+      display: block;
+      overflow: visible;
+      background: #fff;
+    }
+
+    /* --- Hero events carousel --- */
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      padding-top: calc(var(--header-h) + 120px);
+      overflow: hidden;
+    }
+    .hero-carousel__viewport {
+      width: 100%;
+      overflow: visible;
+    }
+    .hero-carousel__track {
+      display: flex;
+      gap: 32px;
+      will-change: transform;
+      transition: transform 1.4s cubic-bezier(.22,.61,.36,1);
+    }
+    .hero-welcome {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 0 24px 28px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-welcome__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 600;
+      color: #1d1d1e;
+      letter-spacing: -.6px;
+      margin: 0;
+      line-height: 1.15;
+      text-align: left;
+    }
+    .hero-welcome__search-wrap { display: flex; flex-direction: column; align-items: flex-end; }
+    .hero--home .hero-welcome__search-wrap .search-box {
+      width: 80%;
+      max-width: 80%;
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .hero-welcome { grid-template-columns: 1fr; gap: 24px; }
+      .hero-welcome__search-wrap { align-items: stretch; }
+      .hero-welcome__search-wrap .search-box { max-width: 100%; }
+    }
+    /* Carousel footer: dots left, see-all right */
+    .hero-carousel__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: var(--max-w);
+      margin: 28px auto 0;
+      padding: 0 24px;
+      gap: 24px;
+    }
+    .hero-carousel__see-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-900);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color .2s ease, gap .2s ease;
+    }
+    .hero-carousel__see-all:hover { color: var(--gold-dark); gap: 12px; }
+    .hero-card {
+      flex: 0 0 1250px;
+      width: 1250px;
+      height: 330px;
+      max-width: 92vw;
+      max-height: calc(100vh - var(--header-h) - 160px);
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background-color: #003DA5;
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      padding: 48px 56px 40px;
+    }
+    .hero-card__date {
+      display: inline-block;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -.3px;
+      text-transform: lowercase;
+      line-height: 1.1;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(0,30,80,.78) 0%, rgba(0,15,50,.5) 60%, rgba(0,15,50,.15) 100%);
+      z-index: 0;
+    }
+    .hero-card > * { position: relative; z-index: 1; }
+    .hero-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .hero-card__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(24px, 2.6vw, 36px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -.5px;
+      color: var(--white);
+      margin: 0 0 20px;
+      max-width: 720px;
+    }
+    .hero-card__category {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.18);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+    .hero-card__desc {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: rgba(255,255,255,.92);
+      line-height: 1.55;
+      max-width: 720px;
+      margin: 0;
+    }
+    .hero-card__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-card__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 13px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+    .hero-card__btn:hover { background: var(--gold-dark); color: var(--white); }
+    .hero-card__tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hero-card__tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--white);
+      color: var(--gray-600);
+      padding: 0 12px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+      border: none;
+    }
+    .hero-carousel__dots {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      margin: 0;
+    }
+    .hero-carousel__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(0,61,165,.25);
+      border: none;
+      cursor: pointer;
+      transition: background .25s ease, transform .25s ease;
+      padding: 0;
+    }
+    .hero-carousel__dot.is-active {
+      background: var(--gold);
+      transform: scale(1.2);
+    }
+    @media (max-width: 768px) {
+      .hero-card { padding: 32px 28px; }
+      .hero-card__top { flex-direction: column; align-items: flex-start; margin-bottom: 20px; }
+      .hero-card__bottom { flex-direction: column; align-items: flex-start; }
+      .hero-carousel__track { gap: 16px; }
+    }
+    /* Spacer to push content below the fixed hero */
+    .hero-spacer {
+      height: 100vh;
+      background: transparent;
+    }
+    .hero--home::before { display: none !important; }
+
+    /* Video background fullscreen */
+    .hero__bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero--home .hero__content { position: relative; z-index: 1; }
+    .hero--home::after { display: none !important;
+    }
+
+    /* Content: left-aligned */
+    .hero--home .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: left;
+      max-width: 900px;
+      padding: 0 24px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero--home .hero__title {
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-weight: 600;
+      letter-spacing: -.8px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: #494a4b;
+      text-shadow: none;
+    }
+    .hero__title-gray { color: #494a4b; white-space: nowrap; }
+    .hero__title-grad {
+      color: #003DA5;
+      background: none;
+      -webkit-text-fill-color: currentColor;
+      white-space: nowrap;
+    }
+    .hero--home .hero__desc {
+      font-size: clamp(15px, 1.8vw, 18px);
+      margin-bottom: 36px;
+      color: #1d1d1e;
+      text-shadow: none;
+      line-height: 1.6;
+      max-width: 100%;
+    }
+
+    /* Search box — minimal */
+    .hero--home .search-box {
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      border: 1.5px solid rgba(29,29,30,.12);
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--white);
+    }
+    .hero--home .search-box__icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(29,29,30,.3);
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+    .hero--home .search-box input {
+      padding: 16px 20px 16px 50px;
+      font-size: 15px;
+      color: #1d1d1e;
+      background: transparent;
+    }
+    .hero--home .search-box input::placeholder {
+      color: rgba(29,29,30,.35);
+    }
+    .hero--home .search-box button {
+      background: transparent;
+      color: var(--gold-dark);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0 20px;
+      border-left: 1px solid rgba(29,29,30,.1);
+    }
+    .hero--home .search-box button:hover {
+      color: var(--gold);
+      background: transparent;
+    }
+
+    /* Hero filter links */
+    .hero-filters {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-filter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(29,29,30,.45);
+      text-decoration: none;
+      padding: 4px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: color .25s ease, border-color .25s ease;
+      letter-spacing: .2px;
+    }
+    .hero-filter svg { opacity: .45; transition: opacity .25s ease; }
+    .hero-filter:hover { color: #009681; border-bottom-color: #009681; }
+    .hero-filter:hover svg { opacity: 1; }
+    .hero-filter.active { color: #009681; border-bottom-color: #009681; }
+    .hero-filter.active svg { opacity: 1; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 3;
+      animation: fadeInUp 1s ease 1s both;
+    }
+    .scroll-hint__arrow {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bounceDown 2s ease infinite;
+    }
+    .scroll-hint__arrow::after { display: none; }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- CONTENT PANEL: slides over fixed hero --- */
+    .home-content {
+      position: relative;
+      z-index: 3;
+      z-index: 2;
+      background: var(--white);
+      min-height: 100vh;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -8px 40px rgba(0,0,0,.1);
+    }
+    .home-content::before { display: none; }
+
+
+    /* Header */
+    .header.header--home {
+      background: transparent !important;
+      box-shadow: none !important;
+      transition: background .4s ease, box-shadow .4s ease;
+    }
+    .header--home .header__title { color: #1d1d1e; }
+    .header--home .header__nav a { color: rgba(29,29,30,.6); }
+    .header--home .header__nav a:hover,
+    .header--home .header__nav a.active { color: #1d1d1e; background: rgba(29,29,30,.06); }
+    .header--home .btn-secondary {
+      color: #1d1d1e; border-color: rgba(29,29,30,.2); background: transparent;
+      border-radius: 50px;
+    }
+    .header--home .btn-secondary:hover {
+      color: var(--white); background: var(--gold); border-color: var(--gold);
+    }
+    .header--home .menu-toggle { color: #1d1d1e; }
+    .header--home .header-search-toggle { color: rgba(29,29,30,.5); }
+    .header--home .header-search-toggle:hover { color: #1d1d1e; }
+    .header--home .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
+    .header--home .mega-trigger__link:hover { color: #1d1d1e !important; }
+
+    .header.header--home.header--solid {
+      background: var(--white) !important;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+    }
+
+    .header__logo-img { height: 40px; width: auto; }
+    .header__right { display: flex; align-items: center; gap: 8px; }
+
+    /* --- Mega Menu --- */
+    .mega-trigger { position: static; }
+    .mega-trigger__link {
+      display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+    }
+    .mega-menu {
+      position: fixed; top: calc(var(--header-h) + 8px); left: 50%;
+      width: calc(100% - 48px); max-width: var(--max-w);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+      border: 1px solid var(--gray-100);
+      opacity: 0; visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 999;
+      overflow: hidden;
+    }
+    .mega-trigger:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .mega-menu__inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px 40px;
+      padding: 32px 24px;
+    }
+    .mega-menu__col { display: flex; flex-direction: column; gap: 4px; }
+    .mega-menu__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-700) !important;
+      transition: background .2s ease, color .2s ease;
+      text-decoration: none;
+    }
+    .mega-menu__item svg { color: var(--gold-dark); flex-shrink: 0; }
+    .mega-menu__item:hover {
+      background: var(--gray-50);
+      color: var(--blue-900) !important;
+    }
+    .mega-menu__item:hover svg { color: var(--gold); }
+
+    .home-content > .section:first-child { padding-top: 56px; }
+    .home-content .footer {
+      border-radius: 0;
+      background: #fff;
+      color: var(--gray-500);
+    }
+    .home-content .footer h4,
+    .home-content .footer h5 { color: var(--gray-900); }
+    .home-content .footer__links h5 { color: var(--blue-900) !important; }
+    .home-content .footer__links a { color: var(--gray-500); }
+    .home-content .footer__links a:hover { color: var(--blue-900); }
+    .home-content .footer__bottom {
+      border-top-color: var(--gray-200);
+      color: var(--gray-400);
+    }
+
+    .home-content .section__title { color: var(--blue-900); font-size: 28px; font-weight: 600; letter-spacing: -.3px; }
+    .home-content .cat-grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      grid-auto-rows: 1fr;
+    }
+    .home-content .cat-card {
+      padding: 20px 18px;
+      gap: 6px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      border: 1px solid transparent;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    .home-content .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .home-content .cat-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .home-content .cat-card:hover::before { transform: scaleX(1); }
+    .home-content .cat-card__icon {
+      width: 36px;
+      height: 36px;
+      font-size: 20px;
+      transform: scale(1.15);
+      background: none;
+      border-radius: 0;
+      grid-row: 1 / 3;
+      align-self: start;
+      margin-top: 2px;
+      color: var(--gold-dark);
+    }
+    .home-content .cat-card__title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .home-content .cat-card__desc {
+      font-size: 12px;
+      line-height: 1.4;
+      grid-column: 2;
+    }
+
+    /* --- Editais carousel — styled cards with alternating colors --- */
+    #sectionEditais .carousel {
+      padding: 0;
+      position: relative;
+    }
+    #sectionEditais .carousel__track {
+      gap: 24px;
+      padding: 8px 0 16px;
+    }
+    #sectionEditais .carousel__track > * {
+      flex: 0 0 calc((100% - 72px) / 4);
+      min-width: 240px;
+    }
+    #sectionEditais .opp-card {
+      border: none;
+      border-radius: 16px;
+      padding: 32px 28px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    #sectionEditais .opp-card__title { font-weight: 600; }
+    #sectionEditais .badge { background: transparent !important; padding-left: 0; padding-right: 0; }
+    #sectionServicosRestritos { background: #f4f4f1; }
+    .home-content .btn-ghost { border-radius: 50px; }
+    .home-content .btn-ghost:hover { background: var(--gold); color: var(--white); }
+    #sectionEditais .tag {
+      background: transparent; border: 1px solid currentColor;
+      padding-top: 0; padding-bottom: 0; transition: all .25s ease;
+    }
+    #sectionEditais .opp-card--open .tag:hover { background: var(--blue-900); color: var(--white); }
+    #sectionEditais .opp-card--urgent .tag:hover { background: var(--white); color: var(--blue-900); }
+    #sectionEditais .opp-card--closed .tag:hover { background: var(--gray-500); color: var(--white); }
+    #sectionEditais .opp-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    }
+    /* Card colors by status */
+    /* Aberto = light blue */
+    #sectionEditais .opp-card--open {
+      background: var(--blue-100);
+      color: var(--gray-900);
+    }
+    /* Urgente = dark blue */
+    #sectionEditais .opp-card--urgent {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+    #sectionEditais .opp-card--urgent .opp-card__financiador { color: rgba(255,255,255,.7); }
+    #sectionEditais .opp-card--urgent .opp-card__title { color: var(--white); }
+    #sectionEditais .opp-card--urgent .opp-card__meta { color: rgba(255,255,255,.75); }
+    #sectionEditais .opp-card--urgent .tag { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.5); }
+    #sectionEditais .opp-card--urgent .badge-urgent { background: rgba(255,255,255,.2); color: #FFB3B3; }
+    /* Encerrado = gray */
+    #sectionEditais .opp-card--closed {
+      background: #ededed;
+      color: var(--gray-700);
+    }
+    #sectionEditais .opp-card--closed .opp-card__financiador { color: var(--gray-500); }
+    #sectionEditais .opp-card--closed .opp-card__title { color: var(--gray-700); }
+    #sectionEditais .opp-card--closed .opp-card__meta { color: var(--gray-500); }
+    #sectionEditais .opp-card--closed .tag { background: transparent; color: var(--gray-500); border: 1px solid var(--gray-400); }
+
+    /* Carousel nav arrows — outside cards */
+    #sectionEditais .carousel__nav {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--gray-300);
+      background: var(--white);
+      color: var(--gray-300);
+    }
+    #sectionEditais { position: relative; overflow: hidden; }
+    #sectionEditais::before {
+      content: '';
+      position: absolute;
+      bottom: -67px;
+      left: -20px;
+      width: 340px;
+      height: 150px;
+      background-image: radial-gradient(var(--blue-900) 6px, transparent 6px);
+      background-size: 28px 28px;
+      opacity: .12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #sectionEditais .container { overflow: visible; position: relative; z-index: 1; }
+    #sectionEditais .carousel { overflow: visible; }
+    #sectionEditais .carousel__track { overflow-x: auto; overflow-y: visible; }
+    #sectionEditais .carousel__nav--prev { left: -56px; }
+    #sectionEditais .carousel__nav--next { right: -56px; }
+    #sectionEditais .carousel__nav:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    /* --- Eventos + Editais IDOR carousels — same component, white bg + gray border --- */
+    #sectionEventos .carousel,
+    #sectionEditaisIdor .carousel {
+      padding: 0;
+      position: relative;
+      overflow: visible;
+    }
+    #sectionEventos { position: relative; overflow: hidden; background: #f4f4f1; }
+    #sectionEditaisIdor { position: relative; overflow: hidden; }
+    #sectionEventos .container,
+    #sectionEditaisIdor .container {
+      overflow: visible;
+      position: relative;
+      z-index: 1;
+    }
+    #sectionEventos .carousel__track,
+    #sectionEditaisIdor .carousel__track {
+      gap: 24px;
+      padding: 8px 0 16px;
+      overflow-x: auto;
+      overflow-y: visible;
+    }
+    #sectionEventos .carousel__track > *,
+    #sectionEditaisIdor .carousel__track > * {
+      flex: 0 0 calc((100% - 72px) / 4);
+      min-width: 240px;
+    }
+    #sectionEventos .opp-card,
+    #sectionEditaisIdor .opp-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 32px 28px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--gray-900);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .25s ease;
+    }
+    #sectionEventos .opp-card:hover,
+    #sectionEditaisIdor .opp-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: var(--gray-200);
+    }
+    #sectionEventos .opp-card__title,
+    #sectionEditaisIdor .opp-card__title { font-weight: 600; }
+    #sectionEventos .badge,
+    #sectionEditaisIdor .badge {
+      background: transparent !important;
+      padding-left: 0; padding-right: 0;
+    }
+    #sectionEventos .tag,
+    #sectionEditaisIdor .tag {
+      background: transparent;
+      border: 1px solid currentColor;
+      padding-top: 0; padding-bottom: 0;
+      transition: all .25s ease;
+    }
+    #sectionEventos .tag:hover,
+    #sectionEditaisIdor .tag:hover {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+    /* Carousel nav arrows — outside cards (same as Grants) */
+    #sectionEventos .carousel__nav,
+    #sectionEditaisIdor .carousel__nav {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--gray-300);
+      background: var(--white);
+      color: var(--gray-300);
+    }
+    #sectionEventos .carousel__nav--prev,
+    #sectionEditaisIdor .carousel__nav--prev { left: -56px; }
+    #sectionEventos .carousel__nav--next,
+    #sectionEditaisIdor .carousel__nav--next { right: -56px; }
+    #sectionEventos .carousel__nav:hover,
+    #sectionEditaisIdor .carousel__nav:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+    @media (max-width: 1100px) {
+      #sectionEventos .carousel__nav--prev,
+      #sectionEditaisIdor .carousel__nav--prev { left: 8px; }
+      #sectionEventos .carousel__nav--next,
+      #sectionEditaisIdor .carousel__nav--next { right: 8px; }
+    }
+    @media (max-width: 768px) {
+      #sectionEventos .carousel__track > *,
+      #sectionEditaisIdor .carousel__track > * {
+        flex: 0 0 85%;
+      }
+    }
+
+    /* Dots indicator */
+    .carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .carousel__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      border: none;
+      cursor: pointer;
+      transition: background .25s ease, transform .25s ease;
+      padding: 0;
+    }
+    .carousel__dot:hover {
+      background: var(--gold-light);
+    }
+    .carousel__dot.active {
+      background: var(--gold);
+      transform: scale(1.2);
+    }
+
+    /* --- CTA full width with background photo --- */
+    .cta-full {
+      position: relative;
+      padding: 100px 24px;
+      text-align: center;
+      background: url('News Background 01.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .cta-full::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(1,40,70,.7);
+    }
+    .cta-full__content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cta-full__content h3 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta-full__content p {
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 32px;
+    }
+    .cta-full__content .btn {
+      background: #71C5E8;
+      color: #003DA5;
+      border-radius: 50px;
+      border: none;
+    }
+    .cta-full__content .btn:hover {
+      background: #fff;
+      color: #003DA5;
+    }
+
+    /* --- NAPE highlight section --- */
+    .nape-section {
+      position: relative;
+      background: #003DA5;
+      padding: 80px 24px;
+      overflow: hidden;
+      color: var(--white);
+    }
+    .nape-section__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .nape-section__title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 20px;
+      letter-spacing: -.3px;
+    }
+    .nape-section__desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.85);
+      margin: 0 0 28px;
+      max-width: 560px;
+    }
+    .nape-section__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #71C5E8;
+      color: #003DA5;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nape-section__btn:hover {
+      background: var(--white);
+      color: #003DA5;
+    }
+    .nape-section__image {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .nape-section__image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 260px;
+      transform: translate(100px, -40px);
+    }
+    .nape-section::before {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -20px;
+      width: 320px;
+      height: 160px;
+      background-image: radial-gradient(rgba(255,255,255,.6) 6px, transparent 6px);
+      background-size: 28px 28px;
+      opacity: .25;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 768px) {
+      .nape-section { padding: 56px 24px; }
+      .nape-section__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .nape-section__desc { margin-left: auto; margin-right: auto; }
+      .nape-section__image { justify-content: center; }
+      .nape-section__image img { max-height: 200px; transform: none; }
+    }
+
+    /* --- Plataformas section (NST, LPI, Biobanco) --- */
+    .platforms-section { background: #fff; padding: 80px 24px; }
+    .platforms-section__inner { max-width: var(--max-w); margin: 0 auto; }
+    .platforms-section__header { text-align: left; margin-bottom: 40px; }
+    .platforms-section__title { font-size: 28px; font-weight: 600; color: var(--blue-900); margin: 0 0 8px; letter-spacing: -.3px; }
+    .platforms-section__subtitle { font-size: 15px; color: var(--gray-500); margin: 0; }
+    .platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .platform-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    .platform-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: var(--gray-200);
+    }
+    .platform-card__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--gold-dark);
+    }
+    .platform-card__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin: 0;
+    }
+    .platform-card__desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin: 0 0 20px;
+      flex: 1;
+    }
+    .platform-card__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background .2s ease;
+    }
+    .platform-card__btn:hover { background: var(--gold-dark); color: var(--white); }
+    @media (max-width: 1100px) {
+      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .platforms-section { padding: 56px 24px; }
+      .platforms-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 1200px) {
+      .home-content .cat-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .home-content .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero--home {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .hero__video {
+        top: auto;
+        bottom: 0;
+        transform: translateX(-50%);
+      }
+      .hero--home::after {
+        background: linear-gradient(
+          180deg,
+          #f0f2f5 0%,
+          #f0f2f5 40%,
+          rgba(240,242,245,.8) 55%,
+          rgba(240,242,245,.2) 75%,
+          transparent 100%
+        );
+      }
+      .hero--home .hero__content {
+        text-align: center;
+        margin-left: 0;
+        padding: 100px 24px 0;
+        max-width: 100%;
+      }
+      .hero--home .hero__desc { max-width: 100%; }
+      .hero--home .search-box { max-width: 100%; }
+      .hero-filters { justify-content: center; }
+      .hero--home .hero__title { font-size: 26px; }
+      .scroll-hint {
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+      }
+      .home-content { border-radius: 16px 16px 0 0; }
+      .home-content > .section:first-child { padding-top: 48px; }
+      /* Header solid on mobile always */
+      .header.header--home {
+        background: var(--white) !important;
+        box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+      }
+      .header--home .header__title { color: #1d1d1e !important; }
+      .header--home .menu-toggle { color: #1d1d1e !important; }
+      .header--home .btn-secondary { display: none !important; }
+      .header-search-toggle { display: none !important; }
+      .scroll-hint { display: none; }
+      .mobile-nav__panel { padding-top: 72px; }
+      .mobile-nav__submenu-trigger {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 0; font-size: 16px; font-weight: 600;
+        color: var(--gray-900); border-bottom: 1px solid var(--gray-100); cursor: pointer;
+      }
+      .mobile-nav__submenu-trigger svg { transition: transform .25s ease; color: var(--gray-400); }
+      .mobile-nav__submenu-trigger.open svg { transform: rotate(180deg); }
+      .mobile-nav__submenu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+      .mobile-nav__submenu-trigger.open + .mobile-nav__submenu { max-height: 800px; }
+      .mobile-nav__submenu a { padding: 10px 0 10px 20px !important; font-size: 14px !important; font-weight: 500 !important; color: var(--gray-600) !important; border-bottom: none !important; }
+      .mobile-nav__submenu a:hover { color: var(--blue-900) !important; }
+      .mobile-nav__search { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--blue-900); border-bottom: 1px solid var(--gray-100); cursor: pointer; }
+    }
+    .mobile-nav__search { display: none; }
+    /* Header search toggle */
+    .header-search-toggle {
+      background: none; border: none; cursor: pointer;
+      color: rgba(29,29,30,.5); padding: 6px;
+      transition: color .2s ease; display: flex; align-items: center;
+    }
+    .header-search-toggle:hover { color: #1d1d1e; }
+    .header-search { position: fixed; top: calc(var(--header-h) + 8px); left: 50%; width: calc(100% - 48px); max-width: var(--max-w); background: var(--white); border-radius: 16px; box-shadow: 0 12px 32px rgba(0,0,0,.12); border: 1px solid var(--gray-100); z-index: 998; opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; }
+    .header-search.open { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .header-search__inner { display: flex; align-items: center; gap: 12px; padding: 16px 24px; }
+    .header-search__icon { color: var(--gray-400); flex-shrink: 0; }
+    .header-search__input { flex: 1; border: none; font-size: 16px; outline: none; background: transparent; color: var(--gray-900); }
+    .header-search__input::placeholder { color: var(--gray-400); }
+    .header-search__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 4px; transition: color .2s ease; line-height: 1; }
+    .header-search__close:hover { color: var(--gray-900); }
+
+    /* --- Login modal --- */
+    .login-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9998;
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+    .login-modal-backdrop.open { opacity: 1; visibility: visible; }
+    .login-modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(.96);
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      width: calc(100% - 32px);
+      max-width: 420px;
+      z-index: 9999;
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+    }
+    .login-modal.open {
+      opacity: 1; visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .login-modal__close {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: none; border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 22px;
+      color: var(--gray-500);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s ease, color .2s ease;
+      line-height: 1;
+    }
+    .login-modal__close:hover { background: var(--gray-100); color: var(--gray-900); }
+    .login-modal__logo { text-align: center; margin-bottom: 24px; }
+    .login-modal__logo img { height: 40px; width: auto; margin-bottom: 16px; }
+    .login-modal__logo h2 {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px; font-weight: 600; color: var(--gray-900);
+      margin: 0 0 6px;
+    }
+    .login-modal__logo p {
+      font-size: 13px; color: var(--gray-500); margin: 0;
+    }
+    .login-modal .form-group { margin-bottom: 16px; }
+    .login-modal .form-group label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--gray-700); margin-bottom: 6px;
+    }
+    .login-modal .label-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .login-modal .label-row label { margin-bottom: 0; }
+    .login-modal .label-row a {
+      font-size: 12px; color: var(--gray-500); text-decoration: none;
+    }
+    .login-modal .label-row a:hover { color: var(--blue-900); }
+    .login-modal .form-input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .2s ease;
+    }
+    .login-modal .form-input:focus { border-color: var(--blue-900); }
+    .login-modal .form-input::placeholder { color: var(--gray-400); }
+    .login-modal .btn-login {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--blue-900);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s ease;
+      margin-top: 8px;
+    }
+    .login-modal .btn-login:hover { background: #002b75; }
+    .login-modal__footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .login-modal__footer a {
+      color: var(--blue-900); font-weight: 600; text-decoration: none;
+    }
+    .login-modal__footer a:hover { text-decoration: underline; }
+    @media (max-width: 480px) {
+      .login-modal { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--home" id="homeHeader">
+    <div class="header__inner">
+      <a href="index.html" class="header__brand">
+        <img src="Logo IDOR.svg" alt="IDOR" class="header__logo-img">
+        <div>
+          <div class="header__title">Portal do Pesquisador</div>
+        </div>
+      </a>
+      <div class="header__right">
+        <nav class="header__nav">
+          <a href="#sectionEventos">Programação e Eventos</a>
+          <a href="#sectionEditais">Grants e Oportunidades</a>
+          <a href="#sectionEditaisIdor">Editais IDOR</a>
+          <div class="mega-trigger show-logged-in">
+            <a href="#sectionServicosRestritos" class="mega-trigger__link">Serviços para Pesquisadores <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu">
+              <div class="mega-menu__inner container">
+                <div class="mega-menu__col">
+                  <a href="area-nape.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> NAPE</a>
+                  <a href="area-ti.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> TI</a>
+                  <a href="area-software-academico.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg> Software Academico</a>
+                  <a href="area-agendamento-salas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Agendamento de Salas</a>
+                  <a href="area-publicacoes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Publicações Científicas</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="area-inovacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Inovação e P.I.</a>
+                  <a href="area-rh.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Recursos Humanos</a>
+                  <a href="area-plataformas.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Plataformas IDOR</a>
+                  <a href="area-editais-idor.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Editais IDOR</a>
+                  <a href="area-eventos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg> Eventos IDOR</a>
+                </div>
+                <div class="mega-menu__col">
+                  <a href="area-captacao.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Captação de Recursos</a>
+                  <a href="area-assessoria.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Assessoria Científica</a>
+                  <a href="area-lattes.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Lattes Desk</a>
+                  <a href="area-editais-externos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Editais Externos</a>
+                  <a href="area-gestao-projetos.html" class="mega-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Gestão de Projetos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <button class="header-search-toggle" onclick="toggleHeaderSearch()" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <a href="login.html" class="btn btn-secondary btn-sm">Entrar</a>
+        <button class="menu-toggle" onclick="toggleMobileNavToggle()">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Search Bar -->
+  <div class="header-search" id="headerSearch">
+    <form class="header-search__inner container" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
+      <svg class="header-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" name="q" class="header-search__input" placeholder="Busque por serviços, artigos, oportunidades, editais..." autofocus>
+      <button type="button" class="header-search__close" onclick="toggleHeaderSearch()">&times;</button>
+    </form>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" onclick="closeMobileNav(event)">
+    <div class="mobile-nav__panel">
+      <div class="mobile-nav__search" onclick="closeMobileNavDirect(); setTimeout(function(){toggleHeaderSearch()},300);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar
+      </div>
+      <a href="#sectionEventos" onclick="closeMobileNavDirect()">Programação e Eventos</a>
+      <a href="#sectionEditais" onclick="closeMobileNavDirect()">Grants e Oportunidades</a>
+      <a href="#sectionEditaisIdor" onclick="closeMobileNavDirect()">Editais IDOR</a>
+      <div class="show-logged-in">
+        <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
+          <span>Serviços para Pesquisadores</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="mobile-nav__submenu">
+          <a href="area-nape.html">NAPE</a>
+          <a href="area-ti.html">TI</a>
+          <a href="area-software-academico.html">Software Acadêmico</a>
+          <a href="area-agendamento-salas.html">Agendamento de Salas</a>
+          <a href="area-publicacoes.html">Publicações Científicas</a>
+          <a href="area-inovacao.html">Inovação e P.I.</a>
+          <a href="area-rh.html">Recursos Humanos</a>
+          <a href="area-plataformas.html">Plataformas IDOR</a>
+          <a href="area-editais-idor.html">Editais IDOR</a>
+          <a href="area-eventos.html">Eventos IDOR</a>
+          <a href="area-captacao.html">Captação de Recursos</a>
+          <a href="area-assessoria.html">Assessoria Científica</a>
+          <a href="area-lattes.html">Lattes Desk</a>
+          <a href="area-editais-externos.html">Editais Externos</a>
+          <a href="area-gestao-projetos.html">Gestão de Projetos</a>
+        </div>
+      </div>
+      <a href="login.html" class="show-logged-out">Entrar</a>
+    </div>
+  </div>
+
+<!-- HERO: fixed behind everything — events carousel -->
+  <section class="hero hero--home">
+    <div class="hero-carousel" id="heroCarousel">
+      <div class="hero-welcome">
+        <h1 class="hero-welcome__title">Bem-vindo ao<br>Portal do Pesquisador IDOR</h1>
+        <div class="hero-welcome__search-wrap">
+          <form class="search-box" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
+            <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" name="q" placeholder="">
+            <button type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+      <div class="hero-carousel__viewport">
+        <div class="hero-carousel__track" id="heroCarouselTrack">
+
+          <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">22 mai 2026</span>
+              <span class="hero-card__category">Evento</span>
+            </div>
+            <h2 class="hero-card__title">VIII Simpósio IDOR de Neurociência</h2>
+            <p class="hero-card__desc">Encontro anual reunindo pesquisadores e clínicos para discutir avanços em neurociência translacional, com painéis sobre doenças neurodegenerativas, imagem e cognição.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">IDOR Botafogo</span>
+                <span class="hero-card__tag">Neurociência</span>
+                <span class="hero-card__tag">Presencial</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hero-card" data-bg="imagem-banner-interno.jpg" style="background-image: url('imagem-banner-interno.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">28 mai 2026</span>
+              <span class="hero-card__category">Workshop</span>
+            </div>
+            <h2 class="hero-card__title">Estatística aplicada à pesquisa clínica</h2>
+            <p class="hero-card__desc">Workshop online com aulas práticas em R sobre testes de hipótese, regressão e análise de sobrevida, voltado para pesquisadores que conduzem ensaios clínicos.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">Online</span>
+                <span class="hero-card__tag">Estatística</span>
+                <span class="hero-card__tag">Capacitação</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hero-card" data-bg="imagem-banner-interno-2.jpg" style="background-image: url('imagem-banner-interno-2.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">5 jun 2026</span>
+              <span class="hero-card__category">Urgente</span>
+            </div>
+            <h2 class="hero-card__title">Capacitação REDCap Avançado</h2>
+            <p class="hero-card__desc">Treinamento intensivo sobre a plataforma REDCap focado em fluxos de trabalho complexos, automações com APIs e gestão de bases multicêntricas.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">IDOR Jabaquara</span>
+                <span class="hero-card__tag">REDCap</span>
+                <span class="hero-card__tag">Sistemas</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hero-card" data-bg="bg-login.jpg" style="background-image: url('bg-login.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">12 jun 2026</span>
+              <span class="hero-card__category">Seminário</span>
+            </div>
+            <h2 class="hero-card__title">Seminário Open Science</h2>
+            <p class="hero-card__desc">Bate-papo com pesquisadores brasileiros sobre práticas de ciência aberta, plano de gestão de dados, pré-prints e princípios FAIR no contexto da pesquisa biomédica.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">Online</span>
+                <span class="hero-card__tag">Open Science</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hero-card" data-bg="News Background 01.jpg" style="background-image: url('News Background 01.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">18 a 20 jun 2026</span>
+              <span class="hero-card__category">Congresso</span>
+            </div>
+            <h2 class="hero-card__title">Congresso de Oncologia Translacional</h2>
+            <p class="hero-card__desc">Três dias de palestras e mesas-redondas com líderes nacionais e internacionais discutindo terapias-alvo, imunoterapia e biomarcadores em câncer.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">IDOR Botafogo</span>
+                <span class="hero-card__tag">Oncologia</span>
+                <span class="hero-card__tag">Translacional</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
+            <div class="hero-card__top">
+              <span class="hero-card__date">25 jun 2026</span>
+              <span class="hero-card__category">Workshop</span>
+            </div>
+            <h2 class="hero-card__title">Submissão de propostas FAPESP</h2>
+            <p class="hero-card__desc">Orientação prática para preparação de propostas a editais FAPESP — estrutura do projeto, orçamento, justificativa e dicas para passar na avaliação.</p>
+            <div class="hero-card__bottom">
+              <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+              <div class="hero-card__tags">
+                <span class="hero-card__tag">Online</span>
+                <span class="hero-card__tag">FAPESP</span>
+                <span class="hero-card__tag">Captação</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+      <div class="hero-carousel__footer">
+        <div class="hero-carousel__dots" id="heroCarouselDots"></div>
+        <a href="#" class="hero-carousel__see-all">Ver todos os eventos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL WRAPPER -->
+  <div class="home-wrapper" id="homeWrapper">
+
+    <!-- Spacer for fixed hero -->
+    <div class="hero-spacer"></div>
+
+    
+
+    <!-- CONTENT PANEL -->
+    <div class="home-content" id="homeContent">
+
+      <!-- SERVICOS PARA PESQUISADORES (restricted area — only visible when logged in) -->
+      <section class="section section--alt show-logged-in" id="sectionServicosRestritos">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Serviços para Pesquisadores</h2>
+          </div>
+          <div class="cat-grid">
+            <a href="area-ti.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="cat-card__title">TI</div>
+              <div class="cat-card__desc">Suporte tecnico e infraestrutura digital</div>
+            </a>
+            <a href="area-software-academico.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+              <div class="cat-card__title">Software Acadêmico</div>
+              <div class="cat-card__desc">Ferramentas e sistemas academicos</div>
+            </a>
+            <a href="area-agendamento-salas.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="cat-card__title">Agendamento de Salas</div>
+              <div class="cat-card__desc">Reserve salas de reuniao e laboratorios</div>
+            </a>
+            <a href="area-publicacoes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <div class="cat-card__title">Publicações Científicas</div>
+              <div class="cat-card__desc">Bases de dados e periodicos</div>
+            </a>
+            <a href="area-inovacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+              <div class="cat-card__title">Inovação e P.I.</div>
+              <div class="cat-card__desc">Patentes, transferencia de tecnologia</div>
+            </a>
+            <a href="area-rh.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="cat-card__title">Recursos Humanos</div>
+              <div class="cat-card__desc">Beneficios, folha e documentacao</div>
+            </a>
+            <a href="area-editais-externos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div class="cat-card__title">Editais Externos</div>
+              <div class="cat-card__desc">FAPESP, CNPq, NIH e outras agencias</div>
+            </a>
+            <a href="area-captacao.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div class="cat-card__title">Captação de Recursos</div>
+              <div class="cat-card__desc">Grants, financiamentos e parcerias</div>
+            </a>
+            <a href="area-assessoria.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="cat-card__title">Assessoria Científica</div>
+              <div class="cat-card__desc">Consultoria para projetos de pesquisa</div>
+            </a>
+            <a href="area-lattes.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+              <div class="cat-card__title">Lattes Desk</div>
+              <div class="cat-card__desc">Apoio na gestao do curriculo Lattes</div>
+            </a>
+            <a href="area-gestao-projetos.html" class="cat-card">
+              <div class="cat-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="cat-card__title">Gestão de Projetos</div>
+              <div class="cat-card__desc">Planejamento, execucao e monitoramento</div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- GRANTS E OPORTUNIDADES -->
+      <section class="section section--alt" id="sectionEditais">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Grants e Oportunidades</h2>
+            <a href="oportunidades.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track">
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">FAPESP</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate R$200.000</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 15/04/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Biomedicina</span>
+                  <span class="tag">Saude</span>
+                </div>
+              </a>
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">NIH</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Grant NIH R21 &mdash; Neuroscience Research</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate US$275,000</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/06/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Neurociencia</span>
+                </div>
+              </a>
+              <a href="oportunidade.html" class="opp-card opp-card--urgent">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">CNPq</span>
+                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
+                </div>
+                <div class="opp-card__title">Bolsa de Produtividade em Pesquisa &mdash; 2026</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$1.500/mes</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 05/04/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Multidisciplinar</span>
+                </div>
+              </a>
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Seed Grant IDOR &mdash; Pesquisa Translacional 2026</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate R$80.000</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/05/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Genetica</span>
+                </div>
+              </a>
+              <a href="oportunidade.html" class="opp-card opp-card--closed">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-closed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Encerrado</span>
+                </div>
+                <div class="opp-card__title">Bolsa IDOR Pos-Doc 2026 &mdash; Oncologia</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$8.000/mes</span>
+                  <span>Encerrado em 01/03/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                </div>
+              </a>
+            </div>
+            <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+            <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="carousel__dots">
+              <button class="carousel__dot active"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDITAIS IDOR (locked when logged out) -->
+      <section class="section" id="sectionEditaisIdor">
+        <div class="container">
+          <div class="section__header">
+            <h2 class="section__title">Editais IDOR</h2>
+            <a href="area-editais-idor.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track">
+
+              <div class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Seed Grant IDOR — Pesquisa Translacional 2026</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 80.000</span>
+                  <span>Prazo: 30/05/2026</span>
+                </div>
+                              <a href="edital-detalhe.html" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
+              </div>
+
+              <div class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Bolsa IDOR Pós-Doc Oncologia 2026</div>
+                <div class="opp-card__meta">
+                  <span>R$ 9.500/mês</span>
+                  <span>Prazo: 15/06/2026</span>
+                </div>
+                              <a href="edital-detalhe.html" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
+              </div>
+
+              <div class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__title">Auxílio Participação em Congressos</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 5.000</span>
+                  <span>Fluxo contínuo</span>
+                </div>
+                              <a href="edital-detalhe.html" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
+              </div>
+
+              <div class="opp-card opp-card--urgent">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-urgent">Urgente</span>
+                </div>
+                <div class="opp-card__title">Programa IDOR de Iniciação Científica</div>
+                <div class="opp-card__meta">
+                  <span>R$ 1.500/mês</span>
+                  <span>Prazo: 30/04/2026</span>
+                </div>
+                              <a href="edital-detalhe.html" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
+              </div>
+
+              <div class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="badge badge-open">Aberto</span>
+                </div>
+                <div class="opp-card__title">Edital Inovação e P.I. 2026</div>
+                <div class="opp-card__meta">
+                  <span>Até R$ 50.000</span>
+                  <span>Prazo: 20/07/2026</span>
+                </div>
+                              <a href="edital-detalhe.html" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
+              </div>
+
+            </div>
+            <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+            <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <div class="carousel__dots">
+              <button class="carousel__dot active"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+              <button class="carousel__dot"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAPE highlight -->
+      <section class="nape-section" id="sectionNape">
+        <div class="nape-section__inner">
+          <div class="nape-section__content">
+            <h2 class="nape-section__title">Núcleo de Apoio à Pesquisa e Ensino</h2>
+            <p class="nape-section__desc">O objetivo principal é a padronização de processos e disponibilização de ferramentas que auxiliam os proponentes, no processo de submissão de projetos dentro da Rede D'Or São Luiz, buscando auxiliar na melhor adequação dos projetos e pacotes regulatórios previamente à submissão ao CEP, evitando pendências.</p>
+            <a href="nape.html" class="nape-section__btn">Saiba mais <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="nape-section__image">
+            <img src="NAPE.png" alt="NAPE">
+          </div>
+        </div>
+      </section>
+
+      <!-- PLATAFORMAS DE PESQUISA (NST, LPI, Biobanco) -->
+      <section class="platforms-section" id="sectionPlataformas">
+        <div class="platforms-section__inner">
+          <div class="platforms-section__header">
+            <h2 class="platforms-section__title">Plataformas de Pesquisa</h2>
+            <p class="platforms-section__subtitle">Infraestrutura científica e laboratorial disponível para pesquisadores IDOR</p>
+          </div>
+          <div class="platforms-grid">
+
+            <div class="platform-card">
+              <div class="platform-card__header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
+                <h3 class="platform-card__title">NST</h3>
+              </div>
+              <p class="platform-card__desc">Núcleo de Suporte Tecnológico — recursos de bioinformática, processamento de dados em larga escala e suporte computacional para projetos de pesquisa.</p>
+              <a href="nst.html" class="platform-card__btn">Saiba mais <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-card__header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6.31a4 4 0 0 1-.59 2.09l-5.6 9.34A2 2 0 0 0 4.5 23h15a2 2 0 0 0 1.69-3.26l-5.6-9.34A4 4 0 0 1 15 8.31V2"/><line x1="9" y1="2" x2="15" y2="2"/><line x1="6" y1="15" x2="18" y2="15"/></svg>
+                <h3 class="platform-card__title">LPI</h3>
+              </div>
+              <p class="platform-card__desc">Laboratório de Pesquisa e Investigação — estrutura completa para experimentos de bancada com equipamentos de alta resolução e protocolos validados.</p>
+              <a href="lpi.html" class="platform-card__btn">Saiba mais <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-card__header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                <h3 class="platform-card__title">Biobanco</h3>
+              </div>
+              <p class="platform-card__desc">Repositório institucional de amostras biológicas — gestão, armazenamento e disponibilização de material para pesquisa, em conformidade com diretrizes éticas e regulatórias.</p>
+              <a href="biobanco.html" class="platform-card__btn">Saiba mais <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-full">
+        <div class="cta-full__content">
+          <h3>Não encontrou o que procura?</h3>
+          <p>Nossa equipe está pronta para ajudar você a encontrar as informações que precisa.</p>
+          <a href="mailto:portalpesquisador@idor.org" class="btn btn-primary btn-lg">Fale Conosco</a>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer__inner">
+          <div class="footer__brand">
+            <img src="Logo IDOR.svg" alt="IDOR" style="height:43px;width:auto;margin-bottom:12px;">
+            <h4>Portal do Pesquisador</h4>
+            <p>Instituto D'Or de Pesquisa e Ensino. Conectando pesquisadores a recursos, oportunidades e conhecimento.</p>
+          </div>
+          <div class="footer__links">
+            <div>
+              <h5>Portal</h5>
+              <a href="index.html">Home</a>
+              <a href="#sectionEventos">Programação e Eventos</a>
+              <a href="#sectionEditais">Grants e Oportunidades</a>
+              <a href="#sectionEditaisIdor">Editais IDOR</a>
+              <a href="#sectionServicosRestritos" class="show-logged-in">Serviços para Pesquisadores</a>
+            </div>
+            <div>
+              <h5>Institucional</h5>
+              <a href="#">IDOR</a>
+              <a href="#">Rede D'Or Sao Luiz</a>
+              <a href="#">Fale Conosco</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          &copy; 2026 Instituto D'Or de Pesquisa e Ensino. Todos os direitos reservados.
+        </div>
+      </footer>
+
+    </div><!-- /home-content -->
+  </div><!-- /home-wrapper -->
+
+  <!-- Login Modal -->
+  <div class="login-modal-backdrop" id="loginModalBackdrop" onclick="closeLoginModal()"></div>
+  <div class="login-modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <button class="login-modal__close" type="button" aria-label="Fechar" onclick="closeLoginModal()">&times;</button>
+    <div class="login-modal__logo">
+      <img src="Logo IDOR.svg" alt="IDOR">
+      <h2 id="loginModalTitle">Portal do Pesquisador</h2>
+      <p>Acesse sua conta para continuar.</p>
+    </div>
+    <form onsubmit="event.preventDefault(); authLogin();">
+      <div class="form-group">
+        <label for="modalEmail">E-mail*</label>
+        <input type="email" id="modalEmail" class="form-input" placeholder="seu.email@idor.org.br" required>
+      </div>
+      <div class="form-group">
+        <div class="label-row">
+          <label for="modalPassword">Senha*</label>
+          <a href="#" onclick="event.preventDefault();">Esqueceu a senha?</a>
+        </div>
+        <input type="password" id="modalPassword" class="form-input" placeholder="Digite sua senha" required>
+      </div>
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+    <div class="login-modal__footer">
+      Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('open');
+      document.getElementById('loginModalBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ var i = document.getElementById('modalEmail'); if (i) i.focus(); }, 50);
+    }
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
+      document.getElementById('loginModalBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLoginModal();
+    });
+    /* Intercept "Ver todos" of restricted sections + locked "Mais informações" buttons when logged out */
+    document.addEventListener('DOMContentLoaded', function() {
+      var selectors = [
+        '#sectionEditaisIdor .section__header a',
+        '.info-btn--locked'
+      ];
+      document.querySelectorAll(selectors.join(',')).forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+            e.preventDefault();
+            openLoginModal();
+          }
+        });
+      });
+    });
+
+    /* --- Hero events carousel (true infinite loop with clones on both sides) --- */
+    document.addEventListener('DOMContentLoaded', function() {
+      var track = document.getElementById('heroCarouselTrack');
+      if (!track) return;
+      var originalCards = Array.prototype.slice.call(track.children);
+      var total = originalCards.length;
+      if (!total) return;
+
+      var TRANSITION = 'transform 1.4s cubic-bezier(.22,.61,.36,1)';
+      var DURATION = 1400;
+
+      // Add two clones at the start (so the left peek is always filled) and two at the end
+      var leadClones = [originalCards[total - 2].cloneNode(true), originalCards[total - 1].cloneNode(true)];
+      var trailClones = [originalCards[0].cloneNode(true), originalCards[1].cloneNode(true)];
+      leadClones.forEach(function(c) { c.setAttribute('data-clone', '1'); track.insertBefore(c, track.children[0]); });
+      // After insertBefore, children indices shifted; insert lead in correct order
+      // Reset: do it cleanly by removing what we did
+      while (track.firstChild) track.removeChild(track.firstChild);
+      // Rebuild: [N-2', N-1', 0, 1, ..., N-1, 0', 1']
+      var arr = [
+        originalCards[total - 2].cloneNode(true),
+        originalCards[total - 1].cloneNode(true)
+      ];
+      arr.forEach(function(c) { c.setAttribute('data-clone', '1'); });
+      originalCards.forEach(function(c) { arr.push(c); });
+      var t1 = originalCards[0].cloneNode(true); t1.setAttribute('data-clone', '1'); arr.push(t1);
+      var t2 = originalCards[1].cloneNode(true); t2.setAttribute('data-clone', '1'); arr.push(t2);
+      arr.forEach(function(c) { track.appendChild(c); });
+
+      // Real card at trackIndex = 2..total+1 ; lead clones at 0,1 ; trail clones at total+2, total+3
+      var FIRST_REAL = 2;
+      var LAST_REAL = total + 1;
+
+      var dotsContainer = document.getElementById('heroCarouselDots');
+      var dots = [];
+      for (var i = 0; i < total; i++) {
+        var d = document.createElement('button');
+        d.className = 'hero-carousel__dot' + (i === 0 ? ' is-active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.dataset.index = i;
+        dotsContainer.appendChild(d);
+        dots.push(d);
+      }
+
+      var current = FIRST_REAL;
+      var isTransitioning = false;
+      var interval = null;
+
+      function cardStep() {
+        var c = track.children[FIRST_REAL];
+        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 32);
+        return c.getBoundingClientRect().width + gap;
+      }
+
+      function centerOffset() {
+        var c = track.children[FIRST_REAL];
+        var cardWidth = c.getBoundingClientRect().width;
+        return (window.innerWidth - cardWidth) / 2;
+      }
+
+      function applyTransform(trackIdx, animate) {
+        var offset = centerOffset() - trackIdx * cardStep();
+        track.style.transition = animate ? TRANSITION : 'none';
+        track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
+      }
+
+      function realIndexOf(trackIdx) {
+        if (trackIdx < FIRST_REAL) return total - (FIRST_REAL - trackIdx);
+        if (trackIdx > LAST_REAL) return trackIdx - LAST_REAL - 1;
+        return trackIdx - FIRST_REAL;
+      }
+
+      function updateDots() {
+        var ri = realIndexOf(current);
+        for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('is-active', d === ri);
+      }
+
+      function next() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        current++;
+        applyTransform(current, true);
+        updateDots();
+        if (current > LAST_REAL) {
+          // landed on a trail clone, snap to equivalent real card silently
+          setTimeout(function() {
+            current = FIRST_REAL + (current - LAST_REAL - 1);
+            applyTransform(current, false);
+            isTransitioning = false;
+          }, DURATION);
+        } else {
+          setTimeout(function() { isTransitioning = false; }, DURATION);
+        }
+      }
+
+      function prev() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        current--;
+        applyTransform(current, true);
+        updateDots();
+        if (current < FIRST_REAL) {
+          setTimeout(function() {
+            current = LAST_REAL - (FIRST_REAL - current - 1);
+            applyTransform(current, false);
+            isTransitioning = false;
+          }, DURATION);
+        } else {
+          setTimeout(function() { isTransitioning = false; }, DURATION);
+        }
+      }
+
+      function goTo(realIdx) {
+        if (isTransitioning) return;
+        var trackIdx = FIRST_REAL + realIdx;
+        if (trackIdx === current) return;
+        isTransitioning = true;
+        current = trackIdx;
+        applyTransform(current, true);
+        updateDots();
+        setTimeout(function() { isTransitioning = false; }, DURATION);
+      }
+
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(parseInt(dot.dataset.index, 10)); resetTimer(); });
+      });
+
+      function startTimer() { interval = setInterval(next, 4000); }
+      function resetTimer() { clearInterval(interval); startTimer(); }
+
+      window.addEventListener('resize', function() { applyTransform(current, false); });
+      applyTransform(current, false);
+      updateDots();
+      startTimer();
+    });
+  </script>
+  <script>
+    (function() {
+      var header = document.getElementById('homeHeader');
+
+      /* --- Toggle header--solid based on scroll --- */
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 40) header.classList.add('header--solid');
+        else header.classList.remove('header--solid');
+      });
+
+      /* --- Smooth scroll helper --- */
+      function smoothScrollTo(target) {
+        window.scrollTo({ top: target, behavior: 'smooth' });
+      }
+
+      /* --- Carousel dots inside #sectionEditais --- */
+      var track = document.querySelector('#sectionEditais .carousel__track');
+      var dots = document.querySelectorAll('#sectionEditais .carousel__dot');
+      if (track && dots.length) {
+        track.addEventListener('scroll', function() {
+          var cardW = track.firstElementChild.offsetWidth + 24;
+          var idx = Math.round(track.scrollLeft / cardW);
+          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        });
+        dots.forEach(function(dot, i) {
+          dot.addEventListener('click', function() {
+            var cardW = track.firstElementChild.offsetWidth + 24;
+            track.scrollTo({ left: i * cardW, behavior: 'smooth' });
+          });
+        });
+      }
+
+      /* --- Hero filter buttons: scroll to corresponding section --- */
+      document.querySelectorAll('.hero-filter[data-scroll]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var id = this.getAttribute('data-scroll');
+          var target = document.getElementById(id);
+          if (!target) return;
+          var top = target.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 8;
+          smoothScrollTo(top);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
