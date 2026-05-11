@@ -12,31 +12,22 @@
 
     /* Use native body scroll instead of wrapper scroll */
     html { scroll-behavior: smooth; }
-    .home-wrapper {
-      position: relative;
-      z-index: 1;
-      pointer-events: none; /* let clicks fall through to hero behind */
-    }
-    .home-wrapper > .home-content { pointer-events: auto; }
-    .hero-spacer { pointer-events: none; }
+    .home-wrapper { position: relative; z-index: 1; }
+    .hero-spacer { display: none; }
 
     /* Force white everywhere */
     body { background: #fff !important; }
 
-    /* --- HERO: fixed behind content (curtain effect) — white background, carousel --- */
+    /* --- HERO: scrolls with the page (no fixed/curtain effect) --- */
     .hero--home {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100vh;
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: auto;
       margin-top: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      z-index: 0;
+      padding: 0 0 56px;
+      display: block;
+      overflow: visible;
       background: #fff;
     }
 
@@ -1977,170 +1968,27 @@
   </script>
   <script>
     (function() {
-      var wrapper = document.getElementById('homeWrapper');
       var header = document.getElementById('homeHeader');
-      var content = document.getElementById('homeContent');
-      var editais = document.getElementById('sectionEditais');
-      var scrollHint = document.querySelector('.scroll-hint');
-      var hasSnapped = false;
-      var isAnimating = false;
 
-      // Snap points: hero=0, categories=heroH, editais=editais top
-      function getSnapPoints() {
-        var heroH = window.innerHeight;
-        var headerH = header.offsetHeight;
-        var pts = [0, heroH];
-        if (editais) pts.push(editais.getBoundingClientRect().top + window.scrollY - headerH);
-        return pts;
-      }
-
-      /* --- Scroll listener for header + animations --- */
+      /* --- Toggle header--solid based on scroll --- */
       window.addEventListener('scroll', function() {
-        var scrollY = window.scrollY;
-        var pts = getSnapPoints();
-
-        // Header solid after hero
-        if (scrollY > pts[1] * 0.15) {
-          header.classList.add('header--solid');
-        } else {
-          header.classList.remove('header--solid');
-        }
-
-        // Scroll hint
-        if (scrollY > 50 && scrollHint) {
-          scrollHint.style.opacity = '0';
-          scrollHint.style.pointerEvents = 'none';
-        } else if (scrollHint) {
-          scrollHint.style.opacity = '';
-          scrollHint.style.pointerEvents = '';
-        }
-
-        // Animate cards
-        if (scrollY > pts[1] * 0.5 && !hasSnapped) {
-          hasSnapped = true;
-          animateCards();
-        }
-        if (scrollY < 10 && hasSnapped) {
-          hasSnapped = false;
-          var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
-          cards.forEach(function(card) { card.classList.remove('visible'); });
-        }
+        if (window.scrollY > 40) header.classList.add('header--solid');
+        else header.classList.remove('header--solid');
       });
 
-      function animateCards() {
-        var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
-        cards.forEach(function(card, i) {
-          setTimeout(function() { card.classList.add('visible'); }, i * 40);
-        });
+      /* --- Smooth scroll helper --- */
+      function smoothScrollTo(target) {
+        window.scrollTo({ top: target, behavior: 'smooth' });
       }
 
-      // Scroll hint click
-      if (scrollHint) {
-        scrollHint.style.cursor = 'pointer';
-        scrollHint.addEventListener('click', function() {
-          smoothScrollTo(getSnapPoints()[1]);
-        });
-      }
-
-      /* --- Find nearest snap points (prev/next) from current scroll --- */
-      function getNeighborSnaps(scrollY) {
-        var pts = getSnapPoints();
-        var tolerance = 80;
-        var prev = null, next = null, atSnap = -1;
-
-        for (var i = 0; i < pts.length; i++) {
-          if (Math.abs(scrollY - pts[i]) < tolerance) {
-            atSnap = i;
-            break;
-          }
-        }
-
-        if (atSnap >= 0) {
-          prev = atSnap > 0 ? pts[atSnap - 1] : null;
-          next = atSnap < pts.length - 1 ? pts[atSnap + 1] : null;
-        } else {
-          // Between snap points — find which two we're between
-          for (var j = 0; j < pts.length - 1; j++) {
-            if (scrollY > pts[j] && scrollY < pts[j + 1]) {
-              prev = pts[j];
-              next = pts[j + 1];
-              break;
-            }
-          }
-        }
-
-        return { atSnap: atSnap, prev: prev, next: next, lastSnap: pts[pts.length - 1] };
-      }
-
-      /* --- Wheel: snap between sections --- */
-      function wheelHandler(e) {
-        if (isMobile) return;
-        var scrollY = window.scrollY;
-        var info = getNeighborSnaps(scrollY);
-        var pts = getSnapPoints();
-        var lastSnap = pts[pts.length - 1];
-
-        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-        // Past the last snap point
-        if (scrollY > lastSnap + 80) {
-          if (e.deltaY < 0) {
-            e.preventDefault();
-            smoothScrollTo(lastSnap);
-          }
-          return;
-        }
-
-        // At a snap point
-        if (info.atSnap >= 0) {
-          // At last snap, scrolling down — snap to bottom (footer visible)
-          if (info.atSnap === pts.length - 1 && e.deltaY > 0) {
-            e.preventDefault();
-            smoothScrollTo(maxScroll);
-            return;
-          }
-          if (e.deltaY > 0 && info.next !== null) {
-            e.preventDefault();
-            smoothScrollTo(info.next);
-          } else if (e.deltaY < 0 && info.prev !== null) {
-            e.preventDefault();
-            smoothScrollTo(info.prev);
-          }
-          return;
-        }
-
-        // Between snap points — resolve to nearest
-        if (info.prev !== null || info.next !== null) {
-          e.preventDefault();
-          if (e.deltaY > 0 && info.next !== null) { smoothScrollTo(info.next); }
-          else if (e.deltaY < 0 && info.prev !== null) { smoothScrollTo(info.prev); }
-        }
-      }
-      window.addEventListener('wheel', wheelHandler, { passive: false });
-
-      /* --- Touch support --- */
-      var touchStartY = 0;
-      window.addEventListener('touchstart', function(e) {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-      window.addEventListener('touchend', function(e) {
-        var scrollY = window.scrollY;
-        var deltaY = touchStartY - e.changedTouches[0].clientY;
-        var info = getNeighborSnaps(scrollY);
-        if (deltaY > 40 && info.next !== null) { smoothScrollTo(info.next); }
-        else if (deltaY < -40 && info.prev !== null) { smoothScrollTo(info.prev); }
-      }, { passive: true });
-
-      /* --- Carousel dots --- */
+      /* --- Carousel dots inside #sectionEditais --- */
       var track = document.querySelector('#sectionEditais .carousel__track');
       var dots = document.querySelectorAll('#sectionEditais .carousel__dot');
       if (track && dots.length) {
         track.addEventListener('scroll', function() {
           var cardW = track.firstElementChild.offsetWidth + 24;
           var idx = Math.round(track.scrollLeft / cardW);
-          dots.forEach(function(d, i) {
-            d.classList.toggle('active', i === idx);
-          });
+          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
         });
         dots.forEach(function(dot, i) {
           dot.addEventListener('click', function() {
@@ -2148,14 +1996,6 @@
             track.scrollTo({ left: i * cardW, behavior: 'smooth' });
           });
         });
-      }
-
-      /* --- Smooth scroll helper --- */
-      function smoothScrollTo(target) {
-        if (isAnimating) return;
-        isAnimating = true;
-        window.scrollTo({ top: target, behavior: 'smooth' });
-        setTimeout(function() { isAnimating = false; }, 700);
       }
 
       /* --- Hero filter buttons: scroll to corresponding section --- */
