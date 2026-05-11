@@ -57,12 +57,26 @@
       will-change: transform;
       transition: transform .9s cubic-bezier(.5,.05,.1,1);
     }
+    .hero-welcome {
+      text-align: center;
+      padding: 0 24px 28px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-welcome__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 600;
+      color: var(--blue-900);
+      letter-spacing: -.5px;
+      margin: 0;
+    }
     .hero-card {
       flex: 0 0 1250px;
       width: 1250px;
-      height: 667px;
+      height: 500px;
       max-width: 92vw;
-      max-height: calc(100vh - var(--header-h) - 64px);
+      max-height: calc(100vh - var(--header-h) - 160px);
       position: relative;
       overflow: hidden;
       background-color: #003DA5;
@@ -71,7 +85,17 @@
       color: var(--white);
       display: flex;
       flex-direction: column;
-      padding: 56px 56px 48px;
+      padding: 48px 56px 40px;
+    }
+    .hero-card__date {
+      display: inline-block;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -.3px;
+      text-transform: lowercase;
+      line-height: 1.1;
     }
     .hero-card::before {
       content: '';
@@ -84,18 +108,18 @@
     .hero-card__top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 24px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
     .hero-card__title {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      font-size: clamp(28px, 3vw, 44px);
+      font-size: clamp(24px, 2.6vw, 36px);
       font-weight: 600;
       line-height: 1.15;
       letter-spacing: -.5px;
       color: var(--white);
-      margin: 0;
+      margin: 0 0 20px;
       max-width: 720px;
     }
     .hero-card__category {
@@ -1239,14 +1263,18 @@
 <!-- HERO: fixed behind everything — events carousel -->
   <section class="hero hero--home">
     <div class="hero-carousel" id="heroCarousel">
+      <div class="hero-welcome">
+        <h1 class="hero-welcome__title">Bem-vindo ao Portal do Pesquisador IDOR</h1>
+      </div>
       <div class="hero-carousel__viewport">
         <div class="hero-carousel__track" id="heroCarouselTrack">
 
           <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">VIII Simpósio IDOR de Neurociência</h2>
-              <span class="hero-card__category">Evento &middot; 22 mai 2026</span>
+              <span class="hero-card__date">22 mai 2026</span>
+              <span class="hero-card__category">Evento</span>
             </div>
+            <h2 class="hero-card__title">VIII Simpósio IDOR de Neurociência</h2>
             <p class="hero-card__desc">Encontro anual reunindo pesquisadores e clínicos para discutir avanços em neurociência translacional, com painéis sobre doenças neurodegenerativas, imagem e cognição.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1260,9 +1288,10 @@
 
           <article class="hero-card" data-bg="imagem-banner-interno.jpg" style="background-image: url('imagem-banner-interno.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">Estatística aplicada à pesquisa clínica</h2>
-              <span class="hero-card__category">Workshop &middot; 28 mai 2026</span>
+              <span class="hero-card__date">28 mai 2026</span>
+              <span class="hero-card__category">Workshop</span>
             </div>
+            <h2 class="hero-card__title">Estatística aplicada à pesquisa clínica</h2>
             <p class="hero-card__desc">Workshop online com aulas práticas em R sobre testes de hipótese, regressão e análise de sobrevida, voltado para pesquisadores que conduzem ensaios clínicos.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1276,9 +1305,10 @@
 
           <article class="hero-card" data-bg="imagem-banner-interno-2.jpg" style="background-image: url('imagem-banner-interno-2.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">Capacitação REDCap Avançado</h2>
-              <span class="hero-card__category">Urgente &middot; 5 jun 2026</span>
+              <span class="hero-card__date">5 jun 2026</span>
+              <span class="hero-card__category">Urgente</span>
             </div>
+            <h2 class="hero-card__title">Capacitação REDCap Avançado</h2>
             <p class="hero-card__desc">Treinamento intensivo sobre a plataforma REDCap focado em fluxos de trabalho complexos, automações com APIs e gestão de bases multicêntricas.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1292,9 +1322,10 @@
 
           <article class="hero-card" data-bg="bg-login.jpg" style="background-image: url('bg-login.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">Seminário Open Science</h2>
-              <span class="hero-card__category">Seminário &middot; 12 jun 2026</span>
+              <span class="hero-card__date">12 jun 2026</span>
+              <span class="hero-card__category">Seminário</span>
             </div>
+            <h2 class="hero-card__title">Seminário Open Science</h2>
             <p class="hero-card__desc">Bate-papo com pesquisadores brasileiros sobre práticas de ciência aberta, plano de gestão de dados, pré-prints e princípios FAIR no contexto da pesquisa biomédica.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1307,9 +1338,10 @@
 
           <article class="hero-card" data-bg="News Background 01.jpg" style="background-image: url('News Background 01.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">Congresso de Oncologia Translacional</h2>
-              <span class="hero-card__category">Congresso &middot; 18 a 20 jun 2026</span>
+              <span class="hero-card__date">18 a 20 jun 2026</span>
+              <span class="hero-card__category">Congresso</span>
             </div>
+            <h2 class="hero-card__title">Congresso de Oncologia Translacional</h2>
             <p class="hero-card__desc">Três dias de palestras e mesas-redondas com líderes nacionais e internacionais discutindo terapias-alvo, imunoterapia e biomarcadores em câncer.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1323,9 +1355,10 @@
 
           <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
             <div class="hero-card__top">
-              <h2 class="hero-card__title">Submissão de propostas FAPESP</h2>
-              <span class="hero-card__category">Workshop &middot; 25 jun 2026</span>
+              <span class="hero-card__date">25 jun 2026</span>
+              <span class="hero-card__category">Workshop</span>
             </div>
+            <h2 class="hero-card__title">Submissão de propostas FAPESP</h2>
             <p class="hero-card__desc">Orientação prática para preparação de propostas a editais FAPESP — estrutura do projeto, orçamento, justificativa e dicas para passar na avaliação.</p>
             <div class="hero-card__bottom">
               <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
