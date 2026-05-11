@@ -55,7 +55,7 @@
       display: flex;
       gap: 32px;
       will-change: transform;
-      transition: transform .9s cubic-bezier(.5,.05,.1,1);
+      transition: transform 1.4s cubic-bezier(.22,.61,.36,1);
     }
     .hero-welcome {
       display: grid;
@@ -1848,8 +1848,8 @@
       var total = originalCards.length;
       if (!total) return;
 
-      var TRANSITION = 'transform .9s cubic-bezier(.5,.05,.1,1)';
-      var DURATION = 900;
+      var TRANSITION = 'transform 1.4s cubic-bezier(.22,.61,.36,1)';
+      var DURATION = 1400;
 
       // Add two clones at the start (so the left peek is always filled) and two at the end
       var leadClones = [originalCards[total - 2].cloneNode(true), originalCards[total - 1].cloneNode(true)];
