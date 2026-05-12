@@ -42,8 +42,8 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 60px;
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 24px;
@@ -93,27 +93,18 @@
     .hero-left__btn { position: relative; }
     .hero-left__btn:hover { color: var(--gold); gap: 12px; }
 
-    /* Right side: track carousel — active card fills right column; next card peeks beyond column edge */
+    /* Right side: stack-fade mini carousel */
     .hero-right { position: relative; }
     .hero-carousel-mini {
       position: relative;
       width: 100%;
-      height: 460px;
-      overflow: visible;
-    }
-    .hero-carousel-mini__track {
-      display: flex;
-      gap: 24px;
-      height: 100%;
-      width: 100%;
-      will-change: transform;
-      transition: transform 1s cubic-bezier(.22,.61,.36,1);
+      height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
     }
     .hero-card {
-      flex: 0 0 100%;
-      width: 100%;
-      height: 100%;
-      position: relative;
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       padding: 36px 36px 28px;
@@ -121,8 +112,11 @@
       background-size: cover;
       background-position: center;
       color: var(--white);
-      border-radius: 20px;
-      overflow: hidden;
+      opacity: 0;
+      transform: translate3d(48px, 0, 0) scale(.97);
+      transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+      pointer-events: none;
+      will-change: transform, opacity;
     }
     .hero-card::before {
       content: '';
@@ -132,6 +126,28 @@
       z-index: 0;
     }
     .hero-card > * { position: relative; z-index: 1; }
+    .hero-card.is-active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      pointer-events: auto;
+    }
+    .hero-card.is-prev {
+      opacity: 0;
+      transform: translate3d(-48px, 0, 0) scale(.97);
+    }
+    /* Subtle stagger on content fade-in */
+    .hero-card > .hero-card__top,
+    .hero-card > .hero-card__title,
+    .hero-card > .hero-card__desc,
+    .hero-card > .hero-card__bottom {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .5s ease, transform .6s cubic-bezier(.22,.61,.36,1);
+    }
+    .hero-card.is-active > .hero-card__top { opacity: 1; transform: translateY(0); transition-delay: .15s; }
+    .hero-card.is-active > .hero-card__title { opacity: 1; transform: translateY(0); transition-delay: .25s; }
+    .hero-card.is-active > .hero-card__desc { opacity: 1; transform: translateY(0); transition-delay: .35s; }
+    .hero-card.is-active > .hero-card__bottom { opacity: 1; transform: translateY(0); transition-delay: .45s; }
 
     .hero-card__date {
       display: inline-block;
@@ -240,7 +256,7 @@
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero-left__title { font-size: 32px; }
-      .hero-carousel-mini { height: 400px; }
+      .hero-carousel-mini { height: 340px; }
     }
     @media (max-width: 600px) {
       .hero-card { padding: 24px 24px 20px; }
@@ -1310,9 +1326,8 @@
         <a href="#" class="hero-left__btn">Ver todos os eventos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
       </div>
       <div class="hero-right">
-        <div class="hero-carousel-mini">
-          <div class="hero-carousel-mini__track" id="heroCarouselTrack">
-        <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
+        <div class="hero-carousel-mini" id="heroCarouselTrack">
+        <article class="hero-card is-active" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
           <div class="hero-card__top">
             <span class="hero-card__date">22 mai 2026</span>
             <span class="hero-card__category">Evento</span>
@@ -1384,7 +1399,6 @@
             <div class="hero-card__tags"><span class="hero-card__tag">Online</span><span class="hero-card__tag">FAPESP</span><span class="hero-card__tag">Captação</span></div>
           </div>
         </article>
-          </div>
         </div>
         <div class="hero-carousel__dots" id="heroCarouselDots"></div>
       </div>
@@ -1905,21 +1919,13 @@
       });
     });
 
-    /* --- Hero events carousel v4 (track + right peek + infinite loop via clone) --- */
+    /* --- Hero events carousel v4 (stack + fade-slide infinite loop) --- */
     document.addEventListener('DOMContentLoaded', function() {
       var track = document.getElementById('heroCarouselTrack');
       if (!track) return;
-      var originalCards = Array.prototype.slice.call(track.children);
-      var total = originalCards.length;
+      var cards = Array.prototype.slice.call(track.children);
+      var total = cards.length;
       if (!total) return;
-
-      var TRANSITION = 'transform 1s cubic-bezier(.22,.61,.36,1)';
-      var DURATION = 1000;
-
-      // Clone the first card and append to the end for seamless loop
-      var firstClone = originalCards[0].cloneNode(true);
-      firstClone.setAttribute('data-clone', '1');
-      track.appendChild(firstClone);
 
       var dotsContainer = document.getElementById('heroCarouselDots');
       var dots = [];
@@ -1933,65 +1939,33 @@
       }
 
       var current = 0;
-      var isTransitioning = false;
-      var interval = null;
+      var prevIdx = total - 1;
 
-      function cardStep() {
-        var c = track.children[0];
-        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 20);
-        return c.getBoundingClientRect().width + gap;
+      function setActive(nextIdx) {
+        prevIdx = current;
+        current = (nextIdx + total) % total;
+        cards.forEach(function(c, i) {
+          c.classList.remove('is-active', 'is-prev');
+          if (i === current) c.classList.add('is-active');
+          else if (i === prevIdx) c.classList.add('is-prev');
+        });
+        dots.forEach(function(dot, i) { dot.classList.toggle('is-active', i === current); });
       }
 
-      function applyTransform(idx, animate) {
-        var offset = -idx * cardStep();
-        track.style.transition = animate ? TRANSITION : 'none';
-        track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
-      }
-
-      function updateActive() {
-        var realIdx = current >= total ? 0 : current;
-        Array.prototype.forEach.call(track.children, function(c, i) { c.classList.toggle('is-active', i === current); });
-        dots.forEach(function(dot, i) { dot.classList.toggle('is-active', i === realIdx); });
-      }
-
-      function next() {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        current++;
-        applyTransform(current, true);
-        updateActive();
-        if (current === total) {
-          // Landed on clone of first — silently jump back to real first
-          setTimeout(function() {
-            current = 0;
-            applyTransform(0, false);
-            updateActive();
-            isTransitioning = false;
-          }, DURATION);
-        } else {
-          setTimeout(function() { isTransitioning = false; }, DURATION);
-        }
-      }
-
-      function goTo(realIdx) {
-        if (isTransitioning || realIdx === current) return;
-        isTransitioning = true;
-        current = realIdx;
-        applyTransform(current, true);
-        updateActive();
-        setTimeout(function() { isTransitioning = false; }, DURATION);
-      }
+      function next() { setActive(current + 1); }
 
       dots.forEach(function(dot) {
-        dot.addEventListener('click', function() { goTo(parseInt(dot.dataset.index, 10)); resetTimer(); });
+        dot.addEventListener('click', function() {
+          setActive(parseInt(dot.dataset.index, 10));
+          resetTimer();
+        });
       });
 
+      var interval = null;
       function startTimer() { interval = setInterval(next, 4500); }
       function resetTimer() { clearInterval(interval); startTimer(); }
 
-      window.addEventListener('resize', function() { applyTransform(current, false); });
-      applyTransform(0, false);
-      updateActive();
+      setActive(0);
       startTimer();
     });
   </script>
