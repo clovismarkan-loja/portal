@@ -394,7 +394,7 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
   letter-spacing: .5px;
   text-align: center;
-  padding: 5px 8px;
+  padding: 0 8px;
   font-family: inherit;
 }
 
