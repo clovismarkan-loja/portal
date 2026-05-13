@@ -159,6 +159,69 @@
       color: var(--gray-700);
       margin: 0 0 16px;
     }
+    .nape-content ol, .nape-content ul {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-700);
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+    .nape-content ol li, .nape-content ul li { margin-bottom: 6px; }
+    .nape-content a { color: var(--blue-900); font-weight: 600; text-decoration: underline; }
+    .nape-content a:hover { color: var(--gold-dark); }
+    .nape-flow {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 8px 0 32px;
+    }
+    .nape-flow__step {
+      flex: 1 1 200px;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue-900);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .nape-flow__step:not(:last-child)::after {
+      content: '\203A';
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: var(--gold);
+      font-weight: 700;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .nape-flow { flex-direction: column; }
+      .nape-flow__step:not(:last-child)::after {
+        right: 50%;
+        top: auto;
+        bottom: -14px;
+        transform: translateX(50%) rotate(90deg);
+      }
+    }
+    .nape-contacts {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray-700);
+    }
+    .nape-contacts strong { color: var(--gray-900); }
     .nape-content .lead {
       font-size: 17px;
       color: var(--gray-600);
@@ -381,25 +444,47 @@
     <div class="nape-content">
       <img src="banner-nape.jpg" alt="NAPE" class="nape-banner">
 
-      <p>O Instituto D'Or de Pesquisa e Ensino (IDOR) criou no início de 2019 o Núcleo de Apoio à Pesquisa e Ensino (NAPE).</p>
+      <p>O <strong>NAPE</strong> atua no suporte e na viabilização institucional de projetos de pesquisa executados no <strong>IDOR</strong> ou na <strong>Rede D'Or São Luiz (RDSL)</strong>. Nossa avaliação é um requisito obrigatório que antecede a submissão ao Comitê de Ética (CEP). A aprovação em ambas as instâncias é requisito obrigatório para o início das atividades.</p>
 
-      <div class="nape-quote">
-        O objetivo principal é a padronização de processos e disponibilização de ferramentas que auxiliam os proponentes, no processo de submissão de projetos dentro da Rede D'Or São Luiz, buscando auxiliar na melhor adequação dos projetos e pacotes regulatórios previamente à submissão ao CEP, evitando pendências.
-      </div>
-
-      <h3>NAPE e o Proponente</h3>
-      <p>O NAPE tem como proposta auxiliar os pesquisadores na construção de projetos, oferecendo modelos de documentos como TCLE, dispensa de TCLE, estrutura de projetos, cartas de ciência, suporte estatístico e acesso a plataforma de banco de dados.</p>
-
-      <p>Através do NAPE, todos os projetos de pesquisa da Rede D'Or São Luiz são registrados, previamente avaliados e aprovados pela diretoria do IDOR, permitindo gerar indicadores importantes da pesquisa desenvolvida na Rede.</p>
-
-      <p>Para submissão de trabalhos de conclusão de curso (graduação, residência, mestrado e doutorado) sugerimos que o orientador, ou preceptor da rede, entre como proponente do projeto na submissão ao NAPE. Os alunos poderão constar nas informações dos pesquisadores envolvidos no projeto.</p>
+      <h3>Como submeter seu projeto</h3>
+      <ol>
+        <li><strong>Cadastro:</strong> Se for sua primeira vez, realize o <a href="#">Cadastro de Proponente via REDCap</a>.</li>
+      </ol>
 
       <div class="nape-callout">
         <svg class="nape-callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <div class="nape-callout__body">
-          <strong>Importante!</strong>
-          <p>O NAPE não possui relação com o processo de seleção de pós-graduação.</p>
+          <strong>Nota</strong>
+          <p>É necessário que ao menos um membro da equipe tenha vínculo com o IDOR / Rede D'Or.</p>
         </div>
+      </div>
+
+      <ol start="2">
+        <li><strong>Plataforma de Avaliação:</strong> Com o cadastro ativo, acesse a <a href="#">Plataforma de Avaliação de Projetos do Núcleo de Apoio à Pesquisa e Ensino</a> para iniciar a submissão e baixar os modelos oficiais.</li>
+      </ol>
+
+      <h3>Documentação Obrigatória</h3>
+      <ul>
+        <li>Projeto de Pesquisa;</li>
+        <li>Cartas de Anuência (assinadas pelas Diretorias das Unidades);</li>
+        <li>Orçamento;</li>
+        <li>TCLE ou solicitação de dispensa.</li>
+      </ul>
+
+      <h3>Fluxo Regulatório</h3>
+      <div class="nape-flow">
+        <div class="nape-flow__step">Aprovação NAPE</div>
+        <div class="nape-flow__step">Submissão Plataforma Brasil (CEP)</div>
+        <div class="nape-flow__step">Início da Pesquisa</div>
+      </div>
+
+      <p><strong>Dúvidas?</strong> Consulte o <a href="#">Manual do NAPE</a> ou entre em contato com nossa equipe técnica.</p>
+
+      <h3>Contatos</h3>
+      <div class="nape-contacts">
+        <strong>NAPE — Núcleo de Apoio à Pesquisa e Ensino</strong><br>
+        E-mail: <a href="mailto:nape@idor.org">nape@idor.org</a><br>
+        Telefone: +55 11 2109-8802
       </div>
     </div>
   </section>
