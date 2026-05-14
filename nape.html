@@ -222,7 +222,7 @@
       color: var(--gray-700);
     }
     .nape-contacts strong { color: var(--gray-900); }
-    .nape-action-btn {
+    .nape-content a.nape-action-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -235,7 +235,70 @@
       text-decoration: none;
       transition: background .2s ease, gap .2s ease;
     }
-    .nape-action-btn:hover { background: var(--gold-dark); color: var(--white); gap: 12px; }
+    .nape-content a.nape-action-btn:hover { background: var(--gold-dark); color: var(--white); gap: 12px; }
+
+    /* Atuação do NAPE — box */
+    .nape-atuacao {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin: 32px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .nape-atuacao__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--blue-900);
+      margin: 0 0 8px;
+      letter-spacing: -.2px;
+    }
+    .nape-atuacao__lead {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+    .nape-atuacao__items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .nape-atuacao__item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .nape-atuacao__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--gold-50);
+      color: var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nape-atuacao__item strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .nape-atuacao__item p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray-600);
+    }
+    @media (max-width: 600px) {
+      .nape-atuacao { padding: 24px; }
+      .nape-atuacao__item { grid-template-columns: 1fr; }
+    }
     .nape-content .lead {
       font-size: 17px;
       color: var(--gray-600);
@@ -464,13 +527,39 @@
 
       <p>O NAPE atua no suporte e na viabilização institucional de projetos de pesquisa executados no IDOR ou na Rede D'Or São Luiz (RDSL). Nossa avaliação é um requisito obrigatório que antecede a submissão ao Comitê de Ética (CEP). A aprovação em ambas as instâncias é requisito obrigatório para o início das atividades.</p>
 
-      <h3>Atuação do NAPE</h3>
-      <p>O NAPE atua como parceiro estratégico do pesquisador na estruturação de projetos, oferecendo:</p>
-      <ul>
-        <li><strong>Modelos Institucionais:</strong> documentação padronizada, incluindo TCLE, termos de dispensa e cartas de anuência.</li>
-        <li><strong>Gestão e Indicadores:</strong> registro, avaliação e monitoramento dos projetos institucionais sob orientação da Diretoria de Pesquisa do IDOR, permitindo o acompanhamento de indicadores de desempenho da pesquisa.</li>
-        <li><strong>Diretriz para Trabalhos Acadêmicos:</strong> para submissões de conclusão de curso (graduação, residência, mestrado e doutorado), ressaltamos a importância de que o orientador ou preceptor da rede seja formalmente citado no projeto, garantindo o devido vínculo institucional e a supervisão técnica necessária ao estudo.</li>
-      </ul>
+      <div class="nape-atuacao">
+        <h3 class="nape-atuacao__title">Atuação do NAPE</h3>
+        <p class="nape-atuacao__lead">O NAPE atua como parceiro estratégico do pesquisador na estruturação de projetos, oferecendo:</p>
+        <div class="nape-atuacao__items">
+          <div class="nape-atuacao__item">
+            <div class="nape-atuacao__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div>
+              <strong>Modelos Institucionais</strong>
+              <p>Documentação padronizada, incluindo TCLE, termos de dispensa e cartas de anuência.</p>
+            </div>
+          </div>
+          <div class="nape-atuacao__item">
+            <div class="nape-atuacao__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div>
+              <strong>Gestão e Indicadores</strong>
+              <p>Registro, avaliação e monitoramento dos projetos institucionais sob orientação da Diretoria de Pesquisa do IDOR, permitindo o acompanhamento de indicadores de desempenho da pesquisa.</p>
+            </div>
+          </div>
+          <div class="nape-atuacao__item">
+            <div class="nape-atuacao__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <strong>Diretriz para Trabalhos Acadêmicos</strong>
+              <p>Para submissões de conclusão de curso (graduação, residência, mestrado e doutorado), ressaltamos a importância de que o orientador ou preceptor da rede seja formalmente citado no projeto, garantindo o devido vínculo institucional e a supervisão técnica necessária ao estudo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <p style="margin-top: 32px;"><a href="area-nape.html" class="nape-action-btn">Acessar área NAPE <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a></p>
     </div>
