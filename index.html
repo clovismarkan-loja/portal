@@ -1004,7 +1004,7 @@
           <a href="#sectionEventos">Programação e Eventos</a>
           <a href="#sectionEditais">Grants e Oportunidades</a>
           <a href="#sectionEditaisIdor">Editais IDOR</a>
-          <div class="mega-trigger show-logged-in">
+          <div class="mega-trigger">
             <a href="#sectionServicosRestritos" class="mega-trigger__link">Serviços para Pesquisadores <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:0"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="mega-menu">
               <div class="mega-menu__inner container">
@@ -1059,7 +1059,7 @@
       <a href="#sectionEventos" onclick="closeMobileNavDirect()">Programação e Eventos</a>
       <a href="#sectionEditais" onclick="closeMobileNavDirect()">Grants e Oportunidades</a>
       <a href="#sectionEditaisIdor" onclick="closeMobileNavDirect()">Editais IDOR</a>
-      <div class="show-logged-in">
+      <div>
         <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
           <span>Serviços para Pesquisadores</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1112,7 +1112,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Oportunidades
           </a>
-          <a href="#sectionServicosRestritos" class="hero-filter show-logged-in" data-scroll="sectionServicosRestritos">
+          <a href="#sectionServicosRestritos" class="hero-filter" data-scroll="sectionServicosRestritos">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             Servicos
           </a>
@@ -1445,7 +1445,7 @@
       </section>
 
       <!-- SERVICOS PARA PESQUISADORES (restricted area — only visible when logged in) -->
-      <section class="section section--alt show-logged-in" id="sectionServicosRestritos">
+      <section class="section section--alt" id="sectionServicosRestritos">
         <div class="container">
           <div class="section__header">
             <h2 class="section__title">Serviços para Pesquisadores</h2>
@@ -1593,7 +1593,7 @@
               <a href="#sectionEventos">Programação e Eventos</a>
               <a href="#sectionEditais">Grants e Oportunidades</a>
               <a href="#sectionEditaisIdor">Editais IDOR</a>
-              <a href="#sectionServicosRestritos" class="show-logged-in">Serviços para Pesquisadores</a>
+              <a href="#sectionServicosRestritos">Serviços para Pesquisadores</a>
             </div>
             <div>
               <h5>Institucional</h5>
@@ -1659,7 +1659,9 @@
     document.addEventListener('DOMContentLoaded', function() {
       var selectors = [
         '#sectionEventos .section__header a',
-        '#sectionEditaisIdor .section__header a',
+              '#sectionEditaisIdor .section__header a',
+        '#sectionServicosRestritos .cat-card:not(.cat-card--soon)',
+        '#sectionServicosRestritos .section__header a',
         '.info-btn--locked'
       ];
       document.querySelectorAll(selectors.join(',')).forEach(function(el) {
