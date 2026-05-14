@@ -346,6 +346,15 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px; flex-wrap: wrap; gap: 12px;
 }
+.section-locked {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+.section-locked svg { color: var(--gray-500); flex-shrink: 0; }
 .section__title {
   font-size: 24px; font-weight: 700; color: var(--gray-900); letter-spacing: -.3px;
 }
