@@ -222,6 +222,20 @@
       color: var(--gray-700);
     }
     .nape-contacts strong { color: var(--gray-900); }
+    .nape-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, gap .2s ease;
+    }
+    .nape-action-btn:hover { background: var(--gold-dark); color: var(--white); gap: 12px; }
     .nape-content .lead {
       font-size: 17px;
       color: var(--gray-600);
@@ -444,56 +458,22 @@
     <div class="nape-content">
       <img src="banner-nape.jpg" alt="NAPE" class="nape-banner">
 
-      <p>O <strong>NAPE</strong> atua no suporte e na viabilização institucional de projetos de pesquisa executados no <strong>IDOR</strong> ou na <strong>Rede D'Or São Luiz (RDSL)</strong>. Nossa avaliação é um requisito obrigatório que antecede a submissão ao Comitê de Ética (CEP). A aprovação em ambas as instâncias é requisito obrigatório para o início das atividades.</p>
+      <h2>Núcleo de Apoio à Pesquisa e Ensino (NAPE)</h2>
 
-      <h3>Como submeter seu projeto</h3>
-      <ol>
-        <li><strong>Cadastro:</strong> Se for sua primeira vez, realize o <a href="https://redcap.idor.org/surveys/?s=RHMKLT8NME" target="_blank" rel="noopener">Cadastro de Proponente via REDCap</a>.</li>
-      </ol>
+      <p>Criado em 2019, o Núcleo de Apoio à Pesquisa e Ensino (NAPE) do Instituto D'Or de Pesquisa e Ensino (IDOR) tem a missão de fomentar as produções científicas, estimulando o crescimento no número de pesquisadores ativos que buscam qualidade e internacionalização da ciência produzida no IDOR.</p>
 
-      <div class="nape-callout">
-        <svg class="nape-callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <div class="nape-callout__body">
-          <strong>Nota</strong>
-          <p>É necessário que ao menos um membro da equipe tenha vínculo com o IDOR / Rede D'Or.</p>
-        </div>
-      </div>
+      <p>O NAPE atua no suporte e na viabilização institucional de projetos de pesquisa executados no IDOR ou na Rede D'Or São Luiz (RDSL). Nossa avaliação é um requisito obrigatório que antecede a submissão ao Comitê de Ética (CEP). A aprovação em ambas as instâncias é requisito obrigatório para o início das atividades.</p>
 
-      <ol start="2">
-        <li><strong>Plataforma de Avaliação:</strong> Com o cadastro ativo, acesse a <a href="https://redcap.idor.org/surveys/?s=T497TDKETE" target="_blank" rel="noopener">Plataforma de Avaliação de Projetos do Núcleo de Apoio à Pesquisa e Ensino</a> para iniciar a submissão e baixar os modelos oficiais.</li>
-      </ol>
-
-      <h3>Documentação Obrigatória</h3>
+      <h3>Atuação do NAPE</h3>
+      <p>O NAPE atua como parceiro estratégico do pesquisador na estruturação de projetos, oferecendo:</p>
       <ul>
-        <li>Projeto de Pesquisa;</li>
-        <li>Cartas de Anuência (assinadas pelas Diretorias das Unidades);</li>
-        <li>Orçamento;</li>
-        <li>TCLE ou solicitação de dispensa.</li>
+        <li><strong>Modelos Institucionais:</strong> documentação padronizada, incluindo TCLE, termos de dispensa e cartas de anuência.</li>
+        <li><strong>Gestão e Indicadores:</strong> registro, avaliação e monitoramento dos projetos institucionais sob orientação da Diretoria de Pesquisa do IDOR, permitindo o acompanhamento de indicadores de desempenho da pesquisa.</li>
+        <li><strong>Diretriz para Trabalhos Acadêmicos:</strong> para submissões de conclusão de curso (graduação, residência, mestrado e doutorado), ressaltamos a importância de que o orientador ou preceptor da rede seja formalmente citado no projeto, garantindo o devido vínculo institucional e a supervisão técnica necessária ao estudo.</li>
       </ul>
 
-      <h3>Fluxo Regulatório</h3>
-      <div class="nape-flow">
-        <div class="nape-flow__step">Aprovação NAPE</div>
-        <div class="nape-flow__step">Submissão Plataforma Brasil (CEP)</div>
-        <div class="nape-flow__step">Início da Pesquisa</div>
-      </div>
-
-      <p><strong>Dúvidas?</strong> Consulte o <a href="#">Manual do NAPE</a> ou entre em contato com nossa equipe técnica.</p>
-
-      <h3>Contatos</h3>
-      <div class="nape-contacts">
-        <strong>NAPE — Núcleo de Apoio à Pesquisa e Ensino</strong><br>
-        E-mail: <a href="mailto:nape@idor.org">nape@idor.org</a><br>
-        Telefone: +55 11 2109-8802
-      </div>
+      <p style="margin-top: 32px;"><a href="area-nape.html" class="nape-action-btn">Acessar área NAPE <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a></p>
     </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="nape-cta">
-    <h3>Quer conhecer os serviços oferecidos pelo NAPE?</h3>
-    <p>Acesse os artigos, modelos e orientações disponíveis na área dedicada ao núcleo.</p>
-    <a href="area-nape.html" class="btn">Acessar área NAPE <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   </section>
 
   <!-- ===== FOOTER ===== -->
