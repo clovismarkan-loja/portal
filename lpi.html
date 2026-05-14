@@ -163,8 +163,19 @@
       font-size: 17px;
       color: var(--gray-600);
     }
+    /* --- LPI section title (above each accordion group) --- */
+    .lpi-section-title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--blue-900);
+      margin: 40px 0 14px;
+      letter-spacing: -.2px;
+    }
+    .lpi-section-title:first-of-type { margin-top: 24px; }
+
     /* --- Accordion --- */
-    .accordion { max-width: 100%; margin: 32px 0; }
+    .accordion { max-width: 100%; margin: 0 0 8px; }
     .accordion__item {
       background: #fff;
       border-radius: 12px;
@@ -204,12 +215,10 @@
     }
     .accordion__body-inner { padding-top: 4px; }
     .accordion__body h4 {
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--gray-900);
       margin: 16px 0 8px;
-      text-transform: uppercase;
-      letter-spacing: .5px;
     }
     .accordion__body h4:first-child { margin-top: 0; }
     .accordion__body ul {
@@ -483,15 +492,14 @@
 
       <p>O laboratório reúne equipe multidisciplinar e infraestrutura avançada para suporte a projetos clínicos, acadêmicos, multicêntricos e industriais, integrando aquisição, processamento, análise, desenvolvimento tecnológico e suporte científico em imagem avançada.</p>
 
+      <h2 class="lpi-section-title">Aquisição de Imagens Médicas</h2>
       <div class="accordion">
-
         <div class="accordion__item open">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Aquisição de Imagens Médicas
+            Desenvolvimento e otimização de protocolos avançados de RM
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Desenvolvimento e otimização de protocolos avançados de RM</h4>
             <ul>
               <li>Protocolos anatômicos de alta resolução: T1, T2, FLAIR, SWI, QSM…</li>
               <li>Difusão avançada (dMRI): DTI, DKI, DSI, HARDI, multi-shell, dwi_HCP…</li>
@@ -501,7 +509,15 @@
               <li>RM fetal, dentre outros</li>
               <li>Protocolos personalizados conforme hipótese clínica ou desenho do estudo</li>
             </ul>
-            <h4>Aquisição para Pesquisa Científica</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Aquisição para pesquisa científica
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Aquisição de imagens para projetos de pesquisa multicêntricos</li>
               <li>Suporte operacional e metodológico</li>
@@ -510,7 +526,15 @@
               <li>Execução padronizada para reprodutibilidade científica</li>
               <li>Apoio em estudos longitudinais e multicêntricos</li>
             </ul>
-            <h4>Suporte Operacional à Aquisição</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Suporte operacional à aquisição
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Treinamento presencial e remoto</li>
               <li>Acompanhamento em tempo real dos exames</li>
@@ -521,14 +545,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Organização e gerenciamento de dados</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Organização e Gerenciamento de Dados
+            Estruturação e curadoria de dados
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Estruturação e Curadoria de Dados</h4>
             <ul>
               <li>Conversão DICOM → NIfTI</li>
               <li>Organização conforme padrão BIDS</li>
@@ -537,7 +563,15 @@
               <li>Estruturação de datasets multicêntricos</li>
               <li>Controle de versões e rastreabilidade</li>
             </ul>
-            <h4>Segurança e Governança</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Segurança e governança
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Anonimização, face-masking e desidentificação de dados</li>
               <li>Backup e armazenamento seguro</li>
@@ -546,7 +580,15 @@
               <li>Estruturação para LGPD</li>
               <li>Reprodutibilidade científica</li>
             </ul>
-            <h4>Repositórios e Data Sharing</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Repositórios e data sharing
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Repositórios XNAT e Orthanc</li>
               <li>Data-sharing institucional</li>
@@ -555,14 +597,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Controle de qualidade (QA/QC)</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Controle de Qualidade (QA/QC)
+            Controle de qualidade em neuroimagem
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Controle de Qualidade em Neuroimagem</h4>
             <ul>
               <li>QC automatizado e visual</li>
               <li>Avaliação de movimento e artefatos</li>
@@ -575,14 +619,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Pré-processamento de neuroimagem</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Pré-processamento de Neuroimagem
+            fMRI
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>fMRI</h4>
             <ul>
               <li>Slice timing correction</li>
               <li>Motion correction</li>
@@ -594,7 +640,15 @@
               <li>Extração de séries temporais</li>
               <li>Pipelines compatíveis com fMRIPrep e Nilearn</li>
             </ul>
-            <h4>Difusão</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Difusão
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Eddy correction</li>
               <li>Motion correction</li>
@@ -606,14 +660,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Pós-processamento e análise de imagens</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Pós-Processamento e Análise de Imagens
+            Processamento avançado de neuroimagem
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Processamento Avançado de Neuroimagem</h4>
             <ul>
               <li>Pós-processamento quantitativo</li>
               <li>Volumetria cerebral automatizada</li>
@@ -623,7 +679,15 @@
               <li>Análises estruturais e funcionais avançadas</li>
               <li>Reconstrução de modelos avançados de difusão</li>
             </ul>
-            <h4>Neuroimagem Funcional</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Neuroimagem funcional
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Conectividade funcional</li>
               <li>ICA</li>
@@ -633,7 +697,15 @@
               <li>Modelagem temporal de eventos</li>
               <li>Grafos e conectomas</li>
             </ul>
-            <h4>Relatórios Quantitativos Especializados</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Relatórios quantitativos especializados
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Relatórios automatizados e customizados</li>
               <li>Relatórios clínicos e de pesquisa</li>
@@ -643,14 +715,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Inteligência artificial e desenvolvimento tecnológico</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Inteligência Artificial e Desenvolvimento Tecnológico
+            Desenvolvimento de ferramentas e IA
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Desenvolvimento de Ferramentas e IA</h4>
             <ul>
               <li>Desenvolvimento de algoritmos de IA aplicados à imagem médica</li>
               <li>Ferramentas de machine learning</li>
@@ -659,7 +733,15 @@
               <li>Desenvolvimento de novas metodologias de processamento</li>
               <li>Criação de soluções próprias para análise e gestão operacional</li>
             </ul>
-            <h4>Desenvolvimento de Software Científico</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Desenvolvimento de software científico
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Pipelines automatizados</li>
               <li>Dashboards operacionais</li>
@@ -671,14 +753,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Infraestrutura computacional e equipamentos</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Infraestrutura Computacional e Equipamentos
+            High Performance Computing (HPC)
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>High Performance Computing (HPC)</h4>
             <ul>
               <li>Cluster de processamento paralelo</li>
               <li>Workstations com GPUs dedicadas</li>
@@ -688,7 +772,15 @@
               <li>Armazenamento superior a 300 TB</li>
               <li>Processamento em larga escala</li>
             </ul>
-            <h4>Tecnologias Integradas</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Tecnologias integradas
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Siemens Prisma 3T</li>
               <li>Equipamentos GE em modo pesquisa (RKL)</li>
@@ -700,26 +792,52 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Plataformas e ferramentas utilizadas</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Plataformas e Ferramentas Utilizadas
+            Neuroimagem e processamento
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Neuroimagem e Processamento</h4>
             <ul>
               <li>FSL · FreeSurfer · Nilearn · MRtrix3 · SPM · CONN Toolbox · fMRIPrep · MRIQC</li>
             </ul>
-            <h4>Infraestrutura e Dados</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Infraestrutura e dados
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Docker · XNAT · Orthanc · AWS (Amazon Web Services)</li>
             </ul>
-            <h4>Pós-processamento Quantitativo</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Pós-processamento quantitativo
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Entelai · Cortechs.ai / NeuroQuant</li>
             </ul>
-            <h4>Equipamentos e Tecnologias</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Equipamentos e tecnologias
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>BrainAmp MR Plus (Brain Products)</li>
               <li>Cedrus Lumina Response Pads</li>
@@ -729,14 +847,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Gestão, consultoria e pesquisa</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Gestão, Consultoria e Pesquisa
+            Gestão de projetos
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Gestão de Projetos</h4>
             <ul>
               <li>Apoio no planejamento e coordenação de estudos</li>
               <li>Gerenciamento operacional de pesquisa</li>
@@ -745,7 +865,15 @@
               <li>Apoio na gestão de contratos e licenças</li>
               <li>Apoio a estudos multicêntricos</li>
             </ul>
-            <h4>Consultoria Especializada</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Consultoria especializada
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Consultoria em neuroimagem avançada</li>
               <li>Consultoria em protocolos de RM</li>
@@ -757,14 +885,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Capacitação e treinamento</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Capacitação e Treinamento
+            Workshops e treinamentos
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Workshops e Treinamentos</h4>
             <ul>
               <li>Hands-on em processamento de neuroimagem</li>
               <li>Workshop de fMRI funcional</li>
@@ -774,7 +904,15 @@
               <li>Controle de qualidade em neuroimagem</li>
               <li>Introdução à neuroimagem avançada</li>
             </ul>
-            <h4>Capacitação Customizada</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Capacitação customizada
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Treinamentos adaptados ao projeto da equipe</li>
               <li>Capacitação para grupos multicêntricos</li>
@@ -783,14 +921,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Aplicações clínicas e translacionais</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Aplicações Clínicas e Translacionais
+            Áreas de atuação
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Áreas de Atuação</h4>
             <ul>
               <li>Neurodegeneração e Alzheimer</li>
               <li>Esclerose múltipla</li>
@@ -804,7 +944,15 @@
               <li>Neuroimagem translacional</li>
               <li>Malformações do Sistema Nervoso Central</li>
             </ul>
-            <h4>Integração Pesquisa–Assistência</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Integração pesquisa–assistência
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Integração entre pesquisa, clínica e desenvolvimento tecnológico</li>
               <li>Aplicação translacional de biomarcadores</li>
@@ -813,14 +961,16 @@
             </ul>
           </div></div>
         </div>
+      </div>
 
+      <h2 class="lpi-section-title">Serviços para indústria e pesquisa translacional</h2>
+      <div class="accordion">
         <div class="accordion__item">
           <button class="accordion__trigger" onclick="toggleAccordion(this)">
-            Serviços para Indústria e Pesquisa Translacional
+            Pesquisa e desenvolvimento
             <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </button>
           <div class="accordion__body"><div class="accordion__body-inner">
-            <h4>Pesquisa e Desenvolvimento</h4>
             <ul>
               <li>Projetos colaborativos com universidades</li>
               <li>Pesquisa patrocinada</li>
@@ -829,7 +979,15 @@
               <li>Integração hardware/software médico</li>
               <li>Desenvolvimento translacional em IA e neuroimagem</li>
             </ul>
-            <h4>Serviços Especializados</h4>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Serviços especializados
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
             <ul>
               <li>Serviços turnkey para pesquisa</li>
               <li>Implementação operacional completa</li>
@@ -839,7 +997,6 @@
             </ul>
           </div></div>
         </div>
-
       </div>
 
       <div class="lpi-diff">
@@ -861,7 +1018,7 @@
       <p>Pesquisadores, grupos acadêmicos, instituições de pesquisa, hospitais, clínicas e empresas interessados nos serviços do LPI podem solicitar uma avaliação técnica e orçamento personalizado.</p>
       <p>Para solicitar um orçamento, entre em contato pelo e-mail <a href="mailto:lpi@idor.org">lpi@idor.org</a>.</p>
 
-      <h4 style="font-size:14px;font-weight:700;color:var(--gray-900);margin:24px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Informações recomendadas para a solicitação</h4>
+      <h4 style="font-size:15px;font-weight:600;color:var(--gray-900);margin:24px 0 8px;">Informações recomendadas para a solicitação</h4>
       <ul style="padding-left:22px;color:var(--gray-700);line-height:1.7;">
         <li>Nome do solicitante</li>
         <li>Instituição / empresa</li>
@@ -875,7 +1032,7 @@
       </ul>
       <p>A equipe do LPI avaliará a viabilidade técnica, disponibilidade de infraestrutura, requisitos operacionais e escopo do serviço para elaboração da proposta.</p>
 
-      <h4 style="font-size:14px;font-weight:700;color:var(--gray-900);margin:24px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Principais solicitações disponíveis</h4>
+      <h4 style="font-size:15px;font-weight:600;color:var(--gray-900);margin:24px 0 8px;">Principais solicitações disponíveis</h4>
       <ul style="padding-left:22px;color:var(--gray-700);line-height:1.7;">
         <li>Orçamento</li>
         <li>Aquisição de imagens para pesquisa</li>
