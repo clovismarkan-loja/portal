@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LPI — Laboratório de Pesquisa e Investigação — Portal do Pesquisador IDOR</title>
+  <title>LPI — Laboratório de Processamento de Imagens — Portal do Pesquisador IDOR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -163,6 +163,106 @@
       font-size: 17px;
       color: var(--gray-600);
     }
+    /* --- Accordion --- */
+    .accordion { max-width: 100%; margin: 32px 0; }
+    .accordion__item {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid var(--gray-200);
+    }
+    .accordion__item:last-child { margin-bottom: 0; }
+    .accordion__trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--blue-900);
+      text-align: left;
+      transition: background .2s ease;
+    }
+    .accordion__trigger:hover { background: var(--gray-50); }
+    .accordion__trigger .icon { color: var(--gray-400); display: inline-flex; transition: transform .25s ease; }
+    .accordion__item.open .accordion__trigger .icon { transform: rotate(180deg); }
+    .accordion__body {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      transition: max-height .4s ease, padding .4s ease;
+    }
+    .accordion__item.open .accordion__body {
+      max-height: 1200px;
+      padding: 0 24px 24px;
+    }
+    .accordion__body-inner { padding-top: 4px; }
+    .accordion__body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 16px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .accordion__body h4:first-child { margin-top: 0; }
+    .accordion__body ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 0 0 12px;
+    }
+    .accordion__body ul li {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--gray-700);
+      margin-bottom: 4px;
+    }
+    /* Differentials block */
+    .lpi-diff {
+      background: var(--blue-900);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin: 32px 0;
+    }
+    .lpi-diff h3 {
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 16px;
+    }
+    .lpi-diff ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 24px;
+    }
+    .lpi-diff ul li {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(255,255,255,.92);
+      padding-left: 22px;
+      position: relative;
+    }
+    .lpi-diff ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    @media (max-width: 700px) { .lpi-diff ul { grid-template-columns: 1fr; } }
     .nape-quote {
       background: #fff;
       border-left: 4px solid var(--gold);
@@ -371,43 +471,437 @@
         <span>&rsaquo;</span>
         LPI
       </nav>
-      <h1>LPI — Laboratório de Pesquisa e Investigação</h1>
-      <p>Infraestrutura completa para experimentos de bancada com equipamentos de alta resolução.</p>
+      <h1>LPI — Laboratório de Processamento de Imagens</h1>
+      <p>Aquisição avançada, processamento e análise de imagens médicas; IA aplicada à neuroimagem.</p>
     </div>
   </div>
 
   <!-- ===== APRESENTAÇÃO ===== -->
   <section class="section">
     <div class="nape-content">
-      <p>O <strong>Laboratório de Pesquisa e Investigação (LPI)</strong> reúne em um espaço único equipamentos de alta resolução, protocolos validados e suporte técnico especializado para apoiar a execução de experimentos de bancada nos projetos da Rede D'Or São Luiz.</p>
+      <p>O <strong>Laboratório de Processamento de Imagens (LPI)</strong> atua em pesquisa, desenvolvimento tecnológico, aquisição avançada de imagens médicas, processamento de neuroimagem, inteligência artificial e infraestrutura computacional aplicada à saúde.</p>
 
-      <div class="nape-quote">
-        Nosso compromisso é oferecer condições ideais para que pesquisadores conduzam experimentos com rigor metodológico, qualidade analítica e reprodutibilidade.
+      <p>O laboratório reúne equipe multidisciplinar e infraestrutura avançada para suporte a projetos clínicos, acadêmicos, multicêntricos e industriais, integrando aquisição, processamento, análise, desenvolvimento tecnológico e suporte científico em imagem avançada.</p>
+
+      <div class="accordion">
+
+        <div class="accordion__item open">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Aquisição de Imagens Médicas
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Desenvolvimento e otimização de protocolos avançados de RM</h4>
+            <ul>
+              <li>Protocolos anatômicos de alta resolução: T1, T2, FLAIR, SWI, QSM…</li>
+              <li>Difusão avançada (dMRI): DTI, DKI, DSI, HARDI, multi-shell, dwi_HCP…</li>
+              <li>RM funcional (fMRI): resting-state, task-based, event-related</li>
+              <li>EEG-fMRI simultâneo</li>
+              <li>Neurofeedback em tempo real</li>
+              <li>RM fetal, dentre outros</li>
+              <li>Protocolos personalizados conforme hipótese clínica ou desenho do estudo</li>
+            </ul>
+            <h4>Aquisição para Pesquisa Científica</h4>
+            <ul>
+              <li>Aquisição de imagens para projetos de pesquisa multicêntricos</li>
+              <li>Suporte operacional e metodológico</li>
+              <li>Planejamento de aquisição para pesquisa clínica e translacional</li>
+              <li>Padronização e harmonização de protocolos</li>
+              <li>Execução padronizada para reprodutibilidade científica</li>
+              <li>Apoio em estudos longitudinais e multicêntricos</li>
+            </ul>
+            <h4>Suporte Operacional à Aquisição</h4>
+            <ul>
+              <li>Treinamento presencial e remoto</li>
+              <li>Acompanhamento em tempo real dos exames</li>
+              <li>Suporte especializado durante aquisição</li>
+              <li>Monitoramento de qualidade durante aquisição</li>
+              <li>Implantação de protocolos em unidades parceiras</li>
+              <li>Acesso remoto aos equipamentos de RM</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Organização e Gerenciamento de Dados
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Estruturação e Curadoria de Dados</h4>
+            <ul>
+              <li>Conversão DICOM → NIfTI</li>
+              <li>Organização conforme padrão BIDS</li>
+              <li>Curadoria e organização de datasets</li>
+              <li>Estruturação de bancos de dados clínicos e de pesquisa</li>
+              <li>Estruturação de datasets multicêntricos</li>
+              <li>Controle de versões e rastreabilidade</li>
+            </ul>
+            <h4>Segurança e Governança</h4>
+            <ul>
+              <li>Anonimização, face-masking e desidentificação de dados</li>
+              <li>Backup e armazenamento seguro</li>
+              <li>Fluxos seguros de compartilhamento</li>
+              <li>Integração segura cloud + on-premise</li>
+              <li>Estruturação para LGPD</li>
+              <li>Reprodutibilidade científica</li>
+            </ul>
+            <h4>Repositórios e Data Sharing</h4>
+            <ul>
+              <li>Repositórios XNAT e Orthanc</li>
+              <li>Data-sharing institucional</li>
+              <li>Bases para IA e pesquisa longitudinal</li>
+              <li>Integração com plataformas multicêntricas</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Controle de Qualidade (QA/QC)
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Controle de Qualidade em Neuroimagem</h4>
+            <ul>
+              <li>QC automatizado e visual</li>
+              <li>Avaliação de movimento e artefatos</li>
+              <li>MRIQC</li>
+              <li>QC de difusão (QUAD / SQUAD)</li>
+              <li>Scrubbing e avaliação temporal em fMRI</li>
+              <li>Controle de qualidade multicêntrico</li>
+              <li>Relatórios técnicos</li>
+              <li>Monitoramento de consistência operacional</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Pré-processamento de Neuroimagem
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>fMRI</h4>
+            <ul>
+              <li>Slice timing correction</li>
+              <li>Motion correction</li>
+              <li>Spatial normalization</li>
+              <li>Smoothing</li>
+              <li>Correção fisiológica</li>
+              <li>Correção de susceptibilidade</li>
+              <li>Regressão de ruído</li>
+              <li>Extração de séries temporais</li>
+              <li>Pipelines compatíveis com fMRIPrep e Nilearn</li>
+            </ul>
+            <h4>Difusão</h4>
+            <ul>
+              <li>Eddy correction</li>
+              <li>Motion correction</li>
+              <li>Correção de susceptibilidade</li>
+              <li>Correção EPI</li>
+              <li>Reconstrução tensorial</li>
+              <li>Reconstrução de modelos avançados</li>
+              <li>Avaliação de gradientes e volumes corrompidos</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Pós-Processamento e Análise de Imagens
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Processamento Avançado de Neuroimagem</h4>
+            <ul>
+              <li>Pós-processamento quantitativo</li>
+              <li>Volumetria cerebral automatizada</li>
+              <li>Conectividade funcional e estrutural</li>
+              <li>Tractografia determinística e probabilística</li>
+              <li>Biomarcadores quantitativos</li>
+              <li>Análises estruturais e funcionais avançadas</li>
+              <li>Reconstrução de modelos avançados de difusão</li>
+            </ul>
+            <h4>Neuroimagem Funcional</h4>
+            <ul>
+              <li>Conectividade funcional</li>
+              <li>ICA</li>
+              <li>Seed-based analysis</li>
+              <li>GLM</li>
+              <li>Mapas de ativação</li>
+              <li>Modelagem temporal de eventos</li>
+              <li>Grafos e conectomas</li>
+            </ul>
+            <h4>Relatórios Quantitativos Especializados</h4>
+            <ul>
+              <li>Relatórios automatizados e customizados</li>
+              <li>Relatórios clínicos e de pesquisa</li>
+              <li>Processamento centralizado em infraestrutura IDOR</li>
+              <li>Integração com AWS e Orthanc</li>
+              <li>Relatórios quantitativos para: doenças neurodegenerativas, esclerose múltipla, doenças desmielinizantes, biomarcadores estruturais e funcionais</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Inteligência Artificial e Desenvolvimento Tecnológico
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Desenvolvimento de Ferramentas e IA</h4>
+            <ul>
+              <li>Desenvolvimento de algoritmos de IA aplicados à imagem médica</li>
+              <li>Ferramentas de machine learning</li>
+              <li>Sistemas de automação e anotação</li>
+              <li>Extração de biomarcadores</li>
+              <li>Desenvolvimento de novas metodologias de processamento</li>
+              <li>Criação de soluções próprias para análise e gestão operacional</li>
+            </ul>
+            <h4>Desenvolvimento de Software Científico</h4>
+            <ul>
+              <li>Pipelines automatizados</li>
+              <li>Dashboards operacionais</li>
+              <li>Sistemas web para gestão de exames e pesquisa</li>
+              <li>Plataformas de processamento de imagens</li>
+              <li>Integração entre PACS, APIs e ambientes de processamento</li>
+              <li>Desenvolvimento de microserviços</li>
+              <li>Soluções para workflows clínicos e científicos</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Infraestrutura Computacional e Equipamentos
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>High Performance Computing (HPC)</h4>
+            <ul>
+              <li>Cluster de processamento paralelo</li>
+              <li>Workstations com GPUs dedicadas</li>
+              <li>Infraestrutura híbrida on-premise + cloud</li>
+              <li>Data center hospedado na Equinix</li>
+              <li>Integração com AWS</li>
+              <li>Armazenamento superior a 300 TB</li>
+              <li>Processamento em larga escala</li>
+            </ul>
+            <h4>Tecnologias Integradas</h4>
+            <ul>
+              <li>Siemens Prisma 3T</li>
+              <li>Equipamentos GE em modo pesquisa (RKL)</li>
+              <li>EEG-fMRI</li>
+              <li>Eye-tracking</li>
+              <li>tDCS e tMS</li>
+              <li>2× NIRS</li>
+              <li>Neurofeedback em tempo real</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Plataformas e Ferramentas Utilizadas
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Neuroimagem e Processamento</h4>
+            <ul>
+              <li>FSL · FreeSurfer · Nilearn · MRtrix3 · SPM · CONN Toolbox · fMRIPrep · MRIQC</li>
+            </ul>
+            <h4>Infraestrutura e Dados</h4>
+            <ul>
+              <li>Docker · XNAT · Orthanc · AWS (Amazon Web Services)</li>
+            </ul>
+            <h4>Pós-processamento Quantitativo</h4>
+            <ul>
+              <li>Entelai · Cortechs.ai / NeuroQuant</li>
+            </ul>
+            <h4>Equipamentos e Tecnologias</h4>
+            <ul>
+              <li>BrainAmp MR Plus (Brain Products)</li>
+              <li>Cedrus Lumina Response Pads</li>
+              <li>NordicNeuroLab</li>
+              <li>Siemens Healthineers Prisma 3T</li>
+              <li>GE HealthCare MRI Systems</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Gestão, Consultoria e Pesquisa
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Gestão de Projetos</h4>
+            <ul>
+              <li>Apoio no planejamento e coordenação de estudos</li>
+              <li>Gerenciamento operacional de pesquisa</li>
+              <li>Apoio técnico-científico</li>
+              <li>Gestão de exames e relatórios</li>
+              <li>Apoio na gestão de contratos e licenças</li>
+              <li>Apoio a estudos multicêntricos</li>
+            </ul>
+            <h4>Consultoria Especializada</h4>
+            <ul>
+              <li>Consultoria em neuroimagem avançada</li>
+              <li>Consultoria em protocolos de RM</li>
+              <li>Apoio metodológico em pesquisa</li>
+              <li>Consultoria científica em neuroimagem</li>
+              <li>Padronização multicêntrica</li>
+              <li>Capacitação técnica de equipes</li>
+              <li>Implementação de protocolos em hospitais e centros parceiros</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Capacitação e Treinamento
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Workshops e Treinamentos</h4>
+            <ul>
+              <li>Hands-on em processamento de neuroimagem</li>
+              <li>Workshop de fMRI funcional</li>
+              <li>Workshop de difusão avançada</li>
+              <li>Capacitação em pipelines de RM</li>
+              <li>Capacitação em organização BIDS</li>
+              <li>Controle de qualidade em neuroimagem</li>
+              <li>Introdução à neuroimagem avançada</li>
+            </ul>
+            <h4>Capacitação Customizada</h4>
+            <ul>
+              <li>Treinamentos adaptados ao projeto da equipe</li>
+              <li>Capacitação para grupos multicêntricos</li>
+              <li>Treinamento remoto e presencial</li>
+              <li>Apoio à implementação local de protocolos</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Aplicações Clínicas e Translacionais
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Áreas de Atuação</h4>
+            <ul>
+              <li>Neurodegeneração e Alzheimer</li>
+              <li>Esclerose múltipla</li>
+              <li>Psiquiatria</li>
+              <li>Epilepsia</li>
+              <li>Neurocirurgia</li>
+              <li>RM fetal</li>
+              <li>Neuromodulação</li>
+              <li>Biomarcadores de imagem</li>
+              <li>Conectividade cerebral</li>
+              <li>Neuroimagem translacional</li>
+              <li>Malformações do Sistema Nervoso Central</li>
+            </ul>
+            <h4>Integração Pesquisa–Assistência</h4>
+            <ul>
+              <li>Integração entre pesquisa, clínica e desenvolvimento tecnológico</li>
+              <li>Aplicação translacional de biomarcadores</li>
+              <li>Apoio a protocolos clínicos avançados</li>
+              <li>Desenvolvimento de soluções quantitativas para apoio diagnóstico</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" onclick="toggleAccordion(this)">
+            Serviços para Indústria e Pesquisa Translacional
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="accordion__body"><div class="accordion__body-inner">
+            <h4>Pesquisa e Desenvolvimento</h4>
+            <ul>
+              <li>Projetos colaborativos com universidades</li>
+              <li>Pesquisa patrocinada</li>
+              <li>Estudos multicêntricos</li>
+              <li>Desenvolvimento conjunto com indústria</li>
+              <li>Integração hardware/software médico</li>
+              <li>Desenvolvimento translacional em IA e neuroimagem</li>
+            </ul>
+            <h4>Serviços Especializados</h4>
+            <ul>
+              <li>Serviços turnkey para pesquisa</li>
+              <li>Implementação operacional completa</li>
+              <li>Suporte a centros parceiros</li>
+              <li>Apoio à expansão de protocolos avançados</li>
+              <li>Integração clínica e científica</li>
+            </ul>
+          </div></div>
+        </div>
+
       </div>
 
-      <h3>Equipamentos e serviços</h3>
-      <p>O LPI conta com microscópios confocais, citômetros de fluxo, termocicladores em tempo real, plataformas de sequenciamento e demais equipamentos voltados a estudos celulares, moleculares e de genética. A equipe do laboratório auxilia desde o desenho experimental até a operação dos equipamentos.</p>
+      <div class="lpi-diff">
+        <h3>Diferenciais do LPI</h3>
+        <ul>
+          <li>Equipe multidisciplinar (física médica, engenharia, ciência de dados, IA, radiologia, TI)</li>
+          <li>Infraestrutura integrada cloud + HPC</li>
+          <li>Contratos de pesquisa com Siemens, GE e United Imaging</li>
+          <li>Forte atuação em neuroimagem avançada</li>
+          <li>Expertise em estudos multicêntricos</li>
+          <li>Processamento em larga escala</li>
+          <li>Desenvolvimento próprio de software científico</li>
+          <li>Integração entre pesquisa, clínica e inovação tecnológica</li>
+          <li>Suporte completo: aquisição, processamento, análise, desenvolvimento, suporte científico e publicação</li>
+        </ul>
+      </div>
 
-      <p>Também oferecemos serviços de cultivo celular, extração e purificação de ácidos nucleicos, ensaios funcionais e suporte técnico durante todas as etapas do experimento.</p>
+      <h3>Solicite seu orçamento</h3>
+      <p>Pesquisadores, grupos acadêmicos, instituições de pesquisa, hospitais, clínicas e empresas interessados nos serviços do LPI podem solicitar uma avaliação técnica e orçamento personalizado.</p>
+      <p>Para solicitar um orçamento, entre em contato pelo e-mail <a href="mailto:lpi@idor.org">lpi@idor.org</a>.</p>
 
-      <h3>Agendamento e uso</h3>
-      <p>A utilização dos equipamentos depende de aprovação prévia do projeto pelo NAPE. Após autorizado, o pesquisador pode agendar horários de uso, solicitar treinamento específico e contar com acompanhamento técnico durante a execução das atividades.</p>
+      <h4 style="font-size:14px;font-weight:700;color:var(--gray-900);margin:24px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Informações recomendadas para a solicitação</h4>
+      <ul style="padding-left:22px;color:var(--gray-700);line-height:1.7;">
+        <li>Nome do solicitante</li>
+        <li>Instituição / empresa</li>
+        <li>Tipo de projeto ou serviço desejado</li>
+        <li>Modalidade de imagem</li>
+        <li>Número estimado de participantes ou exames</li>
+        <li>Unidade ou local de interesse</li>
+        <li>Necessidade de aquisição, processamento, análise, banco de dados ou treinamento</li>
+        <li>Prazo desejado</li>
+        <li>Breve descrição dos objetivos do estudo</li>
+      </ul>
+      <p>A equipe do LPI avaliará a viabilidade técnica, disponibilidade de infraestrutura, requisitos operacionais e escopo do serviço para elaboração da proposta.</p>
 
-      <div class="nape-callout">
-        <svg class="nape-callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <div class="nape-callout__body">
-          <strong>Importante!</strong>
-          <p>Todos os procedimentos no LPI seguem rígidos padrões de biossegurança e boas práticas laboratoriais (BPL), em conformidade com as diretrizes da Anvisa.</p>
-        </div>
+      <h4 style="font-size:14px;font-weight:700;color:var(--gray-900);margin:24px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Principais solicitações disponíveis</h4>
+      <ul style="padding-left:22px;color:var(--gray-700);line-height:1.7;">
+        <li>Orçamento</li>
+        <li>Aquisição de imagens para pesquisa</li>
+        <li>Processamento e análise de neuroimagem</li>
+        <li>Acesso a dados de imagens</li>
+        <li>Acesso ao processamento em cluster local</li>
+        <li>Acesso ao processamento em AWS</li>
+        <li>Acesso ao XNAT</li>
+        <li>Consultoria em protocolos de RM</li>
+        <li>Treinamentos e capacitações</li>
+        <li>Suporte a estudos multicêntricos</li>
+      </ul>
+
+      <h3>Contatos</h3>
+      <div class="nape-contacts">
+        <strong>Laboratório de Processamento de Imagens (LPI)</strong><br>
+        E-mail: <a href="mailto:lpi@idor.org">lpi@idor.org</a>
       </div>
     </div>
   </section>
 
   <!-- ===== CTA ===== -->
   <section class="nape-cta">
-    <h3>Quer reservar um equipamento ou agendar suporte técnico?</h3>
-    <p>Acesse o sistema de agendamento e fale com a equipe do laboratório.</p>
-    <a href="#" class="btn">Agendar uso do LPI <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+    <h3>Pronto para iniciar um projeto com o LPI?</h3>
+    <p>Solicite uma avaliação técnica e um orçamento personalizado para seu estudo.</p>
+    <a href="mailto:lpi@idor.org" class="btn">Solicitar orçamento <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   </section>
 
   <!-- ===== FOOTER ===== -->
