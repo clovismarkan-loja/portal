@@ -413,8 +413,10 @@ img { max-width: 100%; display: block; }
 /* Restricted card: gray ribbon + lock icon + 'Área restrita' */
 .cat-card--restricted { padding-bottom: 64px; align-content: start; }
 
-/* Logged-out: hide the entire restricted card (only visible to logged-in users) */
-.logged-out .cat-card--restricted { display: none !important; }
+/* Logged-out: ocultar APENAS a faixa 'Área restrita', mantendo o card clicavel
+   (o handler de login intercepta o clique e abre o modal de login) */
+.logged-out .cat-card--restricted { padding-bottom: 20px; }
+.logged-out .cat-card--restricted::after { display: none; }
 .cat-card--restricted::after {
   content: 'Área restrita';
   position: absolute;
