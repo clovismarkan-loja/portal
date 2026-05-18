@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal do Pesquisador — IDOR</title>
+  <title>Portal do Pesquisador — IDOR (v4)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -12,32 +12,256 @@
 
     /* Use native body scroll instead of wrapper scroll */
     html { scroll-behavior: smooth; }
-    .home-wrapper {
-      position: relative;
-      z-index: 1;
-      pointer-events: none; /* let clicks fall through to hero behind */
-    }
-    .home-wrapper > .home-content { pointer-events: auto; }
-    .hero-spacer { pointer-events: none; }
+    .home-wrapper { position: relative; z-index: 1; }
+    .hero-spacer { display: none; }
 
     /* Force white everywhere */
     body { background: #fff !important; }
 
-    /* --- HERO: fixed behind content (curtain effect) --- */
+    /* --- HERO (v4): white background, asymmetric layout --- */
     .hero--home {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100vh;
-      margin-top: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 460px;
+      background: #ffffff;
+      padding: var(--header-h) 0 0;
       overflow: hidden;
+      color: var(--gray-900);
+    }
+    .hero--home::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -40px;
+      width: 360px;
+      height: 180px;
+      background-image: radial-gradient(rgba(1,73,142,.18) 6px, transparent 6px);
+      background-size: 28px 28px;
+      opacity: .5;
+      pointer-events: none;
       z-index: 0;
-      background: #fff;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 60px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-left { color: var(--gray-900); }
+    .hero-left__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 44px;
+      font-weight: 600;
+      color: var(--blue-900);
+      letter-spacing: -.8px;
+      line-height: 1.15;
+      margin: 0 0 20px;
+    }
+    .hero-left__desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--gray-600);
+      margin: 0 0 32px;
+      max-width: 480px;
+    }
+    .hero-left__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-900);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      padding: 14px 0;
+      transition: gap .2s ease, color .2s ease;
+    }
+    .hero-left__btn:hover { color: var(--gold-dark); gap: 12px; }
+
+    /* Right side: stack-fade mini carousel */
+    .hero-right { position: relative; }
+    .hero-carousel-mini {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .hero-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 36px 28px;
+      background-color: #001a4a;
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      opacity: 0;
+      transform: translate3d(0, 28px, 0) scale(.90);
+      filter: blur(10px);
+      transition: opacity .9s cubic-bezier(.7,0,.2,1),
+                  transform .9s cubic-bezier(.7,0,.2,1),
+                  filter .9s cubic-bezier(.7,0,.2,1),
+                  box-shadow .9s ease;
+      pointer-events: none;
+      will-change: transform, opacity, filter;
+      z-index: 0;
+      border-radius: 20px;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(0,30,80,.82) 0%, rgba(0,15,50,.55) 60%, rgba(0,15,50,.25) 100%);
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .hero-card > * { position: relative; z-index: 1; }
+    .hero-card.is-active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+      pointer-events: auto;
+      z-index: 2;
+      box-shadow: 0 18px 48px rgba(0, 30, 80, .28), 0 4px 14px rgba(0, 0, 0, .10);
+    }
+    .hero-card.is-prev {
+      opacity: .28;
+      transform: translate3d(0, 0, 0) scale(.96);
+      filter: blur(8px);
+      z-index: 1;
+    }
+    /* Subtle stagger on content fade-in */
+    .hero-card > .hero-card__top,
+    .hero-card > .hero-card__title,
+    .hero-card > .hero-card__desc,
+    .hero-card > .hero-card__bottom {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .5s ease, transform .6s cubic-bezier(.22,.61,.36,1);
+    }
+    .hero-card.is-active > .hero-card__top { opacity: 1; transform: translateY(0); transition-delay: .15s; }
+    .hero-card.is-active > .hero-card__title { opacity: 1; transform: translateY(0); transition-delay: .25s; }
+    .hero-card.is-active > .hero-card__desc { opacity: 1; transform: translateY(0); transition-delay: .35s; }
+    .hero-card.is-active > .hero-card__bottom { opacity: 1; transform: translateY(0); transition-delay: .45s; }
+
+    .hero-card__date {
+      display: inline-block;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--gold);
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: .5px;
+    }
+    .hero-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .hero-card__title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -.4px;
+      color: var(--white);
+      margin: 0 0 12px;
+    }
+    .hero-card__category {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.18);
+      color: var(--white);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+    .hero-card__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.9);
+      line-height: 1.55;
+      margin: 0 0 16px;
+    }
+    .hero-card__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .hero-card__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+    .hero-card__btn:hover { background: var(--gold-dark); color: var(--white); }
+    .hero-card__tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .hero-card__tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--white);
+      color: var(--gray-600);
+      padding: 0 10px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .hero-carousel__dots {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .hero-carousel__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(29,29,30,.25);
+      border: none;
+      cursor: pointer;
+      transition: background .25s ease, transform .25s ease, width .25s ease;
+      padding: 0;
+    }
+    .hero-carousel__dot:hover { background: rgba(29,29,30,.45); }
+    .hero-carousel__dot.is-active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-left__title { font-size: 32px; }
+      .hero-carousel-mini { height: 340px; }
+    }
+    @media (max-width: 600px) {
+      .hero-card { padding: 24px 24px 20px; }
     }
     /* Spacer to push content below the fixed hero */
     .hero-spacer {
@@ -167,6 +391,10 @@
     .hero-filter.active { color: #009681; border-bottom-color: #009681; }
     .hero-filter.active svg { opacity: 1; }
 
+    /* v4 hero-left: align search + filters to the left (asymmetric layout) */
+    .hero-left .search-box { margin: 20px 0 0; max-width: 80%; width: 80%; }
+    .hero-left .hero-filters { justify-content: flex-start; gap: 22px; margin-top: 18px; }
+
     /* Scroll indicator */
     .scroll-hint {
       position: absolute;
@@ -208,35 +436,22 @@
     /* --- CONTENT PANEL: slides over fixed hero --- */
     .home-content {
       position: relative;
-      z-index: 3;
       z-index: 2;
       background: var(--white);
       min-height: 100vh;
-      border-radius: 24px 24px 0 0;
-      box-shadow: 0 -8px 40px rgba(0,0,0,.1);
+      border-radius: 0;
+      box-shadow: none;
     }
     .home-content::before { display: none; }
 
-    /* Animate cards */
-    .home-content .cat-card,
-    .home-content .opp-card,
-    .home-content .article-card {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .home-content .cat-card.visible,
-    .home-content .opp-card.visible,
-    .home-content .article-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
-    /* Header */
-    .header.header--home {
-      background: transparent !important;
-      box-shadow: none !important;
-      transition: background .4s ease, box-shadow .4s ease;
+    /* Header — white bg + gray text + soft shadow (always, on v4) */
+    #homeHeader.header,
+    #homeHeader.header.header--solid,
+    .header.header--home,
+    .header.header--home.header--solid {
+      background: #ffffff !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08) !important;
     }
     .header--home .header__title { color: #1d1d1e; }
     .header--home .header__nav a { color: rgba(29,29,30,.6); }
@@ -254,11 +469,6 @@
     .header--home .header-search-toggle:hover { color: #1d1d1e; }
     .header--home .mega-trigger__link { color: rgba(29,29,30,.6) !important; }
     .header--home .mega-trigger__link:hover { color: #1d1d1e !important; }
-
-    .header.header--home.header--solid {
-      background: var(--white) !important;
-      box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
-    }
 
     .header__logo-img { height: 40px; width: auto; }
     .header__right { display: flex; align-items: center; gap: 8px; }
@@ -426,7 +636,7 @@
     /* Card colors by status */
     /* Aberto = light blue */
     #sectionEditais .opp-card--open {
-      background: var(--blue-100);
+      background: var(--white);
       color: var(--gray-900);
     }
     /* Urgente = dark blue */
@@ -457,7 +667,7 @@
       background: var(--white);
       color: var(--gray-300);
     }
-    #sectionEditais { position: relative; overflow: hidden; }
+    #sectionEditais { position: relative; overflow: hidden; background: #f4f4f1; }
     #sectionEditais::before {
       content: '';
       position: absolute;
@@ -582,10 +792,28 @@
     /* Dots indicator */
     .carousel__dots {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 8px;
+      margin: 0;
+    }
+    .carousel__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
       margin-top: 24px;
     }
+    .carousel__see-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-900);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color .2s ease, gap .2s ease;
+    }
+    .carousel__see-all:hover { color: var(--gold-dark); gap: 12px; }
     .carousel__dot {
       width: 10px;
       height: 10px;
@@ -837,9 +1065,10 @@
       .home-content { border-radius: 16px 16px 0 0; }
       .home-content > .section:first-child { padding-top: 48px; }
       /* Header solid on mobile always */
+      #homeHeader.header,
       .header.header--home {
-        background: var(--white) !important;
-        box-shadow: 0 1px 8px rgba(0,0,0,.06) !important;
+        background: #ffffff !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,.08) !important;
       }
       .header--home .header__title { color: #1d1d1e !important; }
       .header--home .menu-toggle { color: #1d1d1e !important; }
@@ -1059,7 +1288,7 @@
       <a href="#sectionEventos" onclick="closeMobileNavDirect()">Programação e Eventos</a>
       <a href="#sectionEditais" onclick="closeMobileNavDirect()">Grants e Oportunidades</a>
       <a href="#sectionEditaisIdor" onclick="closeMobileNavDirect()">Editais IDOR</a>
-      <div>
+      <div class="show-logged-in">
         <div class="mobile-nav__submenu-trigger" onclick="this.classList.toggle('open')">
           <span>Serviços para Pesquisadores</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1086,21 +1315,15 @@
     </div>
   </div>
 
-<!-- HERO: fixed behind everything -->
+<!-- HERO v4: white, asymmetric (text+search left + mini carousel right) -->
   <section class="hero hero--home">
-
-      <!-- Background Video -->
-      <video class="hero__bg-video" autoplay muted loop playsinline>
-        <source src="video-banner-3.mp4" type="video/mp4">
-      </video>
-
-      <!-- Content -->
-      <div class="hero__content">
-        <h1 class="hero__title"><span class="hero__title-gray">Procure informações sobre serviços e</span> <span class="hero__title-grad">Plataformas do IDOR</span></h1>
-        <p class="hero__desc">Encontre artigos, editais, oportunidades de financiamento e servicos de apoio a pesquisa</p>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-left__title">Bem-vindo ao Portal do Pesquisador IDOR</h1>
+        <p class="hero-left__desc">Encontre artigos, editais, oportunidades de financiamento e serviços de apoio à pesquisa.</p>
         <form class="search-box" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
           <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" name="q" placeholder="Busque por servicos, artigos, oportunidades, editais...">
+          <input type="text" name="q">
           <button type="submit">Buscar</button>
         </form>
         <div class="hero-filters">
@@ -1108,13 +1331,13 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             Todos
           </a>
-<a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
+          <a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Oportunidades
           </a>
           <a href="#sectionServicosRestritos" class="hero-filter" data-scroll="sectionServicosRestritos">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Servicos
+            Serviços
           </a>
           <a href="#sectionEditaisIdor" class="hero-filter" data-scroll="sectionEditaisIdor">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
@@ -1122,11 +1345,84 @@
           </a>
         </div>
       </div>
-
-      <div class="scroll-hint">
-        <div class="scroll-hint__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
-        <span>Áreas de Serviço</span>
+      <div class="hero-right">
+        <div class="hero-carousel-mini" id="heroCarouselTrack">
+        <article class="hero-card is-active" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">22 mai 2026</span>
+            <span class="hero-card__category">Evento</span>
+          </div>
+          <h2 class="hero-card__title">VIII Simpósio IDOR de Neurociência</h2>
+          <p class="hero-card__desc">Encontro anual reunindo pesquisadores e clínicos para discutir avanços em neurociência translacional.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">IDOR Botafogo</span><span class="hero-card__tag">Neurociência</span><span class="hero-card__tag">Presencial</span></div>
+          </div>
+        </article>
+        <article class="hero-card" data-bg="imagem-banner-interno.jpg" style="background-image: url('imagem-banner-interno.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">28 mai 2026</span>
+            <span class="hero-card__category">Workshop</span>
+          </div>
+          <h2 class="hero-card__title">Estatística aplicada à pesquisa clínica</h2>
+          <p class="hero-card__desc">Workshop online em R sobre testes de hipótese, regressão e análise de sobrevida para ensaios clínicos.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">Online</span><span class="hero-card__tag">Estatística</span><span class="hero-card__tag">Capacitação</span></div>
+          </div>
+        </article>
+        <article class="hero-card" data-bg="imagem-banner-interno-2.jpg" style="background-image: url('imagem-banner-interno-2.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">5 jun 2026</span>
+            <span class="hero-card__category">Urgente</span>
+          </div>
+          <h2 class="hero-card__title">Capacitação REDCap Avançado</h2>
+          <p class="hero-card__desc">Treinamento intensivo sobre fluxos complexos, automações via API e gestão de bases multicêntricas.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">IDOR Jabaquara</span><span class="hero-card__tag">REDCap</span><span class="hero-card__tag">Sistemas</span></div>
+          </div>
+        </article>
+        <article class="hero-card" data-bg="bg-login.jpg" style="background-image: url('bg-login.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">12 jun 2026</span>
+            <span class="hero-card__category">Seminário</span>
+          </div>
+          <h2 class="hero-card__title">Seminário Open Science</h2>
+          <p class="hero-card__desc">Bate-papo sobre ciência aberta, plano de gestão de dados, pré-prints e princípios FAIR.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">Online</span><span class="hero-card__tag">Open Science</span></div>
+          </div>
+        </article>
+        <article class="hero-card" data-bg="News Background 01.jpg" style="background-image: url('News Background 01.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">18 a 20 jun 2026</span>
+            <span class="hero-card__category">Congresso</span>
+          </div>
+          <h2 class="hero-card__title">Congresso de Oncologia Translacional</h2>
+          <p class="hero-card__desc">Três dias de palestras com líderes nacionais e internacionais sobre terapias-alvo e imunoterapia.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">IDOR Botafogo</span><span class="hero-card__tag">Oncologia</span><span class="hero-card__tag">Translacional</span></div>
+          </div>
+        </article>
+        <article class="hero-card" data-bg="imagem-hero-banner.jpg" style="background-image: url('imagem-hero-banner.jpg')">
+          <div class="hero-card__top">
+            <span class="hero-card__date">25 jun 2026</span>
+            <span class="hero-card__category">Workshop</span>
+          </div>
+          <h2 class="hero-card__title">Submissão de propostas FAPESP</h2>
+          <p class="hero-card__desc">Orientação prática para preparação de propostas a editais FAPESP — estrutura, orçamento, justificativa.</p>
+          <div class="hero-card__bottom">
+            <a href="#" class="hero-card__btn">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+            <div class="hero-card__tags"><span class="hero-card__tag">Online</span><span class="hero-card__tag">FAPESP</span><span class="hero-card__tag">Captação</span></div>
+          </div>
+        </article>
+        </div>
+        <div class="hero-carousel__dots" id="heroCarouselDots"></div>
       </div>
+    </div>
   </section>
 
   <!-- SCROLL WRAPPER -->
@@ -1140,217 +1436,191 @@
     <!-- CONTENT PANEL -->
     <div class="home-content" id="homeContent">
 
-      <!-- PROGRAMACAO E EVENTOS -->
-      <section class="section" id="sectionEventos">
-        <div class="container">
-          <div class="section__header">
-            <h2 class="section__title">Programação e Eventos</h2>
-            <span class="section-locked show-logged-out"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Área restrita</span>
-            <a href="#" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
-          </div>
-          <div class="carousel">
-            <div class="carousel__track">
-
-              <div class="opp-card opp-card--open">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">22 de mai de 2026</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Evento</span>
-                </div>
-                <div class="opp-card__title">VIII Simpósio IDOR de Neurociência</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Botafogo</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">Neurociência</span>
-                  <span class="tag">Presencial</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-              <div class="opp-card opp-card--open">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">28 de mai de 2026</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Workshop</span>
-                </div>
-                <div class="opp-card__title">Estatística aplicada à pesquisa clínica</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">Estatística</span>
-                  <span class="tag">Capacitação</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-              <div class="opp-card opp-card--urgent">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">5 de jun de 2026</span>
-                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg> Urgente</span>
-                </div>
-                <div class="opp-card__title">Capacitação REDCap Avançado</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Jabaquara</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">REDCap</span>
-                  <span class="tag">Sistemas</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-              <div class="opp-card opp-card--open">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">12 de jun de 2026</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Seminário</span>
-                </div>
-                <div class="opp-card__title">Seminário Open Science</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">Open Science</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-              <div class="opp-card opp-card--open">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">18 a 20 de jun de 2026</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Congresso</span>
-                </div>
-                <div class="opp-card__title">Congresso de Oncologia Translacional</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> IDOR Botafogo</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">Oncologia</span>
-                  <span class="tag">Translacional</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-              <div class="opp-card opp-card--open">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">25 de jun de 2026</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Workshop</span>
-                </div>
-                <div class="opp-card__title">Submissão de propostas FAPESP</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Online</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">FAPESP</span>
-                  <span class="tag">Captação</span>
-                </div>
-                              <a href="#" class="info-btn info-btn--unlocked">Mais informações <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a><button type="button" class="info-btn info-btn--locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mais informações</button>
-              </div>
-
-            </div>
-            <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-            <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <div class="carousel__dots">
-              <button class="carousel__dot active"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- GRANTS E OPORTUNIDADES -->
       <section class="section section--alt" id="sectionEditais">
         <div class="container">
           <div class="section__header">
             <h2 class="section__title">Grants e Oportunidades</h2>
-            <a href="oportunidades.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
           <div class="carousel">
             <div class="carousel__track">
-              <a href="oportunidade.html" class="opp-card opp-card--open">
+
+              <a href="oportunidade.html" class="opp-card opp-card--urgent">
                 <div class="opp-card__top">
-                  <span class="opp-card__financiador">FAPESP</span>
-                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                  <span class="opp-card__financiador">DAAD</span>
+                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
                 </div>
-                <div class="opp-card__title">Edital FAPESP 2026/02 &mdash; Auxilio a Pesquisa</div>
+                <div class="opp-card__title">GROW &mdash; Global Research Opportunities for the South</div>
                 <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate R$200.000</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Bolsa + viagem</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/04/2026</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Alemanha</span>
+                  <span class="tag">Cooperação internacional</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--urgent">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Connections</span>
+                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
+                </div>
+                <div class="opp-card__title">Connections to Sustain Science in Latin America Symposium 2026</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Custos cobertos</span>
                   <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 15/04/2026</span>
                 </div>
                 <div class="opp-card__tags">
-                  <span class="tag">Biomedicina</span>
-                  <span class="tag">Saude</span>
+                  <span class="tag">São Paulo</span>
+                  <span class="tag">Início/Meio de carreira</span>
                 </div>
               </a>
+
               <a href="oportunidade.html" class="opp-card opp-card--open">
                 <div class="opp-card__top">
-                  <span class="opp-card__financiador">NIH</span>
+                  <span class="opp-card__financiador">AstraZeneca</span>
                   <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
                 </div>
-                <div class="opp-card__title">Grant NIH R21 &mdash; Neuroscience Research</div>
+                <div class="opp-card__title">Externally Sponsored Scientific Research (ESSR)</div>
                 <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate US$275,000</span>
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/06/2026</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
                 </div>
                 <div class="opp-card__tags">
-                  <span class="tag">Neurociencia</span>
+                  <span class="tag">Cardiovascular</span>
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Neurociência</span>
                 </div>
               </a>
-              <a href="oportunidade.html" class="opp-card opp-card--urgent">
-                <div class="opp-card__top">
-                  <span class="opp-card__financiador">CNPq</span>
-                  <span class="badge badge-urgent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Urgente</span>
-                </div>
-                <div class="opp-card__title">Bolsa de Produtividade em Pesquisa &mdash; 2026</div>
-                <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$1.500/mes</span>
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 05/04/2026</span>
-                </div>
-                <div class="opp-card__tags">
-                  <span class="tag">Multidisciplinar</span>
-                </div>
-              </a>
+
               <a href="oportunidade.html" class="opp-card opp-card--open">
                 <div class="opp-card__top">
-                  <span class="opp-card__financiador">IDOR Interno</span>
+                  <span class="opp-card__financiador">Libbs</span>
                   <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
                 </div>
-                <div class="opp-card__title">Seed Grant IDOR &mdash; Pesquisa Translacional 2026</div>
+                <div class="opp-card__title">Programa de Incentivo à Pesquisa (PIP) / IIT</div>
                 <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Ate R$80.000</span>
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Prazo: 30/05/2026</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
                 </div>
                 <div class="opp-card__tags">
                   <span class="tag">Oncologia</span>
-                  <span class="tag">Genetica</span>
+                  <span class="tag">Hematologia</span>
+                  <span class="tag">SNC</span>
                 </div>
               </a>
-              <a href="oportunidade.html" class="opp-card opp-card--closed">
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
                 <div class="opp-card__top">
-                  <span class="opp-card__financiador">IDOR Interno</span>
-                  <span class="badge badge-closed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Encerrado</span>
+                  <span class="opp-card__financiador">Pfizer</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
                 </div>
-                <div class="opp-card__title">Bolsa IDOR Pos-Doc 2026 &mdash; Oncologia</div>
+                <div class="opp-card__title">Investigator Sponsored Research (ISR)</div>
                 <div class="opp-card__meta">
-                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> R$8.000/mes</span>
-                  <span>Encerrado em 01/03/2026</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
                 </div>
                 <div class="opp-card__tags">
+                  <span class="tag">Imunologia</span>
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Vacinas</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Roche</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Investigator Initiated Studies (IIS)</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Doenças metabólicas</span>
+                  <span class="tag">Neurociências</span>
+                  <span class="tag">Saúde da mulher</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Novartis</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Investigator Initiated Trials/Studies (IITs / IIRs)</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Terapias gênicas</span>
+                  <span class="tag">Vacinas</span>
                   <span class="tag">Oncologia</span>
                 </div>
               </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Janssen</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Investigator-Initiated Studies (IIS)</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Hematologia</span>
+                  <span class="tag">Cardiovascular</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Lilly</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Investigator Initiated Research (IIR)</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Fluxo contínuo</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Metabólicas</span>
+                  <span class="tag">Oncologia</span>
+                  <span class="tag">Dor</span>
+                </div>
+              </a>
+
+              <a href="oportunidade.html" class="opp-card opp-card--open">
+                <div class="opp-card__top">
+                  <span class="opp-card__financiador">Astellas</span>
+                  <span class="badge badge-open"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg> Aberto</span>
+                </div>
+                <div class="opp-card__title">Astellas Investigator Sponsored Research (ISR)</div>
+                <div class="opp-card__meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> América Latina</span>
+                </div>
+                <div class="opp-card__tags">
+                  <span class="tag">Enzalutamida</span>
+                  <span class="tag">Gilteritinib</span>
+                </div>
+              </a>
+
             </div>
             <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
             <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <div class="carousel__dots">
-              <button class="carousel__dot active"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
+            <div class="carousel__footer">
+              <div class="carousel__dots">
+                <button class="carousel__dot active"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+              </div>
+              <a href="oportunidades.html" class="carousel__see-all">Ver todos os grants <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
             </div>
           </div>
         </div>
@@ -1362,7 +1632,6 @@
           <div class="section__header">
             <h2 class="section__title">Editais IDOR</h2>
             <span class="section-locked show-logged-out"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Área restrita</span>
-            <a href="area-editais-idor.html" class="btn btn-ghost btn-sm">Ver todos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></a>
           </div>
           <div class="carousel">
             <div class="carousel__track">
@@ -1435,12 +1704,15 @@
             </div>
             <button class="carousel__nav carousel__nav--prev" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:-360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
             <button class="carousel__nav carousel__nav--next" onclick="this.parentElement.querySelector('.carousel__track').scrollBy({left:360,behavior:'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <div class="carousel__dots">
-              <button class="carousel__dot active"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
-              <button class="carousel__dot"></button>
+            <div class="carousel__footer">
+              <div class="carousel__dots">
+                <button class="carousel__dot active"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+                <button class="carousel__dot"></button>
+              </div>
+              <a href="area-editais-idor.html" class="carousel__see-all">Ver todos os editais <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
             </div>
           </div>
         </div>
@@ -1661,7 +1933,6 @@
     /* Intercept "Ver todos" of restricted sections + locked "Mais informações" buttons when logged out */
     document.addEventListener('DOMContentLoaded', function() {
       var selectors = [
-        '#sectionEventos .section__header a',
               '#sectionEditaisIdor .section__header a',
         '#sectionServicosRestritos .cat-card:not(.cat-card--soon)',
         '#sectionServicosRestritos .section__header a',
@@ -1676,173 +1947,80 @@
         });
       });
     });
+
+    /* --- Hero events carousel v4 (stack + fade-slide infinite loop) --- */
+    document.addEventListener('DOMContentLoaded', function() {
+      var track = document.getElementById('heroCarouselTrack');
+      if (!track) return;
+      var cards = Array.prototype.slice.call(track.children);
+      var total = cards.length;
+      if (!total) return;
+
+      var dotsContainer = document.getElementById('heroCarouselDots');
+      var dots = [];
+      for (var i = 0; i < total; i++) {
+        var d = document.createElement('button');
+        d.className = 'hero-carousel__dot' + (i === 0 ? ' is-active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.dataset.index = i;
+        dotsContainer.appendChild(d);
+        dots.push(d);
+      }
+
+      var current = 0;
+      var prevIdx = total - 1;
+
+      function setActive(nextIdx) {
+        prevIdx = current;
+        current = (nextIdx + total) % total;
+        cards.forEach(function(c, i) {
+          c.classList.remove('is-active', 'is-prev');
+          if (i === current) c.classList.add('is-active');
+          else if (i === prevIdx) c.classList.add('is-prev');
+        });
+        dots.forEach(function(dot, i) { dot.classList.toggle('is-active', i === current); });
+      }
+
+      function next() { setActive(current + 1); }
+
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          setActive(parseInt(dot.dataset.index, 10));
+          resetTimer();
+        });
+      });
+
+      var interval = null;
+      function startTimer() { interval = setInterval(next, 4500); }
+      function resetTimer() { clearInterval(interval); startTimer(); }
+
+      setActive(0);
+      startTimer();
+    });
   </script>
   <script>
     (function() {
-      var wrapper = document.getElementById('homeWrapper');
       var header = document.getElementById('homeHeader');
-      var content = document.getElementById('homeContent');
-      var editais = document.getElementById('sectionEditais');
-      var scrollHint = document.querySelector('.scroll-hint');
-      var hasSnapped = false;
-      var isAnimating = false;
 
-      // Snap points: hero=0, categories=heroH, editais=editais top
-      function getSnapPoints() {
-        var heroH = window.innerHeight;
-        var headerH = header.offsetHeight;
-        var pts = [0, heroH];
-        if (editais) pts.push(editais.getBoundingClientRect().top + window.scrollY - headerH);
-        return pts;
-      }
-
-      /* --- Scroll listener for header + animations --- */
+      /* --- Toggle header--solid based on scroll --- */
       window.addEventListener('scroll', function() {
-        var scrollY = window.scrollY;
-        var pts = getSnapPoints();
-
-        // Header solid after hero
-        if (scrollY > pts[1] * 0.15) {
-          header.classList.add('header--solid');
-        } else {
-          header.classList.remove('header--solid');
-        }
-
-        // Scroll hint
-        if (scrollY > 50 && scrollHint) {
-          scrollHint.style.opacity = '0';
-          scrollHint.style.pointerEvents = 'none';
-        } else if (scrollHint) {
-          scrollHint.style.opacity = '';
-          scrollHint.style.pointerEvents = '';
-        }
-
-        // Animate cards
-        if (scrollY > pts[1] * 0.5 && !hasSnapped) {
-          hasSnapped = true;
-          animateCards();
-        }
-        if (scrollY < 10 && hasSnapped) {
-          hasSnapped = false;
-          var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
-          cards.forEach(function(card) { card.classList.remove('visible'); });
-        }
+        if (window.scrollY > 40) header.classList.add('header--solid');
+        else header.classList.remove('header--solid');
       });
 
-      function animateCards() {
-        var cards = content.querySelectorAll('.cat-card, .opp-card, .article-card');
-        cards.forEach(function(card, i) {
-          setTimeout(function() { card.classList.add('visible'); }, i * 40);
-        });
+      /* --- Smooth scroll helper --- */
+      function smoothScrollTo(target) {
+        window.scrollTo({ top: target, behavior: 'smooth' });
       }
 
-      // Scroll hint click
-      if (scrollHint) {
-        scrollHint.style.cursor = 'pointer';
-        scrollHint.addEventListener('click', function() {
-          smoothScrollTo(getSnapPoints()[1]);
-        });
-      }
-
-      /* --- Find nearest snap points (prev/next) from current scroll --- */
-      function getNeighborSnaps(scrollY) {
-        var pts = getSnapPoints();
-        var tolerance = 80;
-        var prev = null, next = null, atSnap = -1;
-
-        for (var i = 0; i < pts.length; i++) {
-          if (Math.abs(scrollY - pts[i]) < tolerance) {
-            atSnap = i;
-            break;
-          }
-        }
-
-        if (atSnap >= 0) {
-          prev = atSnap > 0 ? pts[atSnap - 1] : null;
-          next = atSnap < pts.length - 1 ? pts[atSnap + 1] : null;
-        } else {
-          // Between snap points — find which two we're between
-          for (var j = 0; j < pts.length - 1; j++) {
-            if (scrollY > pts[j] && scrollY < pts[j + 1]) {
-              prev = pts[j];
-              next = pts[j + 1];
-              break;
-            }
-          }
-        }
-
-        return { atSnap: atSnap, prev: prev, next: next, lastSnap: pts[pts.length - 1] };
-      }
-
-      /* --- Wheel: snap between sections --- */
-      function wheelHandler(e) {
-        if (isMobile) return;
-        var scrollY = window.scrollY;
-        var info = getNeighborSnaps(scrollY);
-        var pts = getSnapPoints();
-        var lastSnap = pts[pts.length - 1];
-
-        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-        // Past the last snap point
-        if (scrollY > lastSnap + 80) {
-          if (e.deltaY < 0) {
-            e.preventDefault();
-            smoothScrollTo(lastSnap);
-          }
-          return;
-        }
-
-        // At a snap point
-        if (info.atSnap >= 0) {
-          // At last snap, scrolling down — snap to bottom (footer visible)
-          if (info.atSnap === pts.length - 1 && e.deltaY > 0) {
-            e.preventDefault();
-            smoothScrollTo(maxScroll);
-            return;
-          }
-          if (e.deltaY > 0 && info.next !== null) {
-            e.preventDefault();
-            smoothScrollTo(info.next);
-          } else if (e.deltaY < 0 && info.prev !== null) {
-            e.preventDefault();
-            smoothScrollTo(info.prev);
-          }
-          return;
-        }
-
-        // Between snap points — resolve to nearest
-        if (info.prev !== null || info.next !== null) {
-          e.preventDefault();
-          if (e.deltaY > 0 && info.next !== null) { smoothScrollTo(info.next); }
-          else if (e.deltaY < 0 && info.prev !== null) { smoothScrollTo(info.prev); }
-        }
-      }
-      window.addEventListener('wheel', wheelHandler, { passive: false });
-
-      /* --- Touch support --- */
-      var touchStartY = 0;
-      window.addEventListener('touchstart', function(e) {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-      window.addEventListener('touchend', function(e) {
-        var scrollY = window.scrollY;
-        var deltaY = touchStartY - e.changedTouches[0].clientY;
-        var info = getNeighborSnaps(scrollY);
-        if (deltaY > 40 && info.next !== null) { smoothScrollTo(info.next); }
-        else if (deltaY < -40 && info.prev !== null) { smoothScrollTo(info.prev); }
-      }, { passive: true });
-
-      /* --- Carousel dots --- */
+      /* --- Carousel dots inside #sectionEditais --- */
       var track = document.querySelector('#sectionEditais .carousel__track');
       var dots = document.querySelectorAll('#sectionEditais .carousel__dot');
       if (track && dots.length) {
         track.addEventListener('scroll', function() {
           var cardW = track.firstElementChild.offsetWidth + 24;
           var idx = Math.round(track.scrollLeft / cardW);
-          dots.forEach(function(d, i) {
-            d.classList.toggle('active', i === idx);
-          });
+          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
         });
         dots.forEach(function(dot, i) {
           dot.addEventListener('click', function() {
@@ -1850,14 +2028,6 @@
             track.scrollTo({ left: i * cardW, behavior: 'smooth' });
           });
         });
-      }
-
-      /* --- Smooth scroll helper --- */
-      function smoothScrollTo(target) {
-        if (isAnimating) return;
-        isAnimating = true;
-        window.scrollTo({ top: target, behavior: 'smooth' });
-        setTimeout(function() { isAnimating = false; }, 700);
       }
 
       /* --- Hero filter buttons: scroll to corresponding section --- */
