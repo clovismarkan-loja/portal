@@ -391,6 +391,10 @@
     .hero-filter.active { color: #009681; border-bottom-color: #009681; }
     .hero-filter.active svg { opacity: 1; }
 
+    /* v4 hero-left: align search + filters to the left (asymmetric layout) */
+    .hero-left .search-box { margin: 20px 0 0; max-width: 100%; }
+    .hero-left .hero-filters { justify-content: flex-start; gap: 22px; margin-top: 18px; }
+
     /* Scroll indicator */
     .scroll-hint {
       position: absolute;
@@ -1311,13 +1315,35 @@
     </div>
   </div>
 
-<!-- HERO v4: blue, asymmetric (text left + mini carousel right) -->
+<!-- HERO v4: white, asymmetric (text+search left + mini carousel right) -->
   <section class="hero hero--home">
     <div class="hero-grid">
       <div class="hero-left">
         <h1 class="hero-left__title">Bem-vindo ao Portal do Pesquisador IDOR</h1>
-        <p class="hero-left__desc">Confira os próximos eventos, workshops e capacitações agendadas — oportunidades de aprendizado e networking para pesquisadores da Rede D'Or São Luiz.</p>
-        <a href="#" class="hero-left__btn">Ver todos os eventos <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+        <p class="hero-left__desc">Encontre artigos, editais, oportunidades de financiamento e serviços de apoio à pesquisa.</p>
+        <form class="search-box" onsubmit="event.preventDefault(); var q=this.querySelector('input').value.trim(); window.location.href='busca.html'+(q?'?q='+encodeURIComponent(q):'');">
+          <svg class="search-box__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" name="q" placeholder="Busque por serviços, artigos, oportunidades, editais...">
+          <button type="submit">Buscar</button>
+        </form>
+        <div class="hero-filters">
+          <a href="#" class="hero-filter active" onclick="event.preventDefault();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Todos
+          </a>
+          <a href="#sectionEditais" class="hero-filter" data-scroll="sectionEditais">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Oportunidades
+          </a>
+          <a href="#sectionServicosRestritos" class="hero-filter" data-scroll="sectionServicosRestritos">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Serviços
+          </a>
+          <a href="#sectionEditaisIdor" class="hero-filter" data-scroll="sectionEditaisIdor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            Editais
+          </a>
+        </div>
       </div>
       <div class="hero-right">
         <div class="hero-carousel-mini" id="heroCarouselTrack">
