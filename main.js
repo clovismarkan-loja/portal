@@ -57,7 +57,6 @@ function injectUserMenu() {
     '</div>' +
     '<div class="user-menu__dropdown">' +
       '<a href="minha-conta.html">Minha conta</a>' +
-      '<a href="#">Meus favoritos</a>' +
       '<a href="#">Configurações</a>' +
       '<button onclick="authLogout()">Sair</button>' +
     '</div>';
