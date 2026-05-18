@@ -182,6 +182,23 @@
     .page-banner__breadcrumb span { margin: 0 8px; }
     .page-banner h1 { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 36px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: -.3px; }
     @media (max-width: 768px) { .page-banner { height: 280px; } .page-banner h1 { font-size: 26px; } .page-banner__content { padding-bottom: 28px; } }
+
+    /* TI callout */
+    .ti-callout {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #FFF7E6;
+      border: 1px solid #F4DCA6;
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+    .ti-callout__icon { flex-shrink: 0; width: 24px; height: 24px; color: #B8884E; margin-top: 2px; }
+    .ti-callout__body strong { display: block; color: var(--gray-900); font-weight: 700; margin-bottom: 4px; font-size: 16px; }
+    .ti-callout__body p { margin: 6px 0 8px; font-size: 15px; line-height: 1.55; color: var(--gray-700); }
+    .ti-callout__body ul { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.6; color: var(--gray-700); }
+    .ti-callout__body ul li { margin-bottom: 4px; }
   </style>
 </head>
 <body>
@@ -300,55 +317,32 @@
 
       <!-- Article Body -->
       <div class="article-body">
-        <p>Esta página apresenta as orientações oficiais sobre <em>como solicitar o apoio com o desenvolvimento de projetos de ti</em>.</p>
-        <p>Acompanhe o passo a passo, as informações sobre prazos, documentos necessários e a equipe responsável pelo atendimento. Em caso de dúvidas adicionais, entre em contato com a área pelo canal institucional indicado abaixo.</p>
+        <p>Para solicitar o desenvolvimento de soluções ou serviços de Tecnologia da Informação (TI) relacionados a Projetos de Pesquisa, é necessário abrir uma demanda formal junto à equipe de TI.</p>
 
-        <h2>Como proceder</h2>
-        <ol>
-          <li>Acesse o sistema institucional correspondente.</li>
-          <li>Faça login com suas credenciais.</li>
-          <li>Preencha o formulário de solicitação com todos os dados obrigatórios.</li>
-          <li>Anexe a documentação solicitada, quando aplicável.</li>
-          <li>Acompanhe o status pelo painel de solicitações.</li>
-        </ol>
+        <p>Todas as solicitações passarão por avaliação do <strong>Comitê de Tecnologia</strong>, que verificará a pertinência técnica, a viabilidade operacional e a priorização institucional.</p>
 
-        <h2>Prazos e responsáveis</h2>
-        <p>O prazo padrão de atendimento é de até 5 dias úteis após o recebimento da solicitação completa. Solicitações com pendências documentais terão prazo reiniciado a partir da regularização.</p>
-            </div>
+        <div class="ti-callout">
+          <svg class="ti-callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="ti-callout__body">
+            <strong>Importante!</strong>
+            <p>Somente serão analisadas as demandas que atenderem aos seguintes requisitos:</p>
+            <ul>
+              <li>Projeto aprovado pelo NAPE</li>
+              <li>Projeto aprovado pelo CEP/CONEP, quando aplicável</li>
+              <li>Disponibilidade de recursos para custear o desenvolvimento, manutenção ou infraestrutura necessária</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>A abertura da demanda deve apresentar de forma clara o objetivo da solução desejada, suas funcionalidades esperadas, público-alvo, justificativa e impacto no projeto de pesquisa.</p>
+
+        <p><a href="https://app.idor.org/ords/r/producao/sodeti/nova-demanda" target="_blank" rel="noopener"><strong>Clique aqui para abrir sua demanda.</strong></a></p>
+
+        <p>A equipe responsável entrará em contato para orientações complementares, quando necessário.</p>
+      </div>
 
     </div>
   </section>
-
-  <!-- ===== DOWNLOADS (full width) ===== -->
-  <div class="downloads-full">
-    <h2>Downloads</h2>
-    <div class="download-list">
-      <div class="download-item">
-        <div class="download-item__icon">PDF</div>
-        <div class="download-item__info">
-          <div class="download-item__name">Formulario de Submissao de Projeto</div>
-          <div class="download-item__size">PDF &mdash; 245 KB</div>
-        </div>
-        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-      </div>
-      <div class="download-item">
-        <div class="download-item__icon">PDF</div>
-        <div class="download-item__info">
-          <div class="download-item__name">Manual de Orientacao CONEP &mdash; Pesquisa com Seres Humanos</div>
-          <div class="download-item__size">PDF &mdash; 1.2 MB</div>
-        </div>
-        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-      </div>
-      <div class="download-item download-item--doc">
-        <div class="download-item__icon download-item__icon--doc">DOC</div>
-        <div class="download-item__info">
-          <div class="download-item__name">Template de Protocolo de Pesquisa</div>
-          <div class="download-item__size">DOCX &mdash; 89 KB</div>
-        </div>
-        <a href="#" class="btn btn-sm btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
-      </div>
-    </div>
-  </div>
 
   <!-- ===== ARTIGOS RELACIONADOS ===== -->
   <section class="section section--alt">
