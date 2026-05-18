@@ -390,7 +390,7 @@ img { max-width: 100%; display: block; }
 .cat-card__desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
 
 /* "Em breve" — coming-soon ribbon on cat-card */
-.cat-card--soon { pointer-events: none; padding-bottom: 36px; }
+.cat-card--soon { pointer-events: none; padding-bottom: 48px; }
 .cat-card--soon::after {
   content: 'Em breve';
   position: absolute;
@@ -411,7 +411,11 @@ img { max-width: 100%; display: block; }
 }
 
 /* Restricted card: gray ribbon + lock icon + 'Área restrita' */
-.cat-card--restricted { padding-bottom: 36px; }
+.cat-card--restricted { padding-bottom: 48px; }
+
+/* Logged-out: hide 'Área restrita' tag (card behaves like a normal locked link) */
+.logged-out .cat-card--restricted { padding-bottom: 20px; }
+.logged-out .cat-card--restricted::after { display: none; }
 .cat-card--restricted::after {
   content: 'Área restrita';
   position: absolute;
