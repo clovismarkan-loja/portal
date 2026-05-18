@@ -18,15 +18,15 @@
     /* Force white everywhere */
     body { background: #fff !important; }
 
-    /* --- HERO (v4): blue background, asymmetric layout --- */
+    /* --- HERO (v4): white background, asymmetric layout --- */
     .hero--home {
       position: relative;
       width: 100%;
       height: 460px;
-      background: #003DA5;
+      background: #ffffff;
       padding: var(--header-h) 0 0;
       overflow: hidden;
-      color: var(--white);
+      color: var(--gray-900);
     }
     .hero--home::after {
       content: '';
@@ -35,9 +35,9 @@
       left: -40px;
       width: 360px;
       height: 180px;
-      background-image: radial-gradient(rgba(255,255,255,.5) 6px, transparent 6px);
+      background-image: radial-gradient(rgba(1,73,142,.18) 6px, transparent 6px);
       background-size: 28px 28px;
-      opacity: .18;
+      opacity: .5;
       pointer-events: none;
       z-index: 0;
     }
@@ -52,12 +52,12 @@
       position: relative;
       z-index: 1;
     }
-    .hero-left { color: var(--white); }
+    .hero-left { color: var(--gray-900); }
     .hero-left__title {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       font-size: 44px;
       font-weight: 600;
-      color: var(--white);
+      color: var(--blue-900);
       letter-spacing: -.8px;
       line-height: 1.15;
       margin: 0 0 20px;
@@ -65,7 +65,7 @@
     .hero-left__desc {
       font-size: 16px;
       line-height: 1.65;
-      color: rgba(255,255,255,.85);
+      color: var(--gray-600);
       margin: 0 0 32px;
       max-width: 480px;
     }
@@ -73,7 +73,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--white);
+      color: var(--blue-900);
       font-weight: 600;
       font-size: 14px;
       text-decoration: none;
@@ -85,14 +85,14 @@
       display: block;
       width: 100%;
       height: 1px;
-      background: rgba(255,255,255,.4);
+      background: rgba(1,73,142,.3);
       margin-top: 6px;
       position: absolute;
       left: 0;
       bottom: 0;
     }
     .hero-left__btn { position: relative; }
-    .hero-left__btn:hover { color: var(--gold); gap: 12px; }
+    .hero-left__btn:hover { color: var(--gold-dark); gap: 12px; }
 
     /* Right side: stack-fade mini carousel */
     .hero-right { position: relative; }
