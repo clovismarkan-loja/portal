@@ -300,6 +300,47 @@
       gap: 12px;
     }
 
+    /* Modal cadastro: box de destaque solicitar email */
+    .modal-card .modal-callout {
+      background: #FFF7E6;
+      border: 1.5px solid #F4DCA6;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 0 0 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .modal-card .modal-callout__icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      color: #B8884E;
+      margin-top: 2px;
+    }
+    .modal-card .modal-callout__body { flex: 1; }
+    .modal-card .modal-callout p {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.5;
+      margin: 0 0 12px;
+    }
+    .modal-card .modal-callout p strong { color: var(--gray-900); }
+    .modal-card .modal-callout .btn-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      background: #B8884E;
+      color: var(--white) !important;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+    .modal-card .modal-callout .btn-callout:hover { background: #9B7340; }
+
     /* Responsive */
     @media (max-width: 768px) {
       .login-image { display: none; }
@@ -360,7 +401,18 @@
     <div class="modal-card">
       <button class="modal-close" onclick="document.getElementById('cadastroModal').classList.remove('open')">&times;</button>
       <h2>Criar conta</h2>
-      <p class="modal-desc">Preencha os dados abaixo para criar sua conta no Portal do Pesquisador.</p>
+      <p class="modal-desc">Esse cadastro é exclusivo para usuários com e-mail institucional <strong>@idor.edu.br</strong>.</p>
+
+      <div class="modal-callout">
+        <svg class="modal-callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div class="modal-callout__body">
+          <p>Ainda não tem e-mail institucional <strong>@idor.edu.br</strong>? Solicite o seu para prosseguir com o cadastro.</p>
+          <a href="#" target="_blank" rel="noopener" class="btn-callout">
+            Solicitar e-mail institucional
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
 
       <form onsubmit="event.preventDefault();">
 
@@ -371,18 +423,7 @@
 
         <div class="form-group">
           <label for="reg-email">E-mail institucional*</label>
-          <input type="email" id="reg-email" class="form-input" placeholder="seu.email@idor.org.br" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="reg-senha">Senha*</label>
-            <input type="password" id="reg-senha" class="form-input" placeholder="Crie uma senha" required>
-          </div>
-          <div class="form-group">
-            <label for="reg-confirmar">Confirmar senha*</label>
-            <input type="password" id="reg-confirmar" class="form-input" placeholder="Repita a senha" required>
-          </div>
+          <input type="email" id="reg-email" class="form-input" placeholder="seu.email@idor.edu.br" required>
         </div>
 
         <div class="form-row">
@@ -428,8 +469,6 @@
         <button type="submit" class="btn-cadastro">Criar conta</button>
 
       </form>
-
-      <p class="modal-note">E-mails com domínio <strong>@idor.org.br</strong> ou <strong>@rededorsaoluiz.com.br</strong> recebem acesso completo automaticamente.</p>
     </div>
   </div>
 
